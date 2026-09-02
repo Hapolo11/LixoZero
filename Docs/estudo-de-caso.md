@@ -4,7 +4,7 @@
 
 **Disciplina:** Programação para Dispositivos Móveis
 
-**Responsável pela seção:** Hapolo Luiz Silva Ramos dos Santos, Caio Leal Paixão
+**Responsável pela seção:** Hapolo Luiz Silva Ramos dos Santos, Caio Leal Paixão, Salatiel Batista Santos
 
 ## 2.1. Problema
 
@@ -28,11 +28,39 @@ Resposta rápida e confiável sobre "onde jogar isso" (até 3 segundos, offline)
 - **Escolas:** usam o app como ferramenta didática em projetos pedagógicos sobre meio ambiente e economia circular.
 - **Gestores públicos:** usam dados agregados e anônimos de impacto pra apoiar planejamento da coleta seletiva municipal, alinhado aos instrumentos previstos na PNRS.
 
+## 2.3. Contexto de uso
+
+**Identifique os diferentes contextos nos quais o aplicativo poderá ser utilizado. Considere as informações fornecidas no estudo de caso, como:**
+
+- **Ambiente:** Usado em casas e escolas, não em campo aberto. Isso pede interface simples, sem recursos técnicos complexos, com modo claro por padrão. 
+- **Momento de utilização:** Famílias usam semanalmente, escolas usam em projetos pontuais. O app precisa ser rápido de consultar, já que é aberto só na hora de descartar algo. 
+- **Condições do usuário:** Público vai de famílias a catadores e gestores públicos, com níveis de familiaridade digital muito diferentes. Por isso a interface precisa ser simples, com poucas telas e linguagem clara para todos. 
+- **Dispositivo:** Rodar em celulares básicos limita o app tecnicamente: sem processamento pesado, com imagens leves e função offline no guia de classificação. 
+- **Conectividade:** Muitos usuários têm internet fraca, então as funções essenciais precisam funcionar offline, deixando online só o que exige dados atualizados, como o mapa. 
+- **Iluminação:** Uso em ambientes internos e iluminados reforça o modo claro e cores de alto contraste para facilitar a leitura rápida.  
+- **Nível de atenção:** Como o uso ocorre com as mãos ocupadas e pouca atenção disponível, o app precisa responder rápido e exigir poucos toques.  
+- **Situação de urgência:** O descarte costuma ser imediato, então o app precisa ser ágil e funcionar sem depender de conexão. 
+- **Outras condições específicas:** Não coleta dados pessoais, o que gera confiança. Nas escolas, funciona também como ferramenta educativa. E pode futuramente mostrar dados agregados para síndicos e cooperativas.
+
+O Aplicativo atende situações rápidas do dia a dia, em casa ou na escola, para um público variado e quase sempre apressado. Como muitos usuários têm internet fraca e celulares simples, o app precisa ser leve, funcionar offline nas partes principais e responder em poucos segundos, com no máximo três toques. A interface usa cores já conhecidas (azul para papel, vermelho para plástico, verde para vidro) e visual claro. Ou seja: o contexto de uso pede praticidade e agilidade acima de qualquer sofisticação técnica. 
+
 ## 2.4 Objetivo e proposta de valor
 
 **O que o aplicativo pretende oferecer e qual benefício deverá proporcionar ao usuário?**
 
 O aplicativo tem como objetivo funcionar como um assistente de reciclagem doméstica, classificando cada resíduo informado pelo usuário e indicando o destino correto mais próximo, como por exemplo ecopontos e cooperativas de catadores. A proposta de valor do aplicativo consiste em tornar a vida do usuário que não sabe separar corretamente ou não conhece os pontos de coleta perto de casa mais fácil. O aplicativo tem como objetivo final ajudar a reduzir o volume de resíduos recicláveis que acabam em lixões e aterros, além de gerar consciência ambiental por meio do acompanhamento do impacto gerado pelo próprio usuário.
+
+## 2.5. Personalidade, identidade e experiência
+
+**Analise:**
+- **Palavras conceituais:** Termos como reciclagem, compostagem, logística reversa e economia circular moldam a linguagem do app, reforçando tanto a consequência do descarte errado quanto possíveis funções futuras, como conectar usuários a cooperativas. 
+- **Personalidade da identidade:** Didática, verde e comunitária. Isso evita um tom técnico ou corporativo e aproxima o app de uma experiência simples e educativa, valorizando também o impacto coletivo, não só o individual. 
+-- **Tom da interface:** Educativo e motivador. Os feedbacks devem reforçar sensação de progresso e pertencimento, como no contador de "quilos reciclados", em vez de apenas confirmar ações. 
+- **Tom da experiência do usuário:** Segue a mesma lógica motivadora, mas aplicada a todo o fluxo de uso, evitando fricção ou linguagem punitiva mesmo quando o usuário erra. 
+- **Forma como o aplicativo deseja ser lembrado:** Pela frase "o assistente que transforma lixo em consciência", que serve de guia para todas as decisões do produto.
+- 
+**Explique como essas características deverão influenciar a solução. Não é necessário desenvolver a identidade visual nesta atividade.**
+No geral, essas características pedem um app com linguagem simples e educativa, tom motivador e voltado à comunidade, priorizando clareza pedagógica acima de sofisticação técnica e medindo o sucesso pela mudança de consciência ambiental que gera no usuário.
 
 ## 2.7. Restrições e condições
 
