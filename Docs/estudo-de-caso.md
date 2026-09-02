@@ -62,6 +62,60 @@ O aplicativo tem como objetivo funcionar como um assistente de reciclagem domés
 **Explique como essas características deverão influenciar a solução. Não é necessário desenvolver a identidade visual nesta atividade.**
 No geral, essas características pedem um app com linguagem simples e educativa, tom motivador e voltado à comunidade, priorizando clareza pedagógica acima de sofisticação técnica e medindo o sucesso pela mudança de consciência ambiental que gera no usuário.
 
+## 2.6. Funcionalidades e características já definidas
+
+- **Funcionalidade: Guia de classificação de resíduos**
+
+**Necessidade atendida:** Ensinar o usuário à separar corretamente cada tipo de lixo para que ele tenha o destino correto, assim facilitando a reciclagem.
+
+- **Funcionalidade: Mapa de ecopontos, cooperativas e pontos de coleta**
+
+**Necessidade atendida:** Diz ao usuário onde tem um ponto de descarte adequado mais próximo dele.
+
+- **Funcionalidade: Calculadora/contador de impacto e quilos reciclados**
+
+**Necessidade atendida:** Mostrar ao usuário a quanto lixo deixou de ser enviada para aterros ou qualquer outro local irregular, incentivando hábitos sustentáveis.
+
+- **Funcionalidade: Lembretes de coleta seletiva**
+
+**Necessidade atendida:** Notificação com dias e horários da coleta, assim evitando o acumulo de lixo pelo usuário evitando que o usuário perca o momento correto de colocar o lixo para coleta.
+
+- **Funcionalidade: Guia disponível sem internet**
+
+**Necessidade atendida:** Permitir a consulta sobre a classificação do lixo mesmo quando o usuário estiver sem conexão com a internet.
+
+- **Característica: Resultado da busca em até 3 segundos**
+
+**Necessidade atendida:** Oferecer uma resposta rápida para que o usuário consiga escolher onde descartar o lixo.
+
+- **Característica: Uso em até 3 interações**
+
+**Necessidade atendida:** Tornar o aplicativo simples e fácil de usar, principalmente em situações do dia á dai
+
+- **Característica: Compatibilidade com smartphones básicos**
+
+**Necessidade atendida:** Garantir que o aplicativo seja acessível para um maior número de famílias e usuários.
+
+- **Característica: Uso do Google Maps**
+
+**Necessidade atendida:** Facilitar a localização de ecopontos, cooperativas e locais de coleta próximos ao usuário.
+
+- **Característica: Não coleta dados de identificação**
+
+**Necessidade atendida:** Preservar a privacidade dos usuários, mantendo o cálculo de impacto de forma anônima e local.
+
+- **Característica: Código de cores para os resíduos**
+
+**Necessidade atendida:** Facilitar a identificação visual das categorias e tornar a separação do lixo mais rápida e intuitiva.
+
+- **Característica: Interface educativa e motivadora**
+
+**Necessidade atendida:** Ensinar boas práticas de reciclagem e incentivar o usuário a participar ativamente da preservação do meio ambiente.
+
+- **Característica: Até 4 telas principais**
+
+**Necessidade atendida:** Manter a navegação simples, organizada e fácil de compreender, evitando excesso de informações na interface.
+
 ## 2.7. Restrições e condições
 
 - **Quantidade de telas:** o protótipo deve ter no máximo 4 telas principais, "Onde jogo isso?", categorias de resíduos, ecopontos/cooperativas e contador de reciclagem.
