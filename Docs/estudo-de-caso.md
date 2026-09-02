@@ -1,8 +1,10 @@
 # Atividade 01 — Análise do Estudo de Caso
 
 **Projeto:** LixoZero
+
 **Disciplina:** Programação para Dispositivos Móveis
-**Responsável pela seção:** Hapolo Luiz Silva Ramos dos Santos
+
+**Responsável pela seção:** Hapolo Luiz Silva Ramos dos Santos, Caio Leal Paixão
 
 ## 2.1. Problema
 
@@ -26,6 +28,12 @@ Resposta rápida e confiável sobre "onde jogar isso" (até 3 segundos, offline)
 - **Escolas:** usam o app como ferramenta didática em projetos pedagógicos sobre meio ambiente e economia circular.
 - **Gestores públicos:** usam dados agregados e anônimos de impacto pra apoiar planejamento da coleta seletiva municipal, alinhado aos instrumentos previstos na PNRS.
 
+## 2.4 Objetivo e proposta de valor
+
+**O que o aplicativo pretende oferecer e qual benefício deverá proporcionar ao usuário?**
+
+O aplicativo tem como objetivo funcionar como um assistente de reciclagem doméstica, classificando cada resíduo informado pelo usuário e indicando o destino correto mais próximo, como por exemplo ecopontos e cooperativas de catadores. A proposta de valor do aplicativo consiste em tornar a vida do usuário que não sabe separar corretamente ou não conhece os pontos de coleta perto de casa mais fácil. O aplicativo tem como objetivo final ajudar a reduzir o volume de resíduos recicláveis que acabam em lixões e aterros, além de gerar consciência ambiental por meio do acompanhamento do impacto gerado pelo próprio usuário.
+
 ## 2.7. Restrições e condições
 
 - **Quantidade de telas:** o protótipo deve ter no máximo 4 telas principais, "Onde jogo isso?", categorias de resíduos, ecopontos/cooperativas e contador de reciclagem.
@@ -37,3 +45,19 @@ Resposta rápida e confiável sobre "onde jogar isso" (até 3 segundos, offline)
 - **Ambiente de utilização:** o app será usado principalmente em cozinhas, varandas e escolas, o que exige foco no modo claro (não é prioridade oferecer modo escuro).
 - **Integração externa:** o mapa de ecopontos e cooperativas deve usar a API do Google Maps, o que é uma dependência técnica externa a ser considerada no desenvolvimento.
 - **Documentação obrigatória:** o time deve manter, na pasta /docs do repositório GitHub, o Documento de Requisitos + Personas + Pesquisas (com base na PNRS), a justificativa das decisões visuais ligadas à educação ambiental, e um CHANGELOG.md registrando as mudanças feitas no protótipo.
+
+## 2.8 Pontos de atenção
+
+**Quais são os 3 aspectos do estudo de caso que consideramos mais importantes para o sucesso do aplicativo?**
+
+**Rapidez na resposta**
+ 
+A gente considerou esse o ponto mais importante porque é isso que decide se a pessoa vai usar o app de verdade ou vai desistir no meio do caminho. Ninguém vai ficar esperando o celular carregar para saber onde jogar uma pilha ou uma casca de banana, se o aplicativo demorar, o usuário simplesmente joga no lixo comum mesmo e esquece do aplicativo.
+
+**Funcionar offline**
+
+Esse ponto é importante porque nem todo mundo tem internet boa em casa o tempo todo, principalmente em bairros mais afastados ou em famílias de renda mais baixa, que são parte do público que a gente quer atingir. Então garantir que a parte de identificar o tipo de resíduo funcione sem internet é o que vai fazer o app ser acessível de verdade.
+
+**Simplicidade da interface**
+
+A gente escolheu esse aspecto porque o público do app não é só gente que entende de tecnologia, no nosso público alvo temos criança na escola, tem gente mais velha, tem quem nunca usou um app parecido. Se o caminho para usar o app for complicado, a adesão cai. Limitar a três passos (abrir, digitar o resíduo, ver o resultado) força o time a pensar num design enxuto, o que ajuda tanto na usabilidade quanto na educação ambiental, porque a informação chega de forma direta e rápida.
