@@ -34,6 +34,14 @@ Como o Brasil perde bilhões todo ano por reciclar pouco, e boa parte disso vem 
 
 Como a diferença entre taxas de reciclagem por material é grande (alumínio muito alto, vidro bem mais baixo), o guia de classificação não deve tratar todos os materiais da mesma forma, materiais com taxa de reciclagem mais baixa podem precisar de instruções mais detalhadas ou de destaque especial na interface.
 
+### 3 descobertas importantes e como influenciam o projeto
+
+**1. O problema é majoritariamente de conhecimento, não de vontade.** A maioria dos brasileiros reconhece a importância da reciclagem, mas não sabe como agir na prática, seja por não reconhecer símbolos nas embalagens, seja por não saber onde levar resíduos específicos. Isso confirma que o LixoZero está atacando a causa certa: o app não precisa "convencer" o usuário a reciclar, e sim dar a ele a informação que falta no momento do descarte.
+
+**2. A busca não pode depender de reconhecimento visual, e o impacto do erro é mensurável.** Como quase 6 em cada 10 pessoas não reconhecem os símbolos de reciclagem, e o Brasil perde bilhões por ano com descarte incorreto, a funcionalidade de busca por texto do app ("Onde jogo isso?") é mais importante do que qualquer interface baseada só em ícones. Isso reforça a prioridade dessa tela como núcleo do produto, e mostra que mesmo pequenas melhorias de comportamento em escala têm peso real.
+
+**3. Engajamento contínuo depende de reduzir esforço e mostrar progresso.** Barreiras práticas (distância, falta de meios em casa) e a ausência de feedback de impacto fazem as pessoas desistirem de reciclar com regularidade, mesmo sabendo que deveriam. Isso justifica o contador de reciclagem como funcionalidade central, não secundária, do app, transformando o uso pontual em hábito recorrente.
+
 ### Fontes utilizadas
 
 IBGE, Munic 2023, Suplemento de Saneamento (via Agência Brasil e Agência de Notícias IBGE, nov/2024), dados oficiais sobre cobertura de coleta seletiva e lixões nos municípios brasileiros.
