@@ -8,6 +8,8 @@ Mas o problema não é só de infraestrutura pública, é também de comportamen
 
 O impacto disso é também econômico, não só ambiental. Segundo levantamento da Abrelpe (Associação Brasileira de Empresas de Limpeza Pública e Resíduos Especiais), o Brasil perde cerca de R$ 14 bilhões por ano com o descarte incorreto de material reciclável, cerca de 12 milhões de toneladas de resíduos que poderiam gerar renda e emprego acabam indo para lixões e aterros todo ano. Ainda assim, o país recicla apenas 4% de tudo o que é gerado, um índice bem abaixo da média mundial (9%) e muito distante de países como Alemanha, que recicla cerca de 60%. Esse cenário mostra que o gargalo não está só na indústria da reciclagem, mas também na ponta inicial do processo: a separação correta feita (ou não) dentro de casa.
 
+Além da falta de conhecimento sobre como separar o lixo, outro fator que influencia diretamente o sucesso de um app como o LixoZero é a capacidade de manter o usuário engajado ao longo do tempo, não só na primeira consulta. Um estudo sobre uma plataforma gamificada de incentivo à reciclagem, desenvolvido com moradores de Sorocaba, identificou que 59% das pessoas que reciclam apenas às vezes ou raramente apontam a indisponibilidade de meios de reciclagem em casa como principal motivo, e 37% citam a distância até pontos de coleta como barreira. Isso mostra que o problema não termina na dúvida sobre "onde jogar", ele continua depois, na dificuldade de manter o hábito.
+
 ### Necessidades e dificuldades dos usuários
 
 Dificuldade em identificar materiais recicláveis: 58% dos brasileiros afirmam não saber reconhecer os símbolos de reciclagem nas embalagens, esse índice sobe pra 71% entre quem não separa resíduos e 70% entre quem tem apenas ensino fundamental.
@@ -34,6 +36,12 @@ Como o Brasil perde bilhões todo ano por reciclar pouco, e boa parte disso vem 
 
 Como a diferença entre taxas de reciclagem por material é grande (alumínio muito alto, vidro bem mais baixo), o guia de classificação não deve tratar todos os materiais da mesma forma, materiais com taxa de reciclagem mais baixa podem precisar de instruções mais detalhadas ou de destaque especial na interface.
 
+Pesquisas sobre gamificação e educação ambiental mostram que mecânicas de jogo aplicadas a contextos de sustentabilidade, como pontuação, metas e feedback visual de progresso, ajudam a promover mudanças de comportamento de longo prazo, e não só ações pontuais. Um projeto acadêmico de app gamificado para tratamento de resíduos sólidos reforça esse ponto ao usar campanhas de sensibilização contínua como estratégia central para sustentar o engajamento da população com a coleta seletiva ao longo do tempo.
+
+Esses dados dão base direta pra funcionalidade de contador de "quilos reciclados" do LixoZero, ela não é só um enfeite visual, é uma ferramenta de retenção. Mostrar progresso acumulado e dar feedback imediato após cada busca pode ser o que transforma um usuário que usa o app uma vez (por curiosidade) em alguém que volta a usar semanalmente, especialmente famílias e escolas, que são os públicos de uso mais recorrente indicados no estudo de caso.
+
+
+
 ### 3 descobertas importantes e como influenciam o projeto
 
 **1. O problema é majoritariamente de conhecimento, não de vontade.** A maioria dos brasileiros reconhece a importância da reciclagem, mas não sabe como agir na prática, seja por não reconhecer símbolos nas embalagens, seja por não saber onde levar resíduos específicos. Isso confirma que o LixoZero está atacando a causa certa: o app não precisa "convencer" o usuário a reciclar, e sim dar a ele a informação que falta no momento do descarte.
@@ -51,3 +59,5 @@ Pesquisa Ibope/Ambev (via eCycle), pesquisa nacional sobre conhecimento e compor
 Pesquisa Datafolha (via Abrema, jun/2024), dados sobre reconhecimento de símbolos de reciclagem, compostagem e descarte de resíduos especiais como pilhas.
 
 Abrelpe (via CNN Brasil e Agência Brasil), dados sobre perda econômica anual com descarte incorreto de recicláveis e taxas de reciclagem por tipo de material no Brasil.
+
+FEBRACE (Feira Brasileira de Ciências e Engenharia), pôster "Prototipação de uma plataforma gamificada para o incentivo à reciclagem" (pesquisa com moradores de Sorocaba/SP), dados sobre barreiras práticas à reciclagem e uso de gamificação para sustentar engajamento de longo prazo.
