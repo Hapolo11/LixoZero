@@ -3,7 +3,7 @@
 Todas as mudanças relevantes do protótipo LixoZero são registradas aqui.
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
-## [Não lançado]
+## [01/09/2026]
 
 ### Adicionado
 

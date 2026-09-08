@@ -4,7 +4,7 @@
 
 **Disciplina:** Programação para Dispositivos Móveis
 
-**Responsável pela seção:** Hapolo Luiz Silva Ramos dos Santos, Caio Leal Paixão, Salatiel Batista Santos
+**Responsável pela seção:** Hapolo Luiz Silva Ramos dos Santos, Caio Leal Paixão, Salatiel Batista Santos, David de Carvalho Cordeiro
 
 ## 2.1. Problema
 
