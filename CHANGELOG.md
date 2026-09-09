@@ -15,3 +15,11 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
   Salatiel. (`Docs/estudo-de-caso.md`)
 - Estudo de caso — 2.6 Funcionalidades e características já definidas — David.
   (`Docs/estudo-de-caso.md`)
+
+## [08/09/2026]
+
+### Adicionado
+
+- Pesquisa — Hapolo e David. (`Docs/pesquisa.md`)
+- Benchmark — Salatiel. (`Docs/benchmark.md`)
+- Personas — Caio. (`Docs/personas.md`)
