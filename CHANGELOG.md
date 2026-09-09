@@ -23,3 +23,4 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Pesquisa — Hapolo e David. (`Docs/pesquisa.md`)
 - Benchmark — Salatiel. (`Docs/benchmark.md`)
 - Personas — Caio. (`Docs/personas.md`)
+- Apresentação — Caio, Hapolo e Salatiel. (`Docs/apresentação.pdf`)
