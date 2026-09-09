@@ -15,10 +15,10 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 
 | Integrante | Responsabilidades |
 |---|---|
-| Hapolo Luiz | Estudo de caso — 2.1 Problema, 2.2 Público e usuários, 2.7 Restrições e condições |
-| Caio Leal | Estudo de caso — 2.4 Objetivo e proposta de valor, 2.8 Pontos de atenção |
-| Salatiel Batista | Estudo de caso — 2.3 Contexto de uso, 2.5 Personalidade, identidade e experiência |
-| David Cordeiro | Estudo de caso — 2.6 Funcionalidades e características já definidas |
+| Hapolo Luiz | Estudo de caso — 2.1 Problema, 2.2 Público e usuários, 2.7 Restrições e condições; Pesquisa |
+| Caio Leal | Estudo de caso — 2.4 Objetivo e proposta de valor, 2.8 Pontos de atenção; Personas |
+| Salatiel Batista | Estudo de caso — 2.3 Contexto de uso, 2.5 Personalidade, identidade e experiência; Benchmark |
+| David Cordeiro | Estudo de caso — 2.6 Funcionalidades e características já definidas; Pesquisa |
 
 ## Documentação
 
