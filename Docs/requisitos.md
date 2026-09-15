@@ -90,6 +90,56 @@
 ### RF08 - Busca por reconhecimento de imagem
 **Descrição:** O sistema deve permitir que o usuário tire uma foto do resíduo para que o sistema sugira automaticamente a categoria correspondente.
 
+## 2.3. Requisitos Não Funcionais
+
+### RNF01 - Desempenho
+**Descrição:** O sistema deverá apresentar o resultado da classificação de um resíduo em até 3 segundos após a solicitação do usuário.
+
+### RNF02 - Usabilidade
+**Descrição:** O fluxo principal de classificação de resíduos deverá ser realizado em, no máximo, 3 interações principais.
+
+### RNF03 - Funcionamento offline
+**Descrição:** O guia de classificação de resíduos deverá permanecer disponível mesmo quando o dispositivo estiver sem conexão com a internet.
+
+### RNF04 - Desempenho em dispositivos
+**Descrição:** O aplicativo deverá funcionar adequadamente em smartphones de entrada, evitando o uso excessivo de processamento, memória e armazenamento.
+
+### RNF05 - Portabilidade
+**Descrição:** O aplicativo deverá ser compatível com os dispositivos móveis suportados pela plataforma escolhida para seu desenvolvimento.
+
+### RNF06 - Privacidade
+**Descrição:** O sistema não deverá exigir a coleta de dados pessoais de identificação para utilização de suas funcionalidades principais.
+
+### RNF07 - Armazenamento local
+**Descrição:** Os dados relacionados ao contador de impacto ambiental deverão ser armazenados localmente no dispositivo e não deverão estar associados à identificação do usuário.
+
+### RNF08 - Usabilidade e linguagem
+**Descrição:** A interface deverá utilizar linguagem simples, clara e educativa, permitindo sua utilização por pessoas com diferentes níveis de conhecimento tecnológico.
+
+### RNF09 - Identificação visual
+**Descrição:** As categorias de resíduos deverão apresentar identificação visual consistente por meio do código de cores definido pelo projeto.
+
+### RNF10 - Simplicidade da interface
+**Descrição:** O aplicativo deverá possuir no máximo quatro telas principais, mantendo a navegação simples e objetiva.
+
+### RNF11 - Interface
+**Descrição:** A aplicação deverá utilizar o modo claro como padrão visual, considerando os ambientes previstos para utilização do aplicativo.
+
+### RNF12 - Tratamento de conectividade
+**Descrição:** O aplicativo deverá informar o usuário quando uma funcionalidade que dependa de conexão com a internet não puder ser executada.
+
+### RNF13 - Integração externa
+**Descrição:** A funcionalidade de localização de ecopontos e cooperativas deverá utilizar a API/serviço de mapas definido pelo projeto, atualmente especificado como Google Maps.
+
+### RNF14 - Confiabilidade
+**Descrição:** Os dados locais produzidos pelo usuário, como informações do contador de reciclagem, deverão permanecer disponíveis após o encerramento e reabertura do aplicativo.
+
+### RNF15 - Manutenibilidade
+**Descrição:** O código deverá ser organizado em componentes ou módulos independentes, facilitando a manutenção e evolução das funcionalidades.
+
+### RNF16 - Documentação
+**Descrição:** As alterações realizadas no projeto deverão ser documentadas no CHANGELOG.md, mantendo histórico das modificações realizadas.
+
 ## 2.4 CRUD
 
 | Informação | C | R | U | D | Observações |
