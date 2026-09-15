@@ -64,6 +64,32 @@
 
 **Justificativa:** Inspirado no ponto forte do Recycle Coach no benchmark. Não é essencial para o MVP, mas soma valor real, principalmente para crianças (público escolar) e usuários com menor familiaridade com termos técnicos de reciclagem.
 
+## 2.2. Requisitos Funcionais
+
+### RF01 - Busca por classificação de resíduos
+**Descrição:** O sistema deve permitir que o usuário digite o nome de um item a ser descartado e retorne a categoria correta e a orientação de descarte correspondente.
+
+### RF02 - Mapa de pontos de coleta
+**Descrição:** O sistema deve exibir, em um mapa, os ecopontos, cooperativas e pontos de coleta seletiva mais próximos do usuário, priorizando cooperativas de catadores.
+
+### RF03 - Contador de impacto
+**Descrição:** O sistema deve calcular e exibir, de forma acumulada e anônima, a quantidade de resíduos que o usuário já destinou corretamente à reciclagem.
+
+### RF04 - Lembretes de coleta seletiva
+**Descrição:** O sistema deve permitir que o usuário cadastre, consulte, edite e exclua lembretes referentes aos dias e horários da coleta seletiva de sua região.
+
+### RF05 - Consulta offline
+**Descrição:** O sistema deve permitir que o usuário consulte o guia de classificação de resíduos mesmo sem conexão com a internet.
+
+### RF06 - Conteúdo educativo sobre compostagem
+**Descrição:** O sistema deve disponibilizar orientações práticas sobre como realizar compostagem doméstica de resíduos orgânicos.
+
+### RF07 - Categorias com código de cores
+**Descrição:** O sistema deve organizar e exibir os resíduos por categoria (papel, plástico, vidro, orgânico, perigoso), utilizando o código de cores universal da reciclagem.
+
+### RF08 - Busca por reconhecimento de imagem
+**Descrição:** O sistema deve permitir que o usuário tire uma foto do resíduo para que o sistema sugira automaticamente a categoria correspondente.
+
 ## 2.4 CRUD
 
 | Informação | C | R | U | D | Observações |
