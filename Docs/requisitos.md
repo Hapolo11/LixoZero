@@ -100,3 +100,23 @@
 | Lembretes de coleta seletiva | ✓ | ✓ | ✓ | ✓ | O usuário cria o lembrete (dia/horário da coleta do bairro), pode consultá-lo, editá-lo (se o dia da coleta mudar) e excluí-lo quando não precisar mais. |
 | Conteúdo educativo sobre compostagem | ✓ | ✓ | ✓ | ✕ | Criado e atualizado pela equipe (conteúdo editorial); o usuário apenas consulta. Sem exclusão para manter a base de orientações sempre completa. |
 | Dados de identificação do usuário (nome, e-mail, localização exata, etc.) | ✕ | ✕ | ✕ | ✕ | Não se aplica. O app não coleta dados de identificação, conforme definido no compromisso do projeto. Isso também elimina a necessidade de cadastro/login, simplificando o fluxo de uso. |
+
+## 2.5 Priorização
+
+
+### Essenciais
+
+ **Guia de classificação de resíduos (busca por texto)** — é a funcionalidade central do produto; sem ela o app não cumpre sua promessa básica.
+ **Mapa de ecopontos, cooperativas e pontos de coleta** — fecha o ciclo completo do usuário (saber a categoria + saber para onde levar); nenhum concorrente resolve os dois problemas juntos.
+
+### Importantes
+
+ **Contador de impacto (quilos reciclados)** — funciona como ferramenta de retenção/motivação, mas o app funciona sem ela.
+ **Lembretes de coleta seletiva** — reforça engajamento e formação de hábito, mas não é o núcleo da proposta.
+ **Guia de classificação offline** — é um diferencial competitivo forte (nenhum concorrente oferece), mas depende da funcionalidade essencial já existir online.
+ **Categorias de resíduos com código de cores** — atende a uma restrição obrigatória do estudo de caso e ao público escolar, mas é um complemento visual à classificação, não a classificação em si.
+
+### Secundárias
+
+ **Conteúdo educativo sobre compostagem doméstica** — tema adjacente (redução de resíduos), não é o foco de classificação/descarte do app.
+ **Busca com reconhecimento de imagem** — o próprio documento já indica: "(diferencial futuro)" e "não é essencial para o MVP".
