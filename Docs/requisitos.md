@@ -1,0 +1,65 @@
+## 2.1. Funcionalidades
+
+### 1. Guia de classificação de resíduos (busca por texto)
+
+**Descrição:** O usuário digita o nome do item que quer descartar (ex: "pilha", "casca de banana", "isopor") e o app retorna a categoria correta e orientação de descarte.
+
+**Necessidade do usuário que atende:** Saber, na hora da dúvida, em qual categoria um resíduo se encaixa, sem depender de reconhecer símbolos ou embalagens.
+
+**Justificativa:** É a funcionalidade central do produto. A pesquisa mostrou que 58% dos brasileiros não reconhecem os símbolos de reciclagem, então a resposta do app não pode depender de o usuário já saber a categoria. É também a necessidade mais citada pela persona prioritária, Marina Costa, que busca uma resposta rápida sem termos técnicos.
+
+### 2. Mapa de ecopontos, cooperativas e pontos de coleta
+
+**Descrição:** Exibe, num mapa (via Google Maps), os pontos de descarte mais próximos do usuário, com prioridade para cooperativas de catadores.
+
+**Necessidade do usuário que atende:** Saber para onde levar fisicamente o resíduo depois de identificá-lo.
+
+**Justificativa:** A pesquisa apontou que só 35% dos brasileiros acham fácil encontrar informação local sobre coleta seletiva. No benchmark, nenhum concorrente resolve bem os dois problemas ao mesmo tempo (classificar e indicar onde levar), então essa funcionalidade é o que fecha o ciclo completo do usuário.
+
+### 3. Contador de impacto (quilos reciclados)
+
+**Descrição:** Mostra ao usuário, de forma acumulada e anônima, quantos quilos de resíduos ele já deixou de enviar a lixões ou aterros.
+
+**Necessidade do usuário que atende:** Ver resultado concreto do próprio esforço, o que mantém a motivação para continuar reciclando.
+
+**Justificativa:** A pesquisa identificou que a falta de feedback é uma das causas de as pessoas desistirem de reciclar com regularidade. As personas Marina e Ana Beatriz valorizam explicitamente "ver resultado" do que fizeram, o que reforça essa funcionalidade como ferramenta de retenção, não só um enfeite visual.
+
+### 4. Lembretes de coleta seletiva
+
+**Descrição:** Notifica o usuário sobre os dias e horários da coleta seletiva na sua região.
+
+**Necessidade do usuário que atende:** Evitar esquecer o dia da coleta e acumular lixo reciclável em casa.
+
+**Justificativa:** Funcionalidade já prevista no estudo de caso, e validada pelo benchmark: o Recycle Coach mostrou que lembretes de coleta ajudam a criar hábito, algo que reforça o objetivo de engajamento contínuo do LixoZero.
+
+### 5. Guia de classificação disponível offline
+
+**Descrição:** Permite consultar a classificação de resíduos mesmo sem conexão com a internet.
+
+**Necessidade do usuário que atende:** Conseguir usar o app mesmo com internet fraca ou instável, especialmente em ambientes domésticos.
+
+**Justificativa:** Requisito direto do estudo de caso e ponto de atenção destacado pelo próprio grupo. No benchmark, essa é justamente a maior fraqueza dos 3 concorrentes analisados (Cataki, Descarte Rápido e Recycle Coach), nenhum funciona sem internet, o que torna essa funcionalidade um diferencial competitivo real.
+
+### 6. Conteúdo educativo sobre compostagem doméstica
+
+**Descrição:** Orienta o usuário sobre como compostar resíduos orgânicos em casa.
+
+**Necessidade do usuário que atende:** Aproveitar o resíduo orgânico em vez de simplesmente descartá-lo, reduzindo o volume total de lixo gerado.
+
+**Justificativa:** Segue a lógica de prioridade da PNRS (não geração e redução antes de descarte). A pesquisa mostrou que 71% das pessoas já sabem que resíduo orgânico pode virar composto, ou seja, é um público já sensibilizado que só precisa de orientação prática, não de convencimento.
+
+### 7. Categorias de resíduos com código de cores
+
+**Descrição:** Tela que organiza os resíduos por categoria (papel, plástico, vidro, orgânico, perigoso), usando o código de cores universal da reciclagem.
+
+**Necessidade do usuário que atende:** Reconhecer visualmente e rapidamente a categoria de um resíduo, especialmente em situações de pouca atenção disponível.
+
+**Justificativa:** É uma restrição obrigatória definida no estudo de caso, e atende diretamente ao público de escolas (persona Ana Beatriz), que precisa de uma interface visual e didática para uso em sala de aula.
+
+### 8. Busca com reconhecimento de imagem (diferencial futuro)
+
+**Descrição:** Permite tirar uma foto do resíduo para que o app sugira a categoria correta, sem precisar digitar o nome do item.
+
+**Necessidade do usuário que atende:** Identificar resíduos quando o usuário não sabe nem o nome do item.
+
+**Justificativa:** Inspirado no ponto forte do Recycle Coach no benchmark. Não é essencial para o MVP, mas soma valor real, principalmente para crianças (público escolar) e usuários com menor familiaridade com termos técnicos de reciclagem.
