@@ -63,3 +63,14 @@
 **Necessidade do usuário que atende:** Identificar resíduos quando o usuário não sabe nem o nome do item.
 
 **Justificativa:** Inspirado no ponto forte do Recycle Coach no benchmark. Não é essencial para o MVP, mas soma valor real, principalmente para crianças (público escolar) e usuários com menor familiaridade com termos técnicos de reciclagem.
+
+## 2.4 CRUD
+
+| Informação | C | R | U | D | Observações |
+|---|:---:|:---:|:---:|:---:|---|
+| Guia de classificação de resíduos (tipo → categoria → destino) | ✓ | ✓ | ✓ | ✕ | Criado e atualizado pela equipe de desenvolvimento (base de dados interna do app); o usuário apenas consulta. Não há exclusão porque o guia precisa estar sempre completo, remover um item quebraria a função principal do app. |
+| Ecopontos e cooperativas de coleta | ✓ | ✓ | ✓ | ✓ | Cadastro inicial feito pela equipe a partir de fontes públicas; pode ser atualizado (mudança de endereço/horário) ou excluído (ponto desativado). O usuário só consulta, não edita. |
+| Registro de reciclagem (para o contador de impacto) | ✓ | ✓ | ✕ | ✕ | Criado automaticamente a cada consulta/confirmação do usuário e consultado no contador de "quilos reciclados". Não é atualizável nem excluível porque o registro é anônimo e agregado localmente, não há vínculo com uma pessoa para permitir correção ou remoção individual, conforme o compromisso de privacidade do projeto. |
+| Lembretes de coleta seletiva | ✓ | ✓ | ✓ | ✓ | O usuário cria o lembrete (dia/horário da coleta do bairro), pode consultá-lo, editá-lo (se o dia da coleta mudar) e excluí-lo quando não precisar mais. |
+| Conteúdo educativo sobre compostagem | ✓ | ✓ | ✓ | ✕ | Criado e atualizado pela equipe (conteúdo editorial); o usuário apenas consulta. Sem exclusão para manter a base de orientações sempre completa. |
+| Dados de identificação do usuário (nome, e-mail, localização exata, etc.) | ✕ | ✕ | ✕ | ✕ | Não se aplica. O app não coleta dados de identificação, conforme definido no compromisso do projeto. Isso também elimina a necessidade de cadastro/login, simplificando o fluxo de uso. |
