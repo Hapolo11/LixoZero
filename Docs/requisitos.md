@@ -90,6 +90,18 @@
 ### RF08 - Busca por reconhecimento de imagem
 **Descrição:** O sistema deve permitir que o usuário tire uma foto do resíduo para que o sistema sugira automaticamente a categoria correspondente.
 
+### RF09 - Registro automático de reciclagem
+**Descrição:** O sistema deve registrar automaticamente, de forma anônima, cada consulta/confirmação de descarte feita pelo usuário, alimentando o contador de impacto.
+ 
+### RF10 - Aviso de indisponibilidade por falta de conexão
+**Descrição:** O sistema deve informar o usuário quando uma funcionalidade dependente de internet (ex: mapa de ecopontos) não puder ser executada por falta de conexão.
+ 
+### RF11 - Dados agregados para gestores públicos
+**Descrição:** O sistema deve disponibilizar dados agregados e anônimos de impacto ambiental para apoiar o planejamento de gestores públicos da coleta seletiva municipal.
+ 
+### RF12 - Configuração de coleta seletiva por síndicos
+**Descrição:** O sistema deve permitir que síndicos configurem e compartilhem, dentro do app, informações sobre dias e locais de coleta seletiva do condomínio para os moradores.
+
 ## 2.3. Requisitos Não Funcionais
 
 ### RNF01 - Desempenho
