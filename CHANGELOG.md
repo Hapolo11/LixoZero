@@ -24,3 +24,14 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Benchmark — Salatiel. (`Docs/benchmark.md`)
 - Personas — Caio. (`Docs/personas.md`)
 - Apresentação — Caio, Hapolo e Salatiel. (`Docs/apresentação.pdf`)
+
+## [15/09/2026]
+
+### Adicionado
+
+- 2.1 Funcionalidades — Hapolo. (`Docs/requisitos.md`)
+- 2.2 Requisitos Funcionais — Salatiel. (`Docs/requisitos.md`)
+- 2.3 Requisitos Não-Funcionais — Rafael. (`Docs/requisitos.md`)
+- 2.4 CRUD — Caio. (`Docs/requisitos.md`)
+- 2.5 Priorizações — David. (`Docs/requisitos.md`)
+- Apresentação — Caio, David, Hapolo, Rafael e Salatiel. (`Docs/apresentacaoRequisitos.pdf`)
