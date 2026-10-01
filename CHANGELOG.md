@@ -35,3 +35,16 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - 2.4 CRUD — Caio. (`Docs/requisitos.md`)
 - 2.5 Priorizações — David. (`Docs/requisitos.md`)
 - Apresentação — Caio, David, Hapolo, Rafael e Salatiel. (`Docs/apresentacaoRequisitos.pdf`)
+
+## [01/10/2026]
+
+### Adicionado
+
+- 1 Escolha das cores (paleta e contraste) — Hapolo. (`Docs/justificativas.md`)
+- 2 Tipografia — Hapolo. (`Docs/justificativas.md`)
+- 3 Organização das informações — Hapolo. (`Docs/justificativas.md`)
+- 4 Navegação — Hapolo. (`Docs/justificativas.md`)
+- 5 Componentes — Hapolo. (`Docs/justificativas.md`)
+- 6 Acessibilidade — Hapolo. (`Docs/justificativas.md`)
+- 7 Decisões relacionadas ao contexto de uso — Hapolo. (`Docs/justificativas.md`)
+- 8 Arquitetura do sistema — Hapolo. (`Docs/justificativas.md`)
