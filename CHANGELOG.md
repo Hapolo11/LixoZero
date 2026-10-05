@@ -48,3 +48,11 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - 6 Acessibilidade — Hapolo. (`Docs/justificativas.md`)
 - 7 Decisões relacionadas ao contexto de uso — Hapolo. (`Docs/justificativas.md`)
 - 8 Arquitetura do sistema — Hapolo. (`Docs/justificativas.md`)
+
+## [05/10/2026]
+
+### Adicionado
+
+- Protótipo de baixa fidelidade — David, Hapolo e Salatiel. (`Docs/prototipoBaixaFidelidade.pdf`)
+- Protótipo de alta fidelidade — Caio, Hapolo e Salatiel. (`Docs/prototipoAltaFidelidade.pdf`)
+- Apresentação final da Unidade I — Caio e Hapolo. (`Docs/apresentacaoFinalUnidadeI.pdf`)
