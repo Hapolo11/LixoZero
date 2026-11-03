@@ -56,3 +56,27 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Protótipo de baixa fidelidade — David, Hapolo e Salatiel. (`Docs/prototipoBaixaFidelidade.pdf`)
 - Protótipo de alta fidelidade — Caio, Hapolo e Salatiel. (`Docs/prototipoAltaFidelidade.pdf`)
 - Apresentação final da Unidade I — Caio e Hapolo. (`Docs/apresentacaoFinalUnidadeI.pdf`)
+
+## [03/11/2026]
+
+### Adicionado
+
+- Projeto Flutter, tema com a paleta e fontes Montserrat e Inter — Rafael. (`pubspec.yaml`, `lib/theme/app_theme.dart`, `assets/fonts/`)
+- Navegação com as 4 abas e mascote Brotinho — Rafael. (`lib/app.dart`, `lib/widgets/`, `assets/images/`)
+- Guia de classificação com 6 categorias e 81 itens — Rafael. (`assets/data/guia.json`, `lib/models/`)
+- Busca offline que aceita plural, falta de acento e erro de digitação — Rafael. (`lib/data/busca.dart`, `test/busca_test.dart`)
+- Tela "Onde jogo isso?" com resultado, dúvidas comuns e "não encontrei" — Rafael. (`lib/screens/buscar_screen.dart`)
+- Tela de categorias com código de cores; tocar num exemplo abre a busca — Rafael. (`lib/screens/categorias_screen.dart`)
+- Lista com os 9 ecopontos da Emsurb e as cooperativas CARE, Coores e União — Rafael. (`assets/data/pontos.json`, `lib/data/pontos_repository.dart`, `test/pontos_test.dart`)
+- Mapa com Google Maps e chave fora do Git — Rafael. (`lib/screens/mapa_screen.dart`, `android/`, `ios/`)
+- Localização, distância, filtros, "Como chegar" e "Ligar" — Rafael. (`lib/services/localizacao_service.dart`, `lib/screens/mapa_screen.dart`)
+- Aviso de sem internet e botão "Ver pontos de coleta" no resultado da busca — Rafael. (`lib/state/conexao_model.dart`, `lib/screens/buscar_screen.dart`)
+
+### Alterado
+
+- Categoria Metal incluída na funcionalidade 7, no RF07 e no README — Rafael. (`Docs/requisitos.md`, `README.md`)
+- RF09 reescrito: o registro de reciclagem só acontece ao tocar em "Registrar reciclagem" — Rafael. (`Docs/requisitos.md`, `Docs/justificativas.md`)
+- Tabela CRUD ajustada ao login opcional e ao "ajustar peso" — Rafael. (`Docs/requisitos.md`)
+- Priorização: guia offline junto com a busca, login por último, RF11 e RF12 fora do protótipo — Rafael. (`Docs/requisitos.md`)
+- Correção de formatação da seção 2.5 — Rafael. (`Docs/estudo-de-caso.md`)
+- Correção no mapa: não tenta mover o mapa depois que a internet cai — Rafael. (`lib/screens/mapa_screen.dart`)

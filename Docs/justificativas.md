@@ -77,7 +77,8 @@ coleta" leva ao Mapa.
 O login é opcional: o usuário pode criar conta, entrar com e-mail ou Google, ou tocar em
 "Não quero fazer login" e usar o app inteiro sem cadastro. As telas de acesso ficam fora
 das quatro principais (RNF10) e aparecem na primeira abertura, com a escolha guardada no
-aparelho, para não acrescentar um passo ao fluxo de busca em todo uso (RNF02).
+aparelho, para não acrescentar um passo ao fluxo de busca em todo uso (RNF02). Como nada
+do app depende de conta, o login é a última funcionalidade a ser implementada.
 
 ## 5. Componentes (elementos de UI utilizados)
 
@@ -100,8 +101,10 @@ aparelho, para não acrescentar um passo ao fluxo de busca em todo uso (RNF02).
   e nunca é a única forma de informar algo.
 
 O registro de reciclagem é um toast, e não um pop-up pedindo o peso, porque o RF09 pede
-registro automático, ninguém sabe de cabeça quanto pesa uma garrafa e o uso é com as mãos
-ocupadas. Cada item do guia tem um peso médio estimado, somado ao contador sozinho.
+que o peso seja automático, ninguém sabe de cabeça quanto pesa uma garrafa e o uso é com
+as mãos ocupadas. O registro só acontece quando o usuário toca em "Registrar reciclagem"
+(buscar sozinho não conta, para o contador não subir com pesquisas). Cada item do guia tem
+um peso médio estimado, somado ao contador sozinho.
 
 A dica do rodapé da tela Buscar é rotativa. O protótipo mostra uma ("Dica: compostagem"),
 e no app o espaço alterna entre dicas curtas de reciclagem, como compostagem, enxaguar
