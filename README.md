@@ -79,3 +79,5 @@ que confere se todo item tem categoria, destino e peso.
 ## Uso de inteligência artificial
 
 O projeto foi feito em parceria com ferramentas de IA, como o Claude Code e o GPT.
+O registro de como cada integrante usou a IA, com os erros gerados e as correções, está em
+[Docs/uso-de-ia.md](Docs/uso-de-ia.md).
