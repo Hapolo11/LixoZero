@@ -71,6 +71,12 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Mapa com Google Maps e chave fora do Git — Rafael. (`lib/screens/mapa_screen.dart`, `android/`, `ios/`)
 - Localização, distância, filtros, "Como chegar" e "Ligar" — Rafael. (`lib/services/localizacao_service.dart`, `lib/screens/mapa_screen.dart`)
 - Aviso de sem internet e botão "Ver pontos de coleta" no resultado da busca — Rafael. (`lib/state/conexao_model.dart`, `lib/screens/buscar_screen.dart`)
+- Telas de entrar, criar conta e recuperar senha, com o botão "Não quero fazer login" — Hapolo. (`lib/screens/login_screen.dart`, `lib/state/auth_model.dart`)
+- Login com e-mail e senha e com Google pelo Firebase Authentication, com erros em português — Hapolo. (`lib/services/auth_firebase.dart`, `lib/services/auth_repositorio.dart`, `android/app/google-services.json`)
+- Tela de conta: editar nome, sair e excluir a conta — Hapolo. (`lib/screens/conta_screen.dart`)
+- Validação dos campos do login — Hapolo. (`lib/data/validadores.dart`)
+- Testes do login — Hapolo. (`test/login_test.dart`)
+- Ícone do app com o Brotinho — Hapolo. (`android/app/src/main/res/`)
 
 ### Alterado
 
@@ -80,3 +86,4 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Priorização: guia offline junto com a busca, login por último, RF11 e RF12 fora do protótipo — Rafael. (`Docs/requisitos.md`)
 - Correção de formatação da seção 2.5 — Rafael. (`Docs/estudo-de-caso.md`)
 - Correção no mapa: não tenta mover o mapa depois que a internet cai — Rafael. (`lib/screens/mapa_screen.dart`)
+- Correção da tela preta ao abrir o app: `shared_preferences_android` fixado na versão 2.4.28 — Hapolo. (`pubspec.yaml`)

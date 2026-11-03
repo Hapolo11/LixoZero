@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 
 import 'screens/buscar_screen.dart';
 import 'screens/categorias_screen.dart';
+import 'screens/login_screen.dart';
 import 'screens/mapa_screen.dart';
+import 'state/auth_model.dart';
 import 'state/navegacao_model.dart';
 import 'theme/app_theme.dart';
 import 'widgets/barra_navegacao.dart';
@@ -23,8 +25,19 @@ class LixoZeroApp extends StatelessWidget {
       locale: const Locale('pt', 'BR'),
       supportedLocales: const [Locale('pt', 'BR')],
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      home: const TelaPrincipal(),
+      home: const _Raiz(),
     );
+  }
+}
+
+/// Mostra o login até o usuário escolher entrar ou seguir sem conta.
+class _Raiz extends StatelessWidget {
+  const _Raiz();
+
+  @override
+  Widget build(BuildContext context) {
+    final sessao = context.watch<AuthModel>().sessao;
+    return sessao == Sessao.precisaEscolher ? const LoginScreen() : const TelaPrincipal();
   }
 }
 

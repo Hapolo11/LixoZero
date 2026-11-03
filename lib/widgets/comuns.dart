@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../models/categoria.dart';
+import '../screens/conta_screen.dart';
 import '../state/conexao_model.dart';
 import '../theme/app_theme.dart';
 
@@ -60,6 +61,13 @@ class Cabecalho extends StatelessWidget {
                 child: Text(
                   online ? 'offline disponível' : 'sem internet · o guia funciona assim mesmo',
                   style: const TextStyle(fontSize: 13, color: AppColors.verdeEscuro, fontWeight: FontWeight.w500),
+                ),
+              ),
+              IconButton(
+                tooltip: 'Conta',
+                icon: const Icon(Icons.account_circle_outlined, color: AppColors.verdeEscuro),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const ContaScreen()),
                 ),
               ),
               Mascote(pose, tamanho: 52),

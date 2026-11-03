@@ -3,6 +3,13 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("dev.flutter.flutter-gradle-plugin")
+    id("com.google.gms.google-services") apply false
+}
+
+// O Firebase só é ligado se o android/app/google-services.json existir
+// (baixado no console do Firebase). Sem ele o app compila e roda sem login.
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
 }
 
 // A chave do Google Maps fica no android/local.properties (MAPS_API_KEY=...),
