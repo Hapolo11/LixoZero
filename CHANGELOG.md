@@ -78,6 +78,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Testes do login — Hapolo. (`test/login_test.dart`)
 - Ícone do app com o Brotinho — Hapolo. (`android/app/src/main/res/`)
 - Registro de uso de IA, com a seção do login preenchida e espaços para os demais — Hapolo. (`Docs/uso-de-ia.md`)
+- Diagrama de Casos de uso - Caio. (`Docs/diagrama-casos-de-uso.pdf`)
 
 ### Alterado
 
