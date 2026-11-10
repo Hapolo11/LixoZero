@@ -11,7 +11,7 @@ A IA foi usada como ferramenta de apoio. O código gerado foi lido, testado no c
 | Hapolo | Login opcional com Firebase, tela de conta e ícone do app | Claude Code |
 | Rafael | Sprints 1, 2 e 3 (busca, categorias, mapa, contador de impacto e lembretes) | Claude Code |
 | Caio | a preencher | a preencher |
-| Salatiel | a preencher | a preencher |
+| Salatiel | Sprint 3 (registro de reciclagem, tela Impacto e lembretes de coleta) | Agente do Antigravity e Claude |
 | David | Sprint 4 (guia de compostagem e dica rotativa da tela Buscar) | Claude Code |
 
 ## Hapolo: login opcional, conta e ícone do app
@@ -195,9 +195,63 @@ Observação geral: pedir que a IA teste no emulador e mostre a tela trouxe à t
 
 A preencher por Caio.
 
-## Salatiel
-
-A preencher por Salatiel.
+## Salatiel: sprint 3 (registro de reciclagem, tela Impacto e lembretes)
+ 
+### O que foi feito com apoio da IA
+ 
+- Botão "Registrar reciclagem" no resultado da busca. Ao tocar, o app soma o peso médio do item ao total e mostra o aviso "Registrado! +0,02 kg" (o peso real do item, com vírgula decimal).
+- "Ajustar peso" opcional: o aviso tem uma ação que abre um diálogo com campo numérico (aceita vírgula ou ponto) para corrigir o peso daquele registro. Cancelar não altera nada, e valores inválidos ou menores ou iguais a zero são ignorados.
+- Uma busca sozinha não registra nada: o registro só acontece ao tocar no botão, como o RF09 foi reescrito no CHANGELOG de 03/11.
+- Os registros ficam salvos no aparelho e continuam lá depois de fechar o app.
+- Testes automáticos do model e do registro (`test/reciclagem_model_test.dart`).
+O código foi estruturado pelo agente do Antigravity a partir de prompts montados com ajuda do Claude. O Claude também ajudou a revisar o que o agente mexeu, a organizar o CHANGELOG.
+ 
+### Como o código está organizado
+ 
+| Arquivo | Função |
+|---|---|
+| `lib/models/registro_reciclagem.dart` | Um registro de reciclagem: id, item, peso em kg e data, com conversão para JSON. |
+| `lib/data/reciclagem_repository.dart` | Lê e grava a lista de registros no aparelho (`shared_preferences`), em uma única chave. |
+| `lib/state/reciclagem_model.dart` | Guarda a lista e oferece `carregar()`, `registrar()`, `ajustarPeso()` e `totalKg`. |
+| `lib/screens/buscar_screen.dart` | Botão "Registrar reciclagem" no resultado, aviso com "Ajustar peso" e o diálogo de ajuste. |
+| `lib/main.dart` | Cria o model junto com os outros e o disponibiliza para o app. |
+| `test/reciclagem_model_test.dart` | Testes do registro, do ajuste de peso, da persistência e do diálogo. |
+ 
+Quatro decisões de projeto:
+ 
+- **Registro só por ação do usuário:** buscar um item não soma nada. O total só muda ao tocar em "Registrar reciclagem".
+- **Dados só no aparelho (RNF06):** os registros ficam salvos localmente, sem conta e sem dados pessoais. O usuário que não faz login também registra.
+- **Peso vem do guia:** o peso médio de cada item é o campo `pesoKg` que já existia no `guia.json`. A IA não inventou nenhum peso.
+- **Registro antes do contador:** o RF09 foi entregue primeiro, e o total do mês será lido pela aba Impacto (RF03), da mesma sprint. Por isso o total não foi colocado na tela de conta.
+Nenhuma biblioteca nova foi instalada: o `shared_preferences` e o `provider` já estavam no projeto.
+ 
+### Erros gerados pela IA e como foram resolvidos
+ 
+| Erro | O que aconteceu | Como foi resolvido |
+|---|---|---|
+| Total exibido na tela de conta | O agente mostrou o total de "kg reciclados" no `conta_screen.dart`, que é a tela de conta do Hapolo e fora do escopo do RF09. | O `git diff` mostrou a mudança antes do commit. O arquivo foi desfeito com `git restore`. |
+| Teste quebrou depois disso | O agente tinha escrito um teste que procurava o total na tela de conta, e ele falhou quando a tela voltou ao original. | O teste e o import do `conta_screen.dart` foram removidos do arquivo de teste. |
+| Getter desnecessário no `ItemGuia` | O agente adicionou `pesoMedioKg` em `item_guia.dart`, repetindo o `pesoKg` que já existia, e ninguém usava. | `git grep --untracked` confirmou que não era usado e o arquivo foi restaurado. |
+| Busca incompleta pelo getter | A primeira checagem com `git grep` não olhava os arquivos novos ainda não rastreados e parecia mostrar que não havia uso. | Foi repetida com `--untracked`, que mostrou que as outras ocorrências eram só o nome de um parâmetro. |
+| Linha do CHANGELOG no lugar errado | O agente criou uma seção "Não lançado" e a linha também entrou na seção `[03/11/2026]`. A primeira orientação também mandava criar a seção no topo, mas o arquivo está em ordem crescente de data. | As duas foram removidas e a linha ficou em uma seção `[10/11/2026]` no final do arquivo. |
+| Agente parou com erro | O agente do Antigravity terminou a execução com "Agent execution terminated due to error" na primeira tentativa. | A tarefa foi enviada de novo ao agente, que concluiu o código. |
+ 
+### Dados usados
+ 
+- **Pesos dos itens:** vêm do campo `pesoKg` de cada item do guia de classificação (`assets/data/guia.json`), escrito pelo Rafael. O registro usa esse valor como peso inicial.
+- **Textos do botão e do aviso:** "Registrar reciclagem", "Registrado! +0,02 kg" e "Ajustar peso" seguem o RF09 do `Docs/requisitos.md`.
+### Prompts que funcionaram melhor
+ 
+1. **RF09 inteiro.** Contexto do projeto (pastas, `provider`, regras de dados locais e de fluxo curto), o comportamento esperado em 5 pontos e os passos numerados. Pedi que o agente lesse antes `item_guia.dart`, `buscar_screen.dart`, `main.dart`, `app.dart` e um model da pasta `state/`, para seguir o padrão que já existia, e que não fizesse commit.
+   Resultado: o agente reaproveitou o `pesoKg` que já existia, seguiu o padrão do `provider` e não mexeu no login nem no mapa. O erro dele foi mexer no `conta_screen.dart`, que foi pego na revisão.
+Observação geral: ler o `git diff` e o `git status` antes de cada commit achou o que os testes automáticos não pegavam, como a mudança no `conta_screen.dart` e o getter que ninguém usava.
+ 
+### Como o resultado foi conferido
+ 
+- `flutter analyze` sem problemas e todos os testes passando.
+- RF09 testado no Chrome (`flutter run -d chrome`): busca por "Pilha", botão "Registrar reciclagem" no resultado, aviso "Registrado! +0,02 kg" e diálogo "Ajustar peso" abrindo com o peso atual.
+- `git status` e `git diff` conferidos antes do commit, para só entrarem arquivos da sprint e nenhuma linha antiga do CHANGELOG ser alterada.
+- O erro `Cannot read properties of undefined (reading 'maps')` do console no Chrome vem da tela do mapa na versão web e não tem relação com a sprint.
 
 ## David: sprint 4 (guia de compostagem e dica rotativa)
 
