@@ -106,6 +106,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Testes do guia de compostagem e das dicas — David. (`test/compostagem_test.dart`, `test/dicas_falsas.dart`)
 - Seção do David no registro de uso de IA, com a sprint 4 — David. (`Docs/uso-de-ia.md`)
 - Plano das sprints da Unidade II, com o que já foi feito e o que falta para finalizar o projeto — Rafael. (`Docs/sprints.md`)
+- - Registro de uso de IA: seção da Sprint 3 do Salatiel — Salatiel. (`Docs/uso-de-ia.md`)
 
 ### Alterado
 
