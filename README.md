@@ -1,7 +1,7 @@
 # LixoZero
 
-Assistente doméstico de reciclagem: classifica cada resíduo (plástico, papel, vidro,
-orgânico, perigoso) e indica o destino correto mais próximo — ecopontos e cooperativas de
+Assistente doméstico de reciclagem: classifica cada resíduo (papel, plástico, vidro,
+metal, orgânico, perigoso) e indica o destino correto mais próximo — ecopontos e cooperativas de
 catadores.
 
 ## Missão
@@ -26,9 +26,64 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 ## Documentação
 
 - [Estudo de caso](Docs/estudo-de-caso.md)
+- [Pesquisa](Docs/pesquisa.md), [Benchmark](Docs/benchmark.md) e [Personas](Docs/personas.md)
+- [Requisitos](Docs/requisitos.md)
 - [Justificativas](Docs/justificativas.md)
 - [Changelog](CHANGELOG.md)
 
 ## Status
 
-Em fase de documentação e planejamento — nenhum código do app foi criado ainda.
+Unidade II em andamento. Sprints 1, 2 e 3 prontas:
+
+- **Sprint 1:** busca offline "Onde jogo isso?" com o guia de 6 categorias e 81 itens (RF01, RF05)
+- **Sprint 2:** tela de categorias e mapa de ecopontos e cooperativas de Aracaju (RF02, RF07, RF10)
+- **Sprint 3:** registro de reciclagem e tela Impacto, com o contador de quilos e os lembretes
+  de coleta com notificação (RF03, RF04, RF09)
+
+Também tem login opcional com Firebase. Veja o [Changelog](CHANGELOG.md).
+
+## Como rodar
+
+Precisa do [Flutter](https://docs.flutter.dev/get-started/install) 3.47 ou mais novo, com
+JDK 17 e Android SDK (ou Xcode, para iOS).
+
+```bash
+flutter pub get
+flutter test   # testes
+flutter run    # com um emulador ou celular conectado
+```
+
+**Chave do Google Maps:** o mapa precisa de uma chave da API (Maps SDK for Android/iOS),
+que não vai para o Git:
+
+- Android: em `android/local.properties`, coloque `MAPS_API_KEY=sua_chave`
+- iOS: crie `ios/Flutter/Secrets.xcconfig` com `MAPS_API_KEY=sua_chave`
+
+Sem a chave o mapa fica em branco, mas a lista de ecopontos continua aparecendo.
+
+**Lembretes:** no Android 13 ou mais novo, o app pede permissão de notificação ao criar o
+primeiro lembrete. No Android 14 ou mais novo, o aviso só chega no minuto exato se a opção
+"Alarmes e lembretes" estiver ativada para o LixoZero; sem ela, o Android pode atrasar o
+aviso em até 1 hora.
+
+## Estrutura do código
+
+| Pasta | O que tem |
+|---|---|
+| `assets/data/` | Guia de classificação e lista de ecopontos/cooperativas (JSON editado pela equipe) |
+| `assets/images/` | Poses do mascote Brotinho |
+| `lib/data/` | Busca e leitura dos JSON |
+| `lib/models/` | Categoria, item do guia, ponto de coleta, registro de reciclagem e lembrete |
+| `lib/services/` | Localização, login (Firebase) e notificações dos lembretes |
+| `lib/state/` | Navegação, conexão, login, registros de reciclagem e lembretes |
+| `lib/screens/` | Telas Buscar, Mapa, Impacto e Categorias, mais login e conta |
+| `test/` | Testes da busca, pontos de coleta, login, reciclagem, contador e lembretes |
+
+Para incluir ou corrigir um resíduo, edite `assets/data/guia.json` e rode `flutter test`,
+que confere se todo item tem categoria, destino e peso.
+
+## Uso de inteligência artificial
+
+O projeto foi feito em parceria com ferramentas de IA, como o Claude Code e o GPT.
+O registro de como cada integrante usou a IA, com os erros gerados e as correções, está em
+[Docs/uso-de-ia.md](Docs/uso-de-ia.md).

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "683946054311",
+    "project_id": "lixozero-91454",
+    "storage_bucket": "lixozero-91454.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683946054311:android:fe29d8707444ba0615c182",
+        "android_client_info": {
+          "package_name": "br.com.lixozero.lixozero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683946054311-5adf63obgp8mecf3h2q4i84ujgqk66pd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.lixozero.lixozero",
+            "certificate_hash": "2f610f2720b3319e49e184a615cf380fb6619e56"
+          }
+        },
+        {
+          "client_id": "683946054311-iknk1e6ql07qkk7r0tpe6k3t01gborgf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvXNa5ce3bQ4q_RgjMV-DmVeIDKNS3ea4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683946054311-iknk1e6ql07qkk7r0tpe6k3t01gborgf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
