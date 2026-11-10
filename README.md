@@ -29,6 +29,7 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 - [Pesquisa](Docs/pesquisa.md), [Benchmark](Docs/benchmark.md) e [Personas](Docs/personas.md)
 - [Requisitos](Docs/requisitos.md)
 - [Justificativas](Docs/justificativas.md)
+- [Plano das sprints](Docs/sprints.md)
 - [Changelog](CHANGELOG.md)
 
 ## Status

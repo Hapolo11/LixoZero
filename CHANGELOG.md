@@ -105,6 +105,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Dica rotativa no rodapé da tela Buscar, com 8 dicas que mudam a cada busca e a cada abertura, e o cartão do protótipo com "Entendi" — David. (`assets/data/dicas.json`, `lib/models/dica.dart`, `lib/state/dicas_model.dart`, `lib/widgets/dica_rodape.dart`)
 - Testes do guia de compostagem e das dicas — David. (`test/compostagem_test.dart`, `test/dicas_falsas.dart`)
 - Seção do David no registro de uso de IA, com a sprint 4 — David. (`Docs/uso-de-ia.md`)
+- Plano das sprints da Unidade II, com o que já foi feito e o que falta para finalizar o projeto — Rafael. (`Docs/sprints.md`)
 
 ### Alterado
 
