@@ -12,7 +12,7 @@ A IA foi usada como ferramenta de apoio. O código gerado foi lido, testado no c
 | Rafael | Sprints 1, 2 e 3 (busca, categorias, mapa, contador de impacto e lembretes) | Claude Code |
 | Caio | a preencher | a preencher |
 | Salatiel | a preencher | a preencher |
-| David | a preencher | a preencher |
+| David | Sprint 4 (guia de compostagem e dica rotativa da tela Buscar) | Claude Code |
 
 ## Hapolo: login opcional, conta e ícone do app
 
@@ -199,6 +199,57 @@ A preencher por Caio.
 
 A preencher por Salatiel.
 
-## David
+## David: sprint 4 (guia de compostagem e dica rotativa)
 
-A preencher por David.
+### O que foi feito com apoio da IA
+
+- Guia de compostagem doméstica (RF06): o que pode ir (restos úmidos e material seco), o que não pode ir e por quê, passo a passo com 3 baldes, uso do chorume, problemas comuns (mau cheiro, mosquinhas, formigas) e o que fazer sem espaço para composteira.
+- Três caminhos até o guia, sem criar uma quinta tela (RNF10): o botão "Aprenda a compostar em casa" no card Orgânico da tela Categorias, o botão "Como compostar" no resultado de um item orgânico e o cartão das dicas de compostagem.
+- Dica rotativa no rodapé da tela Buscar, como no protótipo de alta fidelidade: a faixa "Dica: compostagem" abre um cartão com o Brotinho e o botão "Entendi". São 8 dicas, que mudam a cada busca e a cada abertura do app. Algumas levam ao guia de compostagem e outras procuram o item no guia (pilha, óleo, isopor...).
+- Correção do card de categoria, que estourava a tela com a fonte grande do sistema.
+- Testes automáticos do guia de compostagem e das dicas (`test/compostagem_test.dart`).
+
+### Como o código está organizado
+
+| Arquivo | Função |
+|---|---|
+| `assets/data/compostagem.json` | Conteúdo do guia de compostagem, editado pela equipe. O usuário só consulta (tabela CRUD). |
+| `assets/data/dicas.json` | As 8 dicas do rodapé. Cada uma pode levar ao guia de compostagem ou à busca de um item. |
+| `lib/screens/compostagem_screen.dart` | Tela do guia de compostagem. Abre por cima da aba atual, sem virar uma quinta tela (RNF10). |
+| `lib/state/dicas_model.dart` | Escolhe a dica: muda a cada busca e a cada abertura, e guarda no aparelho só o número da última. |
+| `lib/widgets/dica_rodape.dart` | Faixa "Dica: ..." do rodapé e o cartão com o Brotinho e o botão "Entendi". |
+| `lib/models/guia_compostagem.dart` e `lib/models/dica.dart` | Leem o JSON do guia e das dicas. |
+| `lib/data/conteudo_repository.dart` | Carrega o guia de compostagem e as dicas, que vão junto com o app. |
+
+Três decisões de projeto:
+
+- **Sem aba nova (RNF10):** o guia de compostagem abre por cima da aba atual, com seta de voltar, igual à tela de conta. A explicação ficou em `Docs/justificativas.md`, seção 4.
+- **Offline e sem coleta de dados (RNF03 e RNF06):** o guia e as dicas vêm dentro do app. Do aparelho, só fica salvo o número da última dica vista, para a próxima abertura mostrar a seguinte.
+- **Dica sem temporizador:** ela muda a cada busca e a cada abertura, como pede o `justificativas.md`, para não distrair nem gastar bateria.
+
+Nenhuma biblioteca nova foi instalada: a sprint usa o `provider` e o `shared_preferences`, que já estavam no projeto.
+
+### Erros gerados pela IA e como foram resolvidos
+
+| Erro | O que aconteceu | Como foi resolvido |
+|---|---|---|
+| Card de categoria estourava a tela com fonte larga | O teste novo da sprint 4 mostrou que a linha "Orgânico · Lixeira Marrom" passava 15 pixels da borda. O mesmo acontece no celular com a fonte grande do sistema. | A linha virou um `Wrap`: quando não cabe, a lixeira desce para a linha de baixo. |
+| Teste tocava num botão fora da tela | A lista monta os cards um pouco antes de eles aparecerem. O teste achava o botão "Aprenda a compostar em casa", mas o toque caía fora da tela. | `ensureVisible` antes do toque, para rolar até o botão aparecer de verdade. |
+| Fim do guia de compostagem ficava embaixo da barra de gestos | A margem da lista era fixa e não somava a barra de gestos do Android. Foi visto rolando a tela no emulador. | A margem de baixo soma a área do sistema (`MediaQuery.paddingOf`). |
+
+### Conteúdo do guia
+- **Guia de compostagem:** escrito para o projeto com base no manual de compostagem doméstica do Ministério do Meio Ambiente (2017) e nas orientações da Embrapa. As regras batem com as instruções dos itens orgânicos do guia (por exemplo, carne e comida cozida não vão para a composteira), e um teste confere isso.
+- **Dicas:** cada dica repete a instrução do item no guia de classificação. Um teste confere se o item citado em cada dica existe no guia.
+
+### Prompts que funcionaram melhor
+
+1. **Sprint 4.** Montar a sprint 4 inteira, fazer os testes e seguir os mesmos padrões dos documentos e dos relatórios do projeto em .md.
+   Resultado: a IA conferiu o protótipo de alta fidelidade (cartão "Dica: compostagem") e o `justificativas.md` (dica que muda a cada busca, sem temporizador) antes de escrever, colocou a compostagem dentro do Orgânico para não criar uma quinta tela e testou no emulador, com e sem internet.
+
+Observação geral: testar no emulador achou um erro que os testes automáticos não pegavam, a lista do guia embaixo da barra de gestos.
+
+### Como o resultado foi conferido
+
+- `flutter analyze` sem problemas e todos os testes passando (100 no momento deste registro).
+- Sprint 4 testada no emulador Android (Android 15): faixa "Dica: compostagem" na primeira abertura e outra dica ao reabrir o app e a cada busca, cartão com "Entendi", "Como compostar em casa" e "Ver como descartar", botão no card Orgânico e no resultado de "Casca de banana" e "Borra de café", e o guia inteiro aberto com o Wi-Fi e os dados desligados.
+- APK de debug e de release compilando.

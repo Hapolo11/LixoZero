@@ -7,11 +7,14 @@ import 'package:lixozero/models/item_guia.dart';
 import 'package:lixozero/models/registro_reciclagem.dart';
 import 'package:lixozero/screens/buscar_screen.dart';
 import 'package:lixozero/state/conexao_model.dart';
+import 'package:lixozero/state/dicas_model.dart';
 import 'package:lixozero/state/navegacao_model.dart';
 import 'package:lixozero/state/reciclagem_model.dart';
 import 'package:lixozero/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'dicas_falsas.dart';
 
 GuiaRepository _criarGuiaFalso() {
   const categorias = [
@@ -163,6 +166,7 @@ void main() {
             ChangeNotifierProvider.value(value: navegacao),
             ChangeNotifierProvider.value(value: conexao),
             ChangeNotifierProvider.value(value: reciclagem),
+            ChangeNotifierProvider(create: (_) => DicasModel(dicasDeTeste)),
           ],
           child: MaterialApp(theme: criarTema(), home: const Scaffold(body: BuscarScreen())),
         ),
@@ -199,6 +203,7 @@ void main() {
             ChangeNotifierProvider.value(value: navegacao),
             ChangeNotifierProvider.value(value: conexao),
             ChangeNotifierProvider.value(value: reciclagem),
+            ChangeNotifierProvider(create: (_) => DicasModel(dicasDeTeste)),
           ],
           child: MaterialApp(theme: criarTema(), home: const Scaffold(body: BuscarScreen())),
         ),
@@ -258,6 +263,7 @@ void main() {
             ChangeNotifierProvider.value(value: navegacao),
             ChangeNotifierProvider.value(value: conexao),
             ChangeNotifierProvider.value(value: reciclagem),
+            ChangeNotifierProvider(create: (_) => DicasModel(dicasDeTeste)),
           ],
           child: MaterialApp(theme: criarTema(), home: const Scaffold(body: BuscarScreen())),
         ),
@@ -301,6 +307,7 @@ void main() {
             ChangeNotifierProvider.value(value: navegacao),
             ChangeNotifierProvider.value(value: conexao),
             ChangeNotifierProvider.value(value: reciclagem),
+            ChangeNotifierProvider(create: (_) => DicasModel(dicasDeTeste)),
           ],
           child: MaterialApp(theme: criarTema(), home: const Scaffold(body: BuscarScreen())),
         ),
@@ -339,6 +346,7 @@ void main() {
             ChangeNotifierProvider.value(value: NavegacaoModel()),
             ChangeNotifierProvider.value(value: ConexaoModel()),
             ChangeNotifierProvider.value(value: reciclagem),
+            ChangeNotifierProvider(create: (_) => DicasModel(dicasDeTeste)),
           ],
           child: MaterialApp(theme: criarTema(), home: const Scaffold(body: BuscarScreen())),
         ),

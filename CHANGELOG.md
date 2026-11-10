@@ -100,9 +100,17 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Notificação semanal no dia e horário de cada lembrete, com aviso se o usuário negar a permissão — Rafael. (`lib/services/notificacoes.dart`, `android/app/src/main/AndroidManifest.xml`, `android/app/src/main/res/drawable/ic_notificacao.xml`, `ios/Runner/AppDelegate.swift`)
 - Testes do contador, dos lembretes e das notificações — Rafael. (`test/impacto_screen_test.dart`, `test/lembretes_test.dart`, `test/notificacoes_falsas.dart`)
 - Seção do Rafael no registro de uso de IA, com as sprints 1, 2 e 3 — Rafael. (`Docs/uso-de-ia.md`)
+- Guia de compostagem doméstica (RF06): o que pode e o que não pode ir, passo a passo com baldes, chorume, problemas comuns e o que fazer sem espaço — David. (`assets/data/compostagem.json`, `lib/models/guia_compostagem.dart`, `lib/data/conteudo_repository.dart`, `lib/screens/compostagem_screen.dart`)
+- Botão "Aprenda a compostar em casa" no card Orgânico e "Como compostar" no resultado de itens orgânicos — David. (`lib/screens/categorias_screen.dart`, `lib/screens/buscar_screen.dart`)
+- Dica rotativa no rodapé da tela Buscar, com 8 dicas que mudam a cada busca e a cada abertura, e o cartão do protótipo com "Entendi" — David. (`assets/data/dicas.json`, `lib/models/dica.dart`, `lib/state/dicas_model.dart`, `lib/widgets/dica_rodape.dart`)
+- Testes do guia de compostagem e das dicas — David. (`test/compostagem_test.dart`, `test/dicas_falsas.dart`)
+- Seção do David no registro de uso de IA, com a sprint 4 — David. (`Docs/uso-de-ia.md`)
 
 ### Alterado
 
 - A aba Impacto deixou de ser "Em construção" — Rafael. (`lib/app.dart`, `lib/main.dart`)
 - Desugaring ligado no Android, exigido pelo `flutter_local_notifications`, que fica na versão 22 porque a 23 pede o Android SDK 37 — Rafael. (`android/app/build.gradle.kts`, `pubspec.yaml`)
 - Correção do aviso "Registrado!", que não sumia e cobria as outras abas — Rafael. (`lib/screens/buscar_screen.dart`, `test/reciclagem_model_test.dart`)
+- Correção no card de categoria: com fonte grande, a lixeira desce para a linha de baixo em vez de estourar a tela — David. (`lib/screens/categorias_screen.dart`)
+- Testes que montam a tela Buscar passam a receber as dicas do rodapé — David. (`test/reciclagem_model_test.dart`, `test/impacto_screen_test.dart`)
+- Navegação: onde fica o guia de compostagem sem criar uma quinta tela — David. (`Docs/justificativas.md`)

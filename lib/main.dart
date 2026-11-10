@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
+import 'data/conteudo_repository.dart';
 import 'data/guia_repository.dart';
 import 'data/lembretes_repository.dart';
 import 'data/pontos_repository.dart';
@@ -15,6 +16,7 @@ import 'services/localizacao_service.dart';
 import 'services/notificacoes.dart';
 import 'state/auth_model.dart';
 import 'state/conexao_model.dart';
+import 'state/dicas_model.dart';
 import 'state/lembretes_model.dart';
 import 'state/navegacao_model.dart';
 import 'state/reciclagem_model.dart';
@@ -58,17 +60,22 @@ Future<void> main() async {
   await reciclagem.carregar();
   final lembretes = LembretesModel(LembretesRepository(prefs), await _iniciarNotificacoes());
   await lembretes.carregar();
+  final conteudo = await ConteudoRepository.carregar();
+  final dicas = DicasModel(conteudo.dicas, prefs);
+  await dicas.carregar();
 
   runApp(
     MultiProvider(
       providers: [
         Provider.value(value: guia),
         Provider.value(value: pontos),
+        Provider.value(value: conteudo),
         Provider(create: (_) => LocalizacaoService()),
         ChangeNotifierProvider.value(value: conexao),
         ChangeNotifierProvider.value(value: auth),
         ChangeNotifierProvider.value(value: reciclagem),
         ChangeNotifierProvider.value(value: lembretes),
+        ChangeNotifierProvider.value(value: dicas),
         ChangeNotifierProvider(create: (_) => NavegacaoModel()),
       ],
       child: const LixoZeroApp(),

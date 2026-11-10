@@ -5,10 +5,13 @@ import '../data/guia_repository.dart';
 import '../models/categoria.dart';
 import '../models/item_guia.dart';
 import '../models/registro_reciclagem.dart';
+import '../state/dicas_model.dart';
 import '../state/navegacao_model.dart';
 import '../state/reciclagem_model.dart';
 import '../theme/app_theme.dart';
 import '../widgets/comuns.dart';
+import '../widgets/dica_rodape.dart';
+import 'compostagem_screen.dart';
 
 /// Tela "Onde jogo isso?". O fluxo principal tem 3 passos: abrir, digitar e
 /// tocar em Buscar. O resultado aparece aqui mesmo.
@@ -57,6 +60,7 @@ class _BuscarScreenState extends State<BuscarScreen> {
     _campo.text = busca;
     _foco.unfocus();
     final guia = context.read<GuiaRepository>();
+    context.read<DicasModel>().proxima(); // a dica do rodapé muda a cada busca
     setState(() {
       _ultimaBusca = busca;
       _resultados = guia.busca.buscar(busca, limite: 3).map((r) => r.item).toList();
@@ -91,6 +95,7 @@ class _BuscarScreenState extends State<BuscarScreen> {
           ),
         ),
         Expanded(child: _conteudo()),
+        const BarraDica(),
       ],
     );
   }
@@ -129,6 +134,7 @@ class CartaoResultado extends StatelessWidget {
     final estilos = Theme.of(context).textTheme;
     // Só faz sentido mostrar o mapa para o que vai para ecoponto ou cooperativa.
     final temPontoDeColeta = item.destino == 'coleta_seletiva' || item.destino == 'ecoponto';
+    final vaiParaComposteira = item.destino == 'compostagem';
 
     return Card(
       child: Padding(
@@ -173,6 +179,12 @@ class CartaoResultado extends StatelessWidget {
                     onPressed: () => context.read<NavegacaoModel>().verPontosDeColeta(item.categoriaId),
                     icon: const Icon(Icons.place_outlined, size: 18),
                     label: const Text('Ver pontos de coleta'),
+                  ),
+                if (vaiParaComposteira)
+                  OutlinedButton.icon(
+                    onPressed: () => abrirCompostagem(context),
+                    icon: const Icon(Icons.eco_outlined, size: 18),
+                    label: const Text('Como compostar'),
                   ),
               ],
             ),

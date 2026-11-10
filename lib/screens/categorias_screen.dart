@@ -6,6 +6,7 @@ import '../models/categoria.dart';
 import '../state/navegacao_model.dart';
 import '../theme/app_theme.dart';
 import '../widgets/comuns.dart';
+import 'compostagem_screen.dart';
 
 /// Todas as categorias numa rolagem só, para dar para comparar sem ficar tocando.
 class CategoriasScreen extends StatelessWidget {
@@ -51,13 +52,23 @@ class _CartaoCategoria extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            // Wrap em vez de Row: com a fonte grande do sistema, a lixeira desce
+            // para a linha de baixo em vez de estourar a tela.
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 4,
               children: [
                 RotuloCategoria(categoria, tamanho: 16),
-                const Spacer(),
-                Icon(Icons.delete, size: 20, color: categoria.cor),
-                const SizedBox(width: 4),
-                Text(categoria.lixeira, style: const TextStyle(fontWeight: FontWeight.w600, color: AppColors.texto)),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.delete, size: 20, color: categoria.cor),
+                    const SizedBox(width: 4),
+                    Text(categoria.lixeira, style: const TextStyle(fontWeight: FontWeight.w600, color: AppColors.texto)),
+                  ],
+                ),
               ],
             ),
             const SizedBox(height: 10),
@@ -79,6 +90,15 @@ class _CartaoCategoria extends StatelessWidget {
                   ),
               ],
             ),
+            // RF06: a compostagem fica dentro do Orgânico, sem aba nova (RNF10).
+            if (categoria.id == 'organico') ...[
+              const SizedBox(height: 14),
+              OutlinedButton.icon(
+                onPressed: () => abrirCompostagem(context),
+                icon: const Icon(Icons.eco_outlined, size: 18),
+                label: const Text('Aprenda a compostar em casa'),
+              ),
+            ],
           ],
         ),
       ),

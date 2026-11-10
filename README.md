@@ -33,12 +33,14 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 
 ## Status
 
-Unidade II em andamento. Sprints 1, 2 e 3 prontas:
+Unidade II em andamento. Sprints 1 a 4 prontas:
 
 - **Sprint 1:** busca offline "Onde jogo isso?" com o guia de 6 categorias e 81 itens (RF01, RF05)
 - **Sprint 2:** tela de categorias e mapa de ecopontos e cooperativas de Aracaju (RF02, RF07, RF10)
 - **Sprint 3:** registro de reciclagem e tela Impacto, com o contador de quilos e os lembretes
   de coleta com notificação (RF03, RF04, RF09)
+- **Sprint 4:** guia de compostagem doméstica, aberto pela categoria Orgânico e pela busca,
+  e dica rotativa no rodapé da busca (RF06)
 
 Também tem login opcional com Firebase. Veja o [Changelog](CHANGELOG.md).
 
@@ -70,17 +72,19 @@ aviso em até 1 hora.
 
 | Pasta | O que tem |
 |---|---|
-| `assets/data/` | Guia de classificação e lista de ecopontos/cooperativas (JSON editado pela equipe) |
+| `assets/data/` | Guia de classificação, ecopontos/cooperativas, guia de compostagem e dicas (JSON editado pela equipe) |
 | `assets/images/` | Poses do mascote Brotinho |
 | `lib/data/` | Busca e leitura dos JSON |
-| `lib/models/` | Categoria, item do guia, ponto de coleta, registro de reciclagem e lembrete |
+| `lib/models/` | Categoria, item do guia, ponto de coleta, registro de reciclagem, lembrete, guia de compostagem e dica |
 | `lib/services/` | Localização, login (Firebase) e notificações dos lembretes |
-| `lib/state/` | Navegação, conexão, login, registros de reciclagem e lembretes |
-| `lib/screens/` | Telas Buscar, Mapa, Impacto e Categorias, mais login e conta |
-| `test/` | Testes da busca, pontos de coleta, login, reciclagem, contador e lembretes |
+| `lib/state/` | Navegação, conexão, login, registros de reciclagem, lembretes e dica do rodapé |
+| `lib/screens/` | Telas Buscar, Mapa, Impacto e Categorias, mais login, conta e compostagem |
+| `test/` | Testes da busca, pontos de coleta, login, reciclagem, contador, lembretes, compostagem e dicas |
 
 Para incluir ou corrigir um resíduo, edite `assets/data/guia.json` e rode `flutter test`,
-que confere se todo item tem categoria, destino e peso.
+que confere se todo item tem categoria, destino e peso. O mesmo vale para o guia de
+compostagem (`compostagem.json`) e as dicas (`dicas.json`): o teste confere se nada ficou
+vazio e se o item citado em cada dica existe no guia.
 
 ## Uso de inteligência artificial
 

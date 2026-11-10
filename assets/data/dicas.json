@@ -1,0 +1,62 @@
+{
+  "versao": "2026-11-10",
+  "observacao": "Dicas curtas do rodapé da tela Buscar (Docs/justificativas.md, seção 5). Mudam a cada busca e a cada abertura do app, sem temporizador. A primeira é a do protótipo de alta fidelidade. 'compostagem: true' mostra o botão do guia de compostagem; 'busca' mostra o botão que procura o item no guia.",
+  "dicas": [
+    {
+      "id": "compostagem",
+      "tema": "compostagem",
+      "titulo": "Restos de comida viram adubo",
+      "texto": "Cascas de frutas, borra de café e cascas de ovo podem virar adubo em casa. Evite carne, laticínios e óleo, que atraem bichos e deixam mau cheiro.",
+      "compostagem": true
+    },
+    {
+      "id": "enxaguar",
+      "tema": "embalagens",
+      "titulo": "Enxágue antes de separar",
+      "texto": "Uma passada de água tira os restos de comida. Embalagem limpa não cheira mal em casa e tem mais chance de ser reciclada pela cooperativa.",
+      "busca": "Pote de iogurte"
+    },
+    {
+      "id": "pilhas",
+      "tema": "pilhas",
+      "titulo": "Pilha não vai no lixo",
+      "texto": "Os metais das pilhas contaminam o solo e a água. Junte num pote fechado e leve ao ecoponto ou a uma loja com coletor.",
+      "busca": "Pilha"
+    },
+    {
+      "id": "oleo",
+      "tema": "óleo de cozinha",
+      "titulo": "Óleo usado na garrafa PET",
+      "texto": "Nunca jogue óleo na pia. Espere esfriar, guarde numa garrafa PET fechada e entregue num ponto de coleta de óleo.",
+      "busca": "Óleo de cozinha"
+    },
+    {
+      "id": "cafe",
+      "tema": "compostagem",
+      "titulo": "A borra de café é adubo",
+      "texto": "A borra e o filtro de papel vão juntos para a composteira. Em pouca quantidade, a borra também pode ir direto na terra dos vasos.",
+      "compostagem": true
+    },
+    {
+      "id": "longa_vida",
+      "tema": "caixa de leite",
+      "titulo": "Caixa de leite é papel",
+      "texto": "A caixa longa vida vai junto com o papel. Enxágue, abra e achate para ocupar menos espaço na sacola do reciclável.",
+      "busca": "Caixa de leite"
+    },
+    {
+      "id": "isopor",
+      "tema": "isopor",
+      "titulo": "Isopor é reciclável",
+      "texto": "O isopor é plástico. Lave, seque e leve ao reciclável. Os ecopontos são a opção mais segura, porque nem toda cooperativa aceita.",
+      "busca": "Isopor"
+    },
+    {
+      "id": "organico_separado",
+      "tema": "orgânico",
+      "titulo": "Separe o orgânico do reciclável",
+      "texto": "Resto de comida suja o papel e o plástico e estraga a reciclagem. Sem composteira, o orgânico vai no lixo comum, bem fechado.",
+      "compostagem": true
+    }
+  ]
+}

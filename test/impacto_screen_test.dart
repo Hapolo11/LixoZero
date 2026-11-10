@@ -11,6 +11,7 @@ import 'package:lixozero/models/item_guia.dart';
 import 'package:lixozero/models/registro_reciclagem.dart';
 import 'package:lixozero/screens/impacto_screen.dart';
 import 'package:lixozero/state/conexao_model.dart';
+import 'package:lixozero/state/dicas_model.dart';
 import 'package:lixozero/state/lembretes_model.dart';
 import 'package:lixozero/state/navegacao_model.dart';
 import 'package:lixozero/state/reciclagem_model.dart';
@@ -18,6 +19,7 @@ import 'package:lixozero/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'dicas_falsas.dart';
 import 'notificacoes_falsas.dart';
 
 String _registrosJson(List<RegistroReciclagem> registros) => jsonEncode(registros.map((r) => r.toJson()).toList());
@@ -364,6 +366,7 @@ void main() {
             ChangeNotifierProvider.value(value: reciclagem),
             ChangeNotifierProvider.value(value: lembretes),
             ChangeNotifierProvider(create: (_) => NavegacaoModel()),
+            ChangeNotifierProvider(create: (_) => DicasModel(dicasDeTeste)),
           ],
           child: MaterialApp(theme: criarTema(), home: const TelaPrincipal()),
         ),

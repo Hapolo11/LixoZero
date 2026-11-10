@@ -1,0 +1,48 @@
+{
+  "versao": "2026-11-10",
+  "observacao": "Conteúdo editorial da equipe (RF06), baseado no manual de compostagem doméstica do Ministério do Meio Ambiente (MMA, 2017) e nas orientações da Embrapa. O usuário só consulta: para corrigir, edite este arquivo e rode flutter test.",
+  "introducao": "Quase metade do lixo de uma casa é orgânico. Na composteira, cascas e restos crus viram adubo para vasos e hortas em 2 a 3 meses, e esse resíduo deixa de ir para o aterro. Dá para fazer em casa ou apartamento, com baldes, sem cheiro ruim.",
+  "podeVerdes": [
+    "Cascas e restos de frutas",
+    "Cascas e talos de legumes e verduras crus",
+    "Borra de café, com o filtro de papel",
+    "Saquinho de chá, sem o grampo",
+    "Casca de ovo amassada",
+    "Flores e plantas sem doença"
+  ],
+  "podeSecos": [
+    "Folhas secas",
+    "Serragem de madeira sem tinta ou verniz",
+    "Papelão e papel sem tinta, picados",
+    "Galhos finos e grama seca",
+    "Rolo de papel higiênico picado"
+  ],
+  "naoPode": [
+    { "item": "Carne, peixe e ossos", "motivo": "atraem bichos e cheiram mal" },
+    { "item": "Leite, queijo e outros laticínios", "motivo": "apodrecem e atraem moscas" },
+    { "item": "Comida cozida ou temperada", "motivo": "o sal e a gordura atrapalham o adubo" },
+    { "item": "Óleo e gordura", "motivo": "impermeabilizam a mistura e cheiram mal" },
+    { "item": "Fezes de cachorro ou gato e areia de gato", "motivo": "podem ter vermes e doenças" },
+    { "item": "Papel plastificado, brilhante ou engordurado", "motivo": "não se decompõe direito" },
+    { "item": "Plantas doentes ou com praga", "motivo": "a doença passa para o adubo" }
+  ],
+  "passos": [
+    "Separe 3 baldes com tampa que encaixem um no outro. Os dois de cima recebem furos no fundo; o de baixo, sem furos, junta o líquido (chorume). Uma caixa de madeira com tampa também serve.",
+    "Deixe a composteira num lugar à sombra e arejado, como a varanda ou a área de serviço.",
+    "Forre o fundo do balde de cima com uma camada de material seco (folhas, serragem ou papelão picado).",
+    "Coloque os restos orgânicos picados: quanto menores, mais rápido viram adubo.",
+    "Cubra sempre com material seco, mais ou menos o dobro do volume dos restos. Isso evita cheiro e mosquinhas.",
+    "Revire a mistura uma vez por semana para entrar ar.",
+    "Quando o balde encher, troque pelo do meio e deixe o cheio descansar, tampado.",
+    "O adubo está pronto em 2 a 3 meses, quando fica escuro, solto e com cheiro de terra molhada. Misture na terra dos vasos ou da horta."
+  ],
+  "chorume": "O líquido que junta no balde de baixo é um bom fertilizante: misture 1 parte de chorume em 10 de água e regue as plantas. Puro, ele queima as raízes.",
+  "problemas": [
+    { "problema": "Mau cheiro", "solucao": "Está úmido demais ou faltou material seco. Acrescente folhas ou serragem e revire." },
+    { "problema": "Mosquinhas", "solucao": "Tem resto exposto. Cubra sempre com material seco e mantenha a tampa fechada." },
+    { "problema": "Nada se decompõe", "solucao": "Está seco demais. Borrife um pouco de água e revire." },
+    { "problema": "Formigas", "solucao": "Também é sinal de que está seco. Umedeça a mistura e revire." },
+    { "problema": "Líquido escorrendo", "solucao": "Esvazie o balde de baixo com frequência e use o chorume diluído nas plantas." }
+  ],
+  "semEspaco": "Se não der para ter composteira, separe o orgânico do reciclável e descarte no lixo comum, bem fechado. Assim o reciclável chega limpo à cooperativa."
+}

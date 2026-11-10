@@ -74,6 +74,12 @@ O fluxo principal tem poucos toques (RNF02): abrir, digitar o resíduo, tocar em
 ver o resultado na mesma tela. Depois, "Registrar reciclagem" é um toque e "Ver pontos de
 coleta" leva ao Mapa.
 
+O guia de compostagem (RF06) não ganha aba própria, para respeitar as quatro telas
+principais (RNF10). Ele abre por cima da aba atual, com seta de voltar, a partir de três
+lugares onde a dúvida aparece: o botão "Aprenda a compostar em casa" no card Orgânico da
+tela Categorias, o botão "Como compostar" no resultado de um item orgânico e o cartão das
+dicas de compostagem.
+
 O login é opcional: o usuário pode criar conta, entrar com e-mail ou Google, ou tocar em
 "Não quero fazer login" e usar o app inteiro sem cadastro. As telas de acesso ficam fora
 das quatro principais (RNF10) e aparecem na primeira abertura, com a escolha guardada no
