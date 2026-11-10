@@ -89,3 +89,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Correção de formatação da seção 2.5 — Rafael. (`Docs/estudo-de-caso.md`)
 - Correção no mapa: não tenta mover o mapa depois que a internet cai — Rafael. (`lib/screens/mapa_screen.dart`)
 - Correção da tela preta ao abrir o app: `shared_preferences_android` fixado na versão 2.4.28 — Hapolo. (`pubspec.yaml`)
+
+## [10/11/2026]
+
+### Adicionado
+
+- Registro de reciclagem: botão "Registrar reciclagem" no resultado da busca, soma do peso médio com aviso "Registrado! +0,03 kg" e ajuste de peso — Salatiel. (`lib/models/registro_reciclagem.dart`, `lib/data/reciclagem_repository.dart`, `lib/state/reciclagem_model.dart`, `lib/screens/buscar_screen.dart`, `test/reciclagem_model_test.dart`)

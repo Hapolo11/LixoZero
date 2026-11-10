@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import '../data/guia_repository.dart';
 import '../models/categoria.dart';
 import '../models/item_guia.dart';
+import '../models/registro_reciclagem.dart';
 import '../state/navegacao_model.dart';
+import '../state/reciclagem_model.dart';
 import '../theme/app_theme.dart';
 import '../widgets/comuns.dart';
 
@@ -156,17 +158,115 @@ class CartaoResultado extends StatelessWidget {
             Text(item.instrucao, style: estilos.bodyLarge),
             const SizedBox(height: 8),
             Text('Destino: $destino', style: estilos.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
-            if (temPontoDeColeta) ...[
-              const SizedBox(height: 14),
-              OutlinedButton.icon(
-                onPressed: () => context.read<NavegacaoModel>().verPontosDeColeta(item.categoriaId),
-                icon: const Icon(Icons.place_outlined, size: 18),
-                label: const Text('Ver pontos de coleta'),
-              ),
-            ],
+            const SizedBox(height: 14),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                FilledButton.icon(
+                  onPressed: () => _registrarReciclagem(context),
+                  icon: const Icon(Icons.recycling, size: 18),
+                  label: const Text('Registrar reciclagem'),
+                ),
+                if (temPontoDeColeta)
+                  OutlinedButton.icon(
+                    onPressed: () => context.read<NavegacaoModel>().verPontosDeColeta(item.categoriaId),
+                    icon: const Icon(Icons.place_outlined, size: 18),
+                    label: const Text('Ver pontos de coleta'),
+                  ),
+              ],
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _registrarReciclagem(BuildContext context) async {
+    final reciclagem = context.read<ReciclagemModel>();
+    final registro = await reciclagem.registrar(item.nome, item.pesoKg);
+    if (!context.mounted) return;
+
+    final pesoTexto = item.pesoKg.toStringAsFixed(2).replaceAll('.', ',');
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Registrado! +$pesoTexto kg'),
+        action: SnackBarAction(
+          label: 'Ajustar peso',
+          onPressed: () => _ajustarPeso(context, registro),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _ajustarPeso(BuildContext context, RegistroReciclagem registro) async {
+    if (!context.mounted) return;
+
+    final resultado = await showDialog<String>(
+      context: context,
+      builder: (ctx) => _DialogoAjustePeso(pesoInicial: registro.pesoKg),
+    );
+
+    if (!context.mounted || resultado == null) return;
+
+    final textoLimpo = resultado.trim().replaceAll(',', '.');
+    final novoPeso = double.tryParse(textoLimpo);
+    if (novoPeso == null || novoPeso <= 0) return;
+
+    await context.read<ReciclagemModel>().ajustarPeso(registro.id, novoPeso);
+  }
+}
+
+class _DialogoAjustePeso extends StatefulWidget {
+  const _DialogoAjustePeso({required this.pesoInicial});
+
+  final double pesoInicial;
+
+  @override
+  State<_DialogoAjustePeso> createState() => _DialogoAjustePesoState();
+}
+
+class _DialogoAjustePesoState extends State<_DialogoAjustePeso> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    final texto = widget.pesoInicial.toStringAsFixed(2).replaceAll('.', ',');
+    _controller = TextEditingController(text: texto);
+    _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Ajustar peso'),
+      content: TextField(
+        controller: _controller,
+        autofocus: true,
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+        decoration: const InputDecoration(
+          labelText: 'Peso (kg)',
+          hintText: 'Ex.: 0,05',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancelar'),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.of(context).pop(_controller.text),
+          child: const Text('Salvar'),
+        ),
+      ],
     );
   }
 }

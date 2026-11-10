@@ -7,12 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
 import 'data/guia_repository.dart';
 import 'data/pontos_repository.dart';
+import 'data/reciclagem_repository.dart';
 import 'services/auth_firebase.dart';
 import 'services/auth_repositorio.dart';
 import 'services/localizacao_service.dart';
 import 'state/auth_model.dart';
 import 'state/conexao_model.dart';
 import 'state/navegacao_model.dart';
+import 'state/reciclagem_model.dart';
 
 /// Liga o Firebase. Se o arquivo google-services.json não estiver no projeto,
 /// o app abre mesmo assim, só com o login indisponível (e "Não quero fazer login").
@@ -35,6 +37,9 @@ Future<void> main() async {
   await conexao.iniciar();
   final prefs = await SharedPreferences.getInstance();
   final auth = AuthModel(await _iniciarFirebase(), prefs);
+  final reciclagemRepo = ReciclagemRepository(prefs);
+  final reciclagem = ReciclagemModel(reciclagemRepo);
+  await reciclagem.carregar();
 
   runApp(
     MultiProvider(
@@ -44,6 +49,7 @@ Future<void> main() async {
         Provider(create: (_) => LocalizacaoService()),
         ChangeNotifierProvider.value(value: conexao),
         ChangeNotifierProvider.value(value: auth),
+        ChangeNotifierProvider.value(value: reciclagem),
         ChangeNotifierProvider(create: (_) => NavegacaoModel()),
       ],
       child: const LixoZeroApp(),
