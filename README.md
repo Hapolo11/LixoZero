@@ -33,13 +33,14 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 
 ## Status
 
-Unidade II em andamento. Sprints 1 e 2 prontas:
+Unidade II em andamento. Sprints 1, 2 e 3 prontas:
 
 - **Sprint 1:** busca offline "Onde jogo isso?" com o guia de 6 categorias e 81 itens (RF01, RF05)
 - **Sprint 2:** tela de categorias e mapa de ecopontos e cooperativas de Aracaju (RF02, RF07, RF10)
+- **Sprint 3:** registro de reciclagem e tela Impacto, com o contador de quilos e os lembretes
+  de coleta com notificação (RF03, RF04, RF09)
 
-A aba Impacto ainda está em construção (contador e lembretes, sprint 3). Veja o
-[Changelog](CHANGELOG.md).
+Também tem login opcional com Firebase. Veja o [Changelog](CHANGELOG.md).
 
 ## Como rodar
 
@@ -60,6 +61,11 @@ que não vai para o Git:
 
 Sem a chave o mapa fica em branco, mas a lista de ecopontos continua aparecendo.
 
+**Lembretes:** no Android 13 ou mais novo, o app pede permissão de notificação ao criar o
+primeiro lembrete. No Android 14 ou mais novo, o aviso só chega no minuto exato se a opção
+"Alarmes e lembretes" estiver ativada para o LixoZero; sem ela, o Android pode atrasar o
+aviso em até 1 hora.
+
 ## Estrutura do código
 
 | Pasta | O que tem |
@@ -67,11 +73,11 @@ Sem a chave o mapa fica em branco, mas a lista de ecopontos continua aparecendo.
 | `assets/data/` | Guia de classificação e lista de ecopontos/cooperativas (JSON editado pela equipe) |
 | `assets/images/` | Poses do mascote Brotinho |
 | `lib/data/` | Busca e leitura dos JSON |
-| `lib/models/` | Categoria, item do guia e ponto de coleta |
-| `lib/services/` | Localização |
-| `lib/state/` | Navegação entre abas e estado da conexão |
-| `lib/screens/` | Telas Buscar, Mapa e Categorias |
-| `test/` | Testes da busca e dos pontos de coleta |
+| `lib/models/` | Categoria, item do guia, ponto de coleta, registro de reciclagem e lembrete |
+| `lib/services/` | Localização, login (Firebase) e notificações dos lembretes |
+| `lib/state/` | Navegação, conexão, login, registros de reciclagem e lembretes |
+| `lib/screens/` | Telas Buscar, Mapa, Impacto e Categorias, mais login e conta |
+| `test/` | Testes da busca, pontos de coleta, login, reciclagem, contador e lembretes |
 
 Para incluir ou corrigir um resíduo, edite `assets/data/guia.json` e rode `flutter test`,
 que confere se todo item tem categoria, destino e peso.

@@ -95,3 +95,14 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 ### Adicionado
 
 - Registro de reciclagem: botão "Registrar reciclagem" no resultado da busca, soma do peso médio com aviso "Registrado! +0,03 kg" e ajuste de peso — Salatiel. (`lib/models/registro_reciclagem.dart`, `lib/data/reciclagem_repository.dart`, `lib/state/reciclagem_model.dart`, `lib/screens/buscar_screen.dart`, `test/reciclagem_model_test.dart`)
+- Tela Impacto com o contador de quilos reciclados no mês e desde o começo (RF03) — Rafael. (`lib/screens/impacto_screen.dart`, `lib/state/reciclagem_model.dart`)
+- Lembretes de coleta seletiva: criar, ver, editar e apagar com confirmação, salvos no aparelho (RF04) — Rafael. (`lib/models/lembrete.dart`, `lib/data/lembretes_repository.dart`, `lib/state/lembretes_model.dart`, `lib/screens/impacto_screen.dart`)
+- Notificação semanal no dia e horário de cada lembrete, com aviso se o usuário negar a permissão — Rafael. (`lib/services/notificacoes.dart`, `android/app/src/main/AndroidManifest.xml`, `android/app/src/main/res/drawable/ic_notificacao.xml`, `ios/Runner/AppDelegate.swift`)
+- Testes do contador, dos lembretes e das notificações — Rafael. (`test/impacto_screen_test.dart`, `test/lembretes_test.dart`, `test/notificacoes_falsas.dart`)
+- Seção do Rafael no registro de uso de IA, com as sprints 1, 2 e 3 — Rafael. (`Docs/uso-de-ia.md`)
+
+### Alterado
+
+- A aba Impacto deixou de ser "Em construção" — Rafael. (`lib/app.dart`, `lib/main.dart`)
+- Desugaring ligado no Android, exigido pelo `flutter_local_notifications`, que fica na versão 22 porque a 23 pede o Android SDK 37 — Rafael. (`android/app/build.gradle.kts`, `pubspec.yaml`)
+- Correção do aviso "Registrado!", que não sumia e cobria as outras abas — Rafael. (`lib/screens/buscar_screen.dart`, `test/reciclagem_model_test.dart`)

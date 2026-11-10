@@ -16,6 +16,14 @@ class ReciclagemModel extends ChangeNotifier {
 
   double get totalKg => _registros.fold<double>(0.0, (soma, r) => soma + r.pesoKg);
 
+  /// Quilos registrados no mês de [agora] (o destaque da tela Impacto, RF03).
+  double totalDoMes([DateTime? agora]) {
+    final hoje = agora ?? DateTime.now();
+    return _registros
+        .where((r) => r.data.year == hoje.year && r.data.month == hoje.month)
+        .fold<double>(0.0, (soma, r) => soma + r.pesoKg);
+  }
+
   Future<void> carregar() async {
     _registros = await _repo.carregar();
     notifyListeners();

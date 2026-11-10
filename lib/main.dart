@@ -6,13 +6,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
 import 'data/guia_repository.dart';
+import 'data/lembretes_repository.dart';
 import 'data/pontos_repository.dart';
 import 'data/reciclagem_repository.dart';
 import 'services/auth_firebase.dart';
 import 'services/auth_repositorio.dart';
 import 'services/localizacao_service.dart';
+import 'services/notificacoes.dart';
 import 'state/auth_model.dart';
 import 'state/conexao_model.dart';
+import 'state/lembretes_model.dart';
 import 'state/navegacao_model.dart';
 import 'state/reciclagem_model.dart';
 
@@ -28,6 +31,19 @@ Future<AuthRepositorio> _iniciarFirebase() async {
   }
 }
 
+/// Liga as notificações dos lembretes. Se falhar, os lembretes continuam
+/// salvos e aparecem na tela, só não tocam.
+Future<Notificacoes> _iniciarNotificacoes() async {
+  try {
+    final notificacoes = NotificacoesLocais();
+    await notificacoes.iniciar();
+    return notificacoes;
+  } catch (e) {
+    debugPrint('Notificações indisponíveis: $e');
+    return const NotificacoesDesligadas();
+  }
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -40,6 +56,8 @@ Future<void> main() async {
   final reciclagemRepo = ReciclagemRepository(prefs);
   final reciclagem = ReciclagemModel(reciclagemRepo);
   await reciclagem.carregar();
+  final lembretes = LembretesModel(LembretesRepository(prefs), await _iniciarNotificacoes());
+  await lembretes.carregar();
 
   runApp(
     MultiProvider(
@@ -50,6 +68,7 @@ Future<void> main() async {
         ChangeNotifierProvider.value(value: conexao),
         ChangeNotifierProvider.value(value: auth),
         ChangeNotifierProvider.value(value: reciclagem),
+        ChangeNotifierProvider.value(value: lembretes),
         ChangeNotifierProvider(create: (_) => NavegacaoModel()),
       ],
       child: const LixoZeroApp(),

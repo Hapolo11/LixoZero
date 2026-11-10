@@ -1,6 +1,7 @@
 import Flutter
 import GoogleMaps
 import UIKit
+import UserNotifications
 
 @main
 @objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
@@ -12,6 +13,8 @@ import UIKit
     if let chave = Bundle.main.object(forInfoDictionaryKey: "MAPS_API_KEY") as? String, !chave.isEmpty {
       GMSServices.provideAPIKey(chave)
     }
+    // Lembretes de coleta: mostra a notificação mesmo com o app aberto.
+    UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 

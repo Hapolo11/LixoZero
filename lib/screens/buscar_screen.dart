@@ -192,6 +192,9 @@ class CartaoResultado extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Registrado! +$pesoTexto kg'),
+        // Desde o Flutter 3.29, SnackBar com ação fica na tela até ser fechado.
+        // Aqui ele precisa sumir sozinho para não cobrir as outras abas.
+        persist: false,
         action: SnackBarAction(
           label: 'Ajustar peso',
           onPressed: () => _ajustarPeso(context, registro),

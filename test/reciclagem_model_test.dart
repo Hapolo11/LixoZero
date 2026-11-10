@@ -323,5 +323,39 @@ void main() {
 
       expect(reciclagem.totalKg, closeTo(0.03, 0.0001));
     });
+    testWidgets('o aviso "Registrado!" some sozinho e não cobre as outras abas', (tester) async {
+      tester.view.physicalSize = const Size(900, 2200);
+      tester.view.devicePixelRatio = 2;
+      addTearDown(tester.view.reset);
+
+      SharedPreferences.setMockInitialValues({});
+      final reciclagem = ReciclagemModel(ReciclagemRepository(await SharedPreferences.getInstance()));
+      await reciclagem.carregar();
+
+      await tester.pumpWidget(
+        MultiProvider(
+          providers: [
+            Provider.value(value: _criarGuiaFalso()),
+            ChangeNotifierProvider.value(value: NavegacaoModel()),
+            ChangeNotifierProvider.value(value: ConexaoModel()),
+            ChangeNotifierProvider.value(value: reciclagem),
+          ],
+          child: MaterialApp(theme: criarTema(), home: const Scaffold(body: BuscarScreen())),
+        ),
+      );
+
+      await tester.enterText(find.byType(TextField).first, 'Garrafa');
+      await tester.tap(find.text('Buscar'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Registrar reciclagem'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+      expect(find.textContaining('Registrado!'), findsOneWidget);
+
+      // SnackBar padrão dura 4 s; com persist ele ficaria para sempre.
+      await tester.pump(const Duration(seconds: 5));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Registrado!'), findsNothing);
+    });
   });
 }
