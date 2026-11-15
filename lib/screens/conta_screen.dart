@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../data/validadores.dart';
 import '../services/auth_repositorio.dart';
 import '../state/auth_model.dart';
+import '../state/sincronizacao_model.dart';
 import '../theme/app_theme.dart';
 import '../widgets/comuns.dart';
 
@@ -25,6 +27,8 @@ class ContaScreen extends StatelessWidget {
           const Center(child: Mascote(Pose.acenando, tamanho: 96)),
           const SizedBox(height: 12),
           if (usuario == null) ..._visitante(context, auth) else ..._logado(context, auth, usuario),
+          const SizedBox(height: 20),
+          const _StatusSincronizacao(),
         ],
       ),
     );
@@ -166,5 +170,58 @@ class ContaScreen extends StatelessWidget {
     } on AuthFalha catch (e) {
       messenger.showSnackBar(SnackBar(content: Text(e.mensagem)));
     }
+  }
+}
+
+/// Diz onde os dados do usuário estão: só no aparelho (visitante) ou também na
+/// conta (Firestore), com o horário da última sincronização.
+class _StatusSincronizacao extends StatelessWidget {
+  const _StatusSincronizacao();
+
+  @override
+  Widget build(BuildContext context) {
+    final sync = context.watch<SincronizacaoModel>();
+    final estilo = Theme.of(context).textTheme.bodyMedium;
+
+    final (icone, texto) = switch (sync.estado) {
+      EstadoSincronizacao.semConta => (
+          Icons.phone_android,
+          'Sem conta, seus registros e lembretes ficam só neste aparelho.',
+        ),
+      EstadoSincronizacao.aguardandoInternet => (
+          Icons.cloud_off_outlined,
+          'Sem internet. Seus dados serão enviados para a conta quando a conexão voltar.',
+        ),
+      EstadoSincronizacao.sincronizando => (Icons.cloud_sync_outlined, 'Sincronizando com a sua conta...'),
+      EstadoSincronizacao.sincronizado => (
+          Icons.cloud_done_outlined,
+          sync.sincronizadoEm == null
+              ? 'Dados sincronizados com a sua conta.'
+              : 'Dados sincronizados com a sua conta às ${DateFormat.Hm().format(sync.sincronizadoEm!)}.',
+        ),
+      EstadoSincronizacao.erro => (
+          Icons.error_outline,
+          'Não foi possível sincronizar agora. Seus dados continuam salvos neste aparelho.',
+        ),
+    };
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icone, size: 20, color: AppColors.textoApoio),
+            const SizedBox(width: 10),
+            Expanded(child: Text(texto, style: estilo)),
+          ],
+        ),
+        if (sync.estado == EstadoSincronizacao.erro)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton(onPressed: sync.sincronizarAgora, child: const Text('Tentar de novo')),
+          ),
+      ],
+    );
   }
 }

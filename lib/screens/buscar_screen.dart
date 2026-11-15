@@ -9,6 +9,7 @@ import '../state/dicas_model.dart';
 import '../state/navegacao_model.dart';
 import '../state/reciclagem_model.dart';
 import '../theme/app_theme.dart';
+import '../widgets/busca_por_foto.dart';
 import '../widgets/comuns.dart';
 import '../widgets/dica_rodape.dart';
 import 'compostagem_screen.dart';
@@ -53,6 +54,14 @@ class _BuscarScreenState extends State<BuscarScreen> {
     if (termo != null && mounted) _buscar(termo);
   }
 
+  /// RF08: a foto vira uma sugestão de item, e o usuário confirma. Daí em
+  /// diante é a busca de sempre.
+  Future<void> _buscarPorFoto() async {
+    _foco.unfocus();
+    final nome = await buscarPorFoto(context);
+    if (nome != null && mounted) _buscar(nome);
+  }
+
   void _buscar(String texto) {
     final busca = texto.trim();
     if (busca.isEmpty) return;
@@ -83,9 +92,14 @@ class _BuscarScreenState extends State<BuscarScreen> {
                   focusNode: _foco,
                   textInputAction: TextInputAction.search,
                   onSubmitted: _buscar,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'Digite o resíduo',
-                    prefixIcon: Icon(Icons.search, color: AppColors.textoApoio),
+                    prefixIcon: const Icon(Icons.search, color: AppColors.textoApoio),
+                    suffixIcon: IconButton(
+                      tooltip: 'Buscar por foto',
+                      icon: const Icon(Icons.photo_camera_outlined, color: AppColors.verdeEscuro),
+                      onPressed: _buscarPorFoto,
+                    ),
                   ),
                 ),
               ),

@@ -73,7 +73,7 @@
 **Descrição:** O sistema deve exibir, em um mapa, os ecopontos, cooperativas e pontos de coleta seletiva mais próximos do usuário, priorizando cooperativas de catadores.
 
 ### RF03 - Contador de impacto
-**Descrição:** O sistema deve calcular e exibir, de forma acumulada e anônima, a quantidade de resíduos que o usuário já destinou corretamente à reciclagem.
+**Descrição:** O sistema deve calcular e exibir, de forma acumulada e anônima, a quantidade de resíduos que o usuário já destinou corretamente à reciclagem. Quem não tem conta mantém o contador só no aparelho; quem tem conta também o tem guardado na conta (Firestore), para não perdê-lo ao trocar de celular.
 
 ### RF04 - Lembretes de coleta seletiva
 **Descrição:** O sistema deve permitir que o usuário cadastre, consulte, edite e exclua lembretes referentes aos dias e horários da coleta seletiva de sua região.
@@ -88,7 +88,7 @@
 **Descrição:** O sistema deve organizar e exibir os resíduos por categoria (papel, plástico, vidro, metal, orgânico, perigoso), utilizando o código de cores universal da reciclagem.
 
 ### RF08 - Busca por reconhecimento de imagem
-**Descrição:** O sistema deve permitir que o usuário tire uma foto do resíduo para que o sistema sugira automaticamente a categoria correspondente.
+**Descrição:** O sistema deve permitir que o usuário tire uma foto do resíduo para que o sistema sugira automaticamente a categoria correspondente. A foto é analisada no próprio aparelho (ML Kit), sem enviá-la para a internet, e o usuário confirma o item sugerido antes de ver o resultado.
 
 ### RF09 - Registro de reciclagem com peso automático
 **Descrição:** O sistema deve registrar, de forma anônima, o descarte de um item somente quando o usuário tocar em "Registrar reciclagem" no resultado da busca. O peso médio estimado do item é somado automaticamente ao contador de impacto, sem pedir que o usuário informe o peso; o usuário pode, se quiser, ajustar o peso daquele registro logo após confirmá-lo. Uma busca sozinha não gera registro.
@@ -123,7 +123,7 @@
 **Descrição:** O sistema não deverá exigir a coleta de dados pessoais de identificação para utilização de suas funcionalidades principais.
 
 ### RNF07 - Armazenamento local
-**Descrição:** Os dados relacionados ao contador de impacto ambiental deverão ser armazenados localmente no dispositivo e não deverão estar associados à identificação do usuário.
+**Descrição:** Os dados do contador de impacto ambiental e dos lembretes deverão ser armazenados localmente no dispositivo. Quem não tem conta não terá esses dados enviados para a nuvem nem associados a nenhuma identificação. Quem escolher criar uma conta terá esses dados também gravados no Firestore, vinculados apenas ao identificador da conta, e eles serão apagados quando a conta for excluída.
 
 ### RNF08 - Usabilidade e linguagem
 **Descrição:** A interface deverá utilizar linguagem simples, clara e educativa, permitindo sua utilização por pessoas com diferentes níveis de conhecimento tecnológico.
@@ -158,10 +158,10 @@
 |---|:---:|:---:|:---:|:---:|---|
 | Guia de classificação de resíduos (tipo → categoria → destino) | ✓ | ✓ | ✓ | ✕ | Criado e atualizado pela equipe de desenvolvimento (base de dados interna do app); o usuário apenas consulta. Não há exclusão porque o guia precisa estar sempre completo, remover um item quebraria a função principal do app. |
 | Ecopontos e cooperativas de coleta | ✓ | ✓ | ✓ | ✓ | Cadastro inicial feito pela equipe a partir de fontes públicas; pode ser atualizado (mudança de endereço/horário) ou excluído (ponto desativado). O usuário só consulta, não edita. |
-| Registro de reciclagem (para o contador de impacto) | ✓ | ✓ | ✓ | ✕ | Criado quando o usuário toca em "Registrar reciclagem", com o peso médio estimado do item, e consultado no contador de "quilos reciclados". A única atualização permitida é "ajustar peso", logo após o registro, para corrigir a estimativa. Não é excluível: o registro é anônimo e fica só no aparelho, sem vínculo com uma pessoa, conforme o compromisso de privacidade do projeto. |
-| Lembretes de coleta seletiva | ✓ | ✓ | ✓ | ✓ | O usuário cria o lembrete (dia/horário da coleta do bairro), pode consultá-lo, editá-lo (se o dia da coleta mudar) e excluí-lo quando não precisar mais. |
+| Registro de reciclagem (para o contador de impacto) | ✓ | ✓ | ✓ | ✕ | Criado quando o usuário toca em "Registrar reciclagem", com o peso médio estimado do item, e consultado no contador de "quilos reciclados". A única atualização permitida é "ajustar peso", logo após o registro, para corrigir a estimativa. Não é excluível: sem conta, o registro é anônimo e fica só no aparelho, sem vínculo com uma pessoa, conforme o compromisso de privacidade do projeto; com conta, ele também é gravado no Firestore (`usuarios/{uid}/registros`) e só é apagado junto com a conta. |
+| Lembretes de coleta seletiva | ✓ | ✓ | ✓ | ✓ | O usuário cria o lembrete (dia/horário da coleta do bairro), pode consultá-lo, editá-lo (se o dia da coleta mudar) e excluí-lo quando não precisar mais. Sem conta, ficam só no aparelho; com conta, também são gravados no Firestore (`usuarios/{uid}/lembretes`). |
 | Conteúdo educativo sobre compostagem | ✓ | ✓ | ✓ | ✕ | Criado e atualizado pela equipe (conteúdo editorial); o usuário apenas consulta. Sem exclusão para manter a base de orientações sempre completa. |
-| Conta opcional do usuário (nome, sobrenome e e-mail) | ✓ | ✓ | ✓ | ✓ | Só existe se o usuário escolher criar conta; "Não quero fazer login" libera o app inteiro sem cadastro (RNF06). Os dados ficam no serviço de autenticação (Firebase Authentication), com o mínimo necessário e conforme a LGPD, e o usuário pode editar ou excluir a conta. A localização do GPS é usada só no aparelho para ordenar os ecopontos e nunca é armazenada. É a última funcionalidade a ser implementada. |
+| Conta opcional do usuário (nome, sobrenome e e-mail) | ✓ | ✓ | ✓ | ✓ | Só existe se o usuário escolher criar conta; "Não quero fazer login" libera o app inteiro sem cadastro (RNF06). Os dados ficam no serviço de autenticação (Firebase Authentication), com o mínimo necessário e conforme a LGPD, e o usuário pode editar ou excluir a conta; ao excluir, os registros e lembretes dela no Firestore também são apagados. A localização do GPS é usada só no aparelho para ordenar os ecopontos e nunca é armazenada. É a última funcionalidade a ser implementada. |
 
 ## 2.5 Priorização
 

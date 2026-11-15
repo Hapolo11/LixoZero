@@ -34,7 +34,7 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 
 ## Status
 
-Unidade II em andamento. Sprints 1 a 4 prontas:
+Unidade II em andamento. Sprints 1 a 4, Firestore e busca por foto prontos:
 
 - **Sprint 1:** busca offline "Onde jogo isso?" com o guia de 6 categorias e 81 itens (RF01, RF05)
 - **Sprint 2:** tela de categorias e mapa de ecopontos e cooperativas de Aracaju (RF02, RF07, RF10)
@@ -42,6 +42,11 @@ Unidade II em andamento. Sprints 1 a 4 prontas:
   de coleta com notificação (RF03, RF04, RF09)
 - **Sprint 4:** guia de compostagem doméstica, aberto pela categoria Orgânico e pela busca,
   e dica rotativa no rodapé da busca (RF06)
+
+- **Firestore:** quem tem conta também guarda os registros e os lembretes na nuvem, e eles
+  voltam ao entrar de novo ou em outro celular. Sem conta, tudo fica só no aparelho
+- **Busca por foto (RF08):** o botão de câmera da busca sugere o item pela foto, no próprio
+  aparelho, e o usuário confirma
 
 Também tem login opcional com Firebase. Veja o [Changelog](CHANGELOG.md).
 
@@ -69,18 +74,29 @@ primeiro lembrete. No Android 14 ou mais novo, o aviso só chega no minuto exato
 "Alarmes e lembretes" estiver ativada para o LixoZero; sem ela, o Android pode atrasar o
 aviso em até 1 hora.
 
+**Firebase:** o login e o Firestore precisam do projeto no Firebase. O arquivo
+`android/app/google-services.json` já está no repositório. Para a sincronização funcionar,
+no console do Firebase crie o Firestore Database e publique o conteúdo de `firestore.rules`
+(Firestore Database > Regras). Não use o "modo de teste", que deixa o banco aberto para
+qualquer pessoa. Sem o Firestore, o app continua funcionando e a tela Conta avisa que não
+foi possível sincronizar.
+
+**Busca por foto:** o reconhecimento é do ML Kit e roda sem internet. A tabela que liga os
+rótulos dele aos itens do guia é `assets/data/rotulos.json`. Se uma foto não for reconhecida,
+acrescente ali o rótulo que o ML Kit devolveu.
+
 ## Estrutura do código
 
 | Pasta | O que tem |
 |---|---|
-| `assets/data/` | Guia de classificação, ecopontos/cooperativas, guia de compostagem e dicas (JSON editado pela equipe) |
+| `assets/data/` | Guia de classificação, ecopontos/cooperativas, guia de compostagem, dicas e rótulos da busca por foto (JSON editado pela equipe) |
 | `assets/images/` | Poses do mascote Brotinho |
 | `lib/data/` | Busca e leitura dos JSON |
 | `lib/models/` | Categoria, item do guia, ponto de coleta, registro de reciclagem, lembrete, guia de compostagem e dica |
-| `lib/services/` | Localização, login (Firebase) e notificações dos lembretes |
-| `lib/state/` | Navegação, conexão, login, registros de reciclagem, lembretes e dica do rodapé |
+| `lib/services/` | Localização, login e Firestore (Firebase), notificações dos lembretes, câmera e reconhecimento de imagem |
+| `lib/state/` | Navegação, conexão, login, sincronização com o Firestore, registros de reciclagem, lembretes e dica do rodapé |
 | `lib/screens/` | Telas Buscar, Mapa, Impacto e Categorias, mais login, conta e compostagem |
-| `test/` | Testes da busca, pontos de coleta, login, reciclagem, contador, lembretes, compostagem e dicas |
+| `test/` | Testes da busca, pontos de coleta, login, sincronização, busca por foto, reciclagem, contador, lembretes, compostagem e dicas |
 
 Para incluir ou corrigir um resíduo, edite `assets/data/guia.json` e rode `flutter test`,
 que confere se todo item tem categoria, destino e peso. O mesmo vale para o guia de

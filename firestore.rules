@@ -1,0 +1,44 @@
+rules_version = '2';
+
+// Regras do Firestore do LixoZero.
+// Cada usuário só lê e grava o que está dentro de usuarios/{uid}, com o próprio uid.
+// Não use o "modo de teste" do Firebase: ele deixa o banco aberto para qualquer pessoa.
+//
+// Para aplicar: Firebase Console > Firestore Database > Regras > colar este arquivo > Publicar.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function dono(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // Registros de reciclagem (RF09): item, pesoKg e data.
+    match /usuarios/{uid}/registros/{id} {
+      allow read, delete: if dono(uid);
+      allow create, update: if dono(uid)
+        && request.resource.data.keys().hasOnly(['item', 'pesoKg', 'data'])
+        && request.resource.data.item is string
+        && request.resource.data.pesoKg is number
+        && request.resource.data.pesoKg > 0
+        && request.resource.data.data is timestamp;
+    }
+
+    // Lembretes de coleta (RF04): hora, minuto, titulo e dias da semana (1 a 7).
+    match /usuarios/{uid}/lembretes/{id} {
+      allow read, delete: if dono(uid);
+      allow create, update: if dono(uid)
+        && request.resource.data.keys().hasOnly(['hora', 'minuto', 'titulo', 'dias'])
+        && request.resource.data.hora is int
+        && request.resource.data.hora >= 0 && request.resource.data.hora <= 23
+        && request.resource.data.minuto is int
+        && request.resource.data.minuto >= 0 && request.resource.data.minuto <= 59
+        && request.resource.data.titulo is string
+        && request.resource.data.dias is list;
+    }
+
+    // Todo o resto é negado.
+    match /{documento=**} {
+      allow read, write: if false;
+    }
+  }
+}

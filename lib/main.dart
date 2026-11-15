@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,26 +11,31 @@ import 'data/guia_repository.dart';
 import 'data/lembretes_repository.dart';
 import 'data/pontos_repository.dart';
 import 'data/reciclagem_repository.dart';
+import 'data/rotulos_repository.dart';
 import 'services/auth_firebase.dart';
 import 'services/auth_repositorio.dart';
 import 'services/localizacao_service.dart';
 import 'services/notificacoes.dart';
+import 'services/reconhecimento_imagem.dart';
+import 'services/nuvem_repositorio.dart';
 import 'state/auth_model.dart';
 import 'state/conexao_model.dart';
 import 'state/dicas_model.dart';
 import 'state/lembretes_model.dart';
 import 'state/navegacao_model.dart';
 import 'state/reciclagem_model.dart';
+import 'state/sincronizacao_model.dart';
 
-/// Liga o Firebase. Se o arquivo google-services.json não estiver no projeto,
-/// o app abre mesmo assim, só com o login indisponível (e "Não quero fazer login").
-Future<AuthRepositorio> _iniciarFirebase() async {
+/// Liga o Firebase (login e Firestore). Se o arquivo google-services.json não
+/// estiver no projeto, o app abre mesmo assim, só com o login indisponível
+/// (e "Não quero fazer login") e sem nuvem.
+Future<({AuthRepositorio auth, NuvemRepositorio nuvem})> _iniciarFirebase() async {
   try {
     await Firebase.initializeApp();
-    return AuthFirebase(FirebaseAuth.instance);
+    return (auth: AuthFirebase(FirebaseAuth.instance), nuvem: NuvemFirestore(FirebaseFirestore.instance));
   } catch (e) {
     debugPrint('Firebase não configurado: $e');
-    return const AuthIndisponivel();
+    return (auth: const AuthIndisponivel(), nuvem: const NuvemIndisponivel());
   }
 }
 
@@ -54,13 +60,15 @@ Future<void> main() async {
   final conexao = ConexaoModel();
   await conexao.iniciar();
   final prefs = await SharedPreferences.getInstance();
-  final auth = AuthModel(await _iniciarFirebase(), prefs);
-  final reciclagemRepo = ReciclagemRepository(prefs);
-  final reciclagem = ReciclagemModel(reciclagemRepo);
+  final firebase = await _iniciarFirebase();
+  final auth = AuthModel(firebase.auth, prefs, antesDeExcluir: firebase.nuvem.apagarTudo);
+  final reciclagem = ReciclagemModel(ReciclagemRepository(prefs), firebase.nuvem);
   await reciclagem.carregar();
-  final lembretes = LembretesModel(LembretesRepository(prefs), await _iniciarNotificacoes());
+  final lembretes = LembretesModel(LembretesRepository(prefs), await _iniciarNotificacoes(), firebase.nuvem);
   await lembretes.carregar();
+  final sincronizacao = SincronizacaoModel(auth: auth, conexao: conexao, reciclagem: reciclagem, lembretes: lembretes);
   final conteudo = await ConteudoRepository.carregar();
+  final rotulos = await RotulosRepository.carregar();
   final dicas = DicasModel(conteudo.dicas, prefs);
   await dicas.carregar();
 
@@ -70,12 +78,16 @@ Future<void> main() async {
         Provider.value(value: guia),
         Provider.value(value: pontos),
         Provider.value(value: conteudo),
+        Provider.value(value: rotulos),
+        Provider<ReconhecedorImagem>(create: (_) => ReconhecedorMlKit()),
+        Provider<SeletorFoto>(create: (_) => SeletorFotoImagePicker()),
         Provider(create: (_) => LocalizacaoService()),
         ChangeNotifierProvider.value(value: conexao),
         ChangeNotifierProvider.value(value: auth),
         ChangeNotifierProvider.value(value: reciclagem),
         ChangeNotifierProvider.value(value: lembretes),
         ChangeNotifierProvider.value(value: dicas),
+        ChangeNotifierProvider.value(value: sincronizacao),
         ChangeNotifierProvider(create: (_) => NavegacaoModel()),
       ],
       child: const LixoZeroApp(),

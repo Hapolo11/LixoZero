@@ -1,15 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 
 import '../data/lembretes_repository.dart';
 import '../models/lembrete.dart';
 import '../services/notificacoes.dart';
+import '../services/nuvem_repositorio.dart';
 
 /// CRUD dos lembretes de coleta (RF04). Salva no aparelho e mantém as
-/// notificações agendadas em dia com a lista.
+/// notificações agendadas em dia com a lista. Quem tem conta também envia os
+/// lembretes para o Firestore.
 class LembretesModel extends ChangeNotifier {
-  LembretesModel(this._repo, this._notificacoes);
+  LembretesModel(this._repo, this._notificacoes, [this._nuvem]);
 
   final LembretesRepository _repo;
+  final NuvemRepositorio? _nuvem;
+  String? _uid;
   final Notificacoes _notificacoes;
   List<Lembrete> _lembretes = [];
   bool _avisosPermitidos = true;
@@ -33,6 +39,10 @@ class LembretesModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Chamado quando o usuário entra ou sai da conta. Com [uid] nulo, nada é
+  /// enviado para a nuvem.
+  void definirUsuario(String? uid) => _uid = uid;
+
   /// Valida os campos do formulário. Devolve a mensagem de erro ou null.
   static String? validar({required int? hora, required int? minuto, required String titulo, required Set<int> dias}) {
     if (hora == null || hora < 0 || hora > 23) return 'A hora vai de 0 a 23.';
@@ -52,6 +62,7 @@ class LembretesModel extends ChangeNotifier {
     _lembretes.add(lembrete);
     notifyListeners();
     await _repo.salvar(_lembretes);
+    _enviar(lembrete);
 
     // Só pede permissão quando o usuário mostra que quer ser avisado. Se já
     // foi aceita, o sistema responde na hora, sem mostrar nada.
@@ -76,6 +87,7 @@ class LembretesModel extends ChangeNotifier {
     _lembretes[index] = novo;
     notifyListeners();
     await _repo.salvar(_lembretes);
+    _enviar(novo);
     await _notificacoes.cancelar(antigo);
     await _notificacoes.agendar(novo);
   }
@@ -86,6 +98,60 @@ class LembretesModel extends ChangeNotifier {
     final removido = _lembretes.removeAt(index);
     notifyListeners();
     await _repo.salvar(_lembretes);
+    _apagarNaNuvem(removido.id);
     await _notificacoes.cancelar(removido);
+  }
+
+  /// Junta os lembretes do aparelho com os da conta: o que só existe de um
+  /// lado vai para o outro (e os novos lembretes da conta passam a tocar neste
+  /// aparelho). Se o mesmo id existir dos dois lados com conteúdo diferente,
+  /// vale o do aparelho. Chamado ao entrar na conta e quando a internet volta.
+  Future<void> sincronizar() async {
+    final uid = _uid;
+    final nuvem = _nuvem;
+    if (uid == null || nuvem == null || !nuvem.disponivel) return;
+
+    final remotos = {for (final l in await nuvem.lerLembretes(uid)) l.id: l};
+    final locais = {for (final l in _lembretes) l.id: l};
+
+    final novos = <Lembrete>[];
+    for (final remoto in remotos.values) {
+      if (!locais.containsKey(remoto.id)) novos.add(remoto);
+    }
+    for (final local in locais.values) {
+      if (remotos[local.id] != local) _enviar(local);
+    }
+
+    if (novos.isEmpty) return;
+    _lembretes.addAll(novos);
+    notifyListeners();
+    await _repo.salvar(_lembretes);
+    for (final lembrete in novos) {
+      try {
+        await _notificacoes.agendar(lembrete);
+      } catch (e) {
+        debugPrint('Lembrete ${lembrete.id} não agendado: $e');
+      }
+    }
+  }
+
+  /// Envia sem esperar a resposta do servidor: sem internet, o Firestore
+  /// guarda a gravação e envia quando a conexão volta.
+  void _enviar(Lembrete lembrete) {
+    final uid = _uid;
+    final nuvem = _nuvem;
+    if (uid == null || nuvem == null || !nuvem.disponivel) return;
+    unawaited(nuvem.gravarLembrete(uid, lembrete).catchError((Object e) {
+      debugPrint('Lembrete ${lembrete.id} não enviado: $e');
+    }));
+  }
+
+  void _apagarNaNuvem(int id) {
+    final uid = _uid;
+    final nuvem = _nuvem;
+    if (uid == null || nuvem == null || !nuvem.disponivel) return;
+    unawaited(nuvem.apagarLembrete(uid, id).catchError((Object e) {
+      debugPrint('Lembrete $id não apagado na nuvem: $e');
+    }));
   }
 }

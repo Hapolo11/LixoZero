@@ -116,3 +116,19 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Correção no card de categoria: com fonte grande, a lixeira desce para a linha de baixo em vez de estourar a tela — David. (`lib/screens/categorias_screen.dart`)
 - Testes que montam a tela Buscar passam a receber as dicas do rodapé — David. (`test/reciclagem_model_test.dart`, `test/impacto_screen_test.dart`)
 - Navegação: onde fica o guia de compostagem sem criar uma quinta tela — David. (`Docs/justificativas.md`)
+
+## [11/11/2026]
+
+### Adicionado
+
+- Firestore para quem tem conta: registros de reciclagem e lembretes são gravados em `usuarios/{uid}`, com cópia no aparelho e envio quando a internet volta; quem escolhe "Não quero fazer login" continua só com os dados do aparelho — Hapolo. (`lib/services/nuvem_repositorio.dart`, `lib/state/reciclagem_model.dart`, `lib/state/lembretes_model.dart`)
+- Sincronização ao entrar na conta e quando a conexão volta, com o estado na tela Conta ("Dados sincronizados às 14:32") — Hapolo. (`lib/state/sincronizacao_model.dart`, `lib/screens/conta_screen.dart`)
+- Excluir a conta também apaga os registros e lembretes dela na nuvem — Hapolo. (`lib/state/auth_model.dart`)
+- Regras de segurança do Firestore: cada usuário só acessa o que é dele — Hapolo. (`firestore.rules`)
+- Busca por foto (RF08): botão de câmera na busca, reconhecimento no aparelho com o ML Kit, até 3 sugestões para o usuário confirmar e mensagem quando a foto não é reconhecida — Hapolo. (`lib/services/reconhecimento_imagem.dart`, `lib/data/rotulos_repository.dart`, `lib/widgets/busca_por_foto.dart`, `assets/data/rotulos.json`, `lib/screens/buscar_screen.dart`)
+- Testes da sincronização, da conversão para o Firestore, da exclusão da conta e da busca por foto — Hapolo. (`test/sincronizacao_test.dart`, `test/busca_por_foto_test.dart`, `test/nuvem_falsa.dart`)
+
+### Alterado
+
+- RF03, RF08, RNF07, tabela CRUD (registros, lembretes e conta) ajustados ao uso do Firestore e à busca por foto — Hapolo. (`Docs/requisitos.md`)
+- Telas de login refeitas para ficar fiéis ao protótipo de alta fidelidade — Hapolo. (`lib/screens/login_screen.dart`, `lib/data/validadores.dart`, `assets/images/google_g.png`)

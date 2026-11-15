@@ -20,7 +20,7 @@ enum Sessao {
 /// Guarda a sessão. O login é opcional (RNF06): quem toca em
 /// "Não quero fazer login" usa tudo, e a escolha fica salva no aparelho.
 class AuthModel extends ChangeNotifier {
-  AuthModel(this._repo, this._prefs) {
+  AuthModel(this._repo, this._prefs, {this._antesDeExcluir}) {
     _usuario = _repo.atual;
     _escolheuVisitante = _prefs.getBool(_chaveVisitante) ?? false;
     _assinatura = _repo.mudancas.listen((u) {
@@ -33,6 +33,9 @@ class AuthModel extends ChangeNotifier {
 
   final AuthRepositorio _repo;
   final SharedPreferences _prefs;
+
+  /// Apaga os dados da conta na nuvem antes de a conta ser excluída.
+  final Future<void> Function(String uid)? _antesDeExcluir;
   late final StreamSubscription<UsuarioConta?> _assinatura;
 
   UsuarioConta? _usuario;
@@ -97,6 +100,17 @@ class AuthModel extends ChangeNotifier {
   }
 
   Future<void> excluirConta() async {
+    final uid = _usuario?.uid;
+    final apagarDados = _antesDeExcluir;
+    if (uid != null && apagarDados != null) {
+      try {
+        await apagarDados(uid);
+      } catch (_) {
+        // Se os dados da nuvem não forem apagados, a conta também não é: senão
+        // eles ficariam lá sem dono.
+        throw const AuthFalha('Não foi possível apagar seus dados da nuvem. Veja a conexão e tente de novo.');
+      }
+    }
     await _repo.excluirConta();
     _usuario = null;
     await pedirLogin();

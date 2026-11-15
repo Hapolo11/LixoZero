@@ -8,91 +8,94 @@ A IA foi usada como ferramenta de apoio. O código gerado foi lido, testado no c
 
 | Integrante | Parte do projeto | Ferramenta de IA |
 |---|---|---|
-| Hapolo | Login opcional com Firebase, tela de conta e ícone do app | Claude Code |
+| Hapolo | Login opcional com Firebase, tela de conta, ícone do app, Firestore (sincronização) e busca por foto | Claude Code |
 | Rafael | Sprints 1, 2 e 3 (busca, categorias, mapa, contador de impacto e lembretes) | Claude Code |
 | Caio | a preencher | a preencher |
 | Salatiel | Sprint 3 (registro de reciclagem, tela Impacto e lembretes de coleta) | Agente do Antigravity e Claude |
 | David | Sprint 4 (guia de compostagem e dica rotativa da tela Buscar) | Claude Code |
 
-## Hapolo: login opcional, conta e ícone do app
+## Hapolo: login opcional, conta, ícone, Firestore e busca por foto
 
 ### O que foi feito com apoio da IA
 
-- Telas de entrar, criar conta e recuperar senha, seguindo o protótipo de alta fidelidade, com o botão "Não quero fazer login".
-- Login com e-mail e senha e com Google pelo Firebase Authentication.
-- Tela de conta: editar nome, sair e excluir a conta.
-- Ícone do app com o Brotinho (ícone adaptativo do Android).
-- Testes automáticos das validações, da sessão e da tela de login (`test/login_test.dart`).
+- Telas de entrar, criar conta e recuperar senha, fiéis ao protótipo de alta fidelidade, com o botão "Não quero fazer login".
+- Login com e-mail e senha e com Google pelo Firebase Authentication, e tela de conta (editar nome, sair e excluir).
+- Ícone do app com o Brotinho.
+- Firestore para quem tem conta: registros de reciclagem e lembretes são sincronizados com a conta. Quem usa o app sem login fica só com os dados do aparelho.
+- Busca por foto (RF08), com reconhecimento no aparelho pelo ML Kit.
+- Testes automáticos de cada uma dessas partes.
 
 ### Como o código está organizado
 
 | Arquivo | Função |
 |---|---|
-| `lib/services/auth_repositorio.dart` | Contrato do login: define o que o app pode pedir (entrar, criar conta, sair, excluir...) sem saber que o Firebase existe. |
-| `lib/services/auth_firebase.dart` | Implementação com o Firebase Authentication. Traduz os códigos de erro do Firebase para mensagens em português. Também tem a versão `AuthIndisponivel`, usada quando o Firebase não está configurado. |
-| `lib/state/auth_model.dart` | Guarda a sessão (precisa escolher, visitante ou logado) e lembra do "Não quero fazer login" no aparelho. |
-| `lib/screens/login_screen.dart` | As três telas do protótipo, com validação dos campos. |
-| `lib/screens/conta_screen.dart` | Ver nome e e-mail, editar nome, sair e excluir a conta. |
-| `lib/data/validadores.dart` | Regras dos campos: e-mail válido, senha com 6 ou mais caracteres, confirmação igual. |
+| `lib/services/auth_repositorio.dart` e `auth_firebase.dart` | Contrato do login e a implementação com o Firebase Authentication, com as mensagens de erro em português. |
+| `lib/state/auth_model.dart` | Guarda a sessão (precisa escolher, visitante ou logado) e lembra do "Não quero fazer login". |
+| `lib/screens/login_screen.dart` e `conta_screen.dart` | As telas de login e de conta. |
+| `lib/services/nuvem_repositorio.dart` | Contrato e implementação do Firestore, com a conversão entre as classes Dart e os documentos. |
+| `lib/state/sincronizacao_model.dart` | Decide quando sincronizar (ao entrar na conta e quando a internet volta). |
+| `firestore.rules` | Regras de segurança: cada usuário só acessa `usuarios/{seu uid}`. |
+| `lib/services/reconhecimento_imagem.dart`, `lib/data/rotulos_repository.dart` e `assets/data/rotulos.json` | Câmera, reconhecimento da foto e a tabela que liga o que o ML Kit vê aos itens do guia. |
+| `lib/widgets/busca_por_foto.dart` | O fluxo da foto: escolher câmera ou galeria, analisar e confirmar a sugestão. |
 
-Duas decisões de projeto:
+Decisões de projeto:
 
-- O app só conversa com o `AuthRepositorio`. Por isso os testes usam um login de mentira e rodam sem internet e sem Firebase.
-- O login é opcional (RNF06). Se o `google-services.json` não estiver no projeto, o app abre normalmente, o login mostra um aviso e "Não quero fazer login" continua funcionando.
+- O app só conversa com contratos (`AuthRepositorio`, `NuvemRepositorio`). Por isso os testes usam versões falsas e rodam sem internet e sem Firebase.
+- O login é opcional (RNF06). Sem o `google-services.json`, o app abre normalmente e "Não quero fazer login" continua funcionando.
+- O aparelho é a fonte principal dos dados e o Firestore é uma cópia para quem tem conta. Assim o app funciona offline e quem não faz login não envia nada para a nuvem (RNF06 e RNF07).
+
+Estrutura no Firestore:
+
+| Caminho | Campos |
+|---|---|
+| `usuarios/{uid}/registros/{id}` | `item` (texto), `pesoKg` (número), `data` (data e hora) |
+| `usuarios/{uid}/lembretes/{id}` | `hora` e `minuto` (números), `titulo` (texto), `dias` (lista de 1 a 7) |
+
+Como a sincronização funciona: o que só existe de um lado vai para o outro; se o mesmo registro tiver valores diferentes, vale o do aparelho; sem internet, o Firestore guarda a gravação e envia depois; ao excluir a conta, os dados da nuvem são apagados antes.
 
 ### Bibliotecas escolhidas
 
 | Biblioteca | Por que foi escolhida |
 |---|---|
-| `firebase_core` e `firebase_auth` | O enunciado exige Firebase para autenticação. O `firebase_auth` já traz e-mail e senha, recuperação de senha, exclusão de conta e login com Google sem precisar de outro pacote. |
-| `shared_preferences` | Guardar no aparelho uma única informação simples (se o usuário escolheu seguir sem login). Não justifica um banco de dados. |
-| Plugin Gradle `com.google.gms.google-services` | Lê o `google-services.json` e liga o app ao projeto do Firebase. Só é aplicado se o arquivo existir. |
-
-O login com Google usa `signInWithProvider(GoogleAuthProvider())`, do próprio `firebase_auth`, e não o pacote `google_sign_in`, para ter uma dependência a menos.
+| `firebase_core` e `firebase_auth` | O enunciado exige Firebase para autenticação. O `firebase_auth` já traz e-mail e senha, recuperação de senha, exclusão de conta e login com Google, sem outro pacote. |
+| `cloud_firestore` | O enunciado exige Firebase também para o banco de dados. Ele guarda uma cópia no aparelho e envia as gravações quando a internet volta, o que combina com o app offline. |
+| `shared_preferences` | Guardar no aparelho uma informação simples (se o usuário escolheu seguir sem login). |
+| `image_picker` | Abre a câmera ou a galeria, sem permissão própria no Android. |
+| `google_mlkit_image_labeling` | Reconhece a foto no próprio aparelho, sem internet, e a foto não sai do celular (RNF06). |
 
 ### Erros gerados pela IA e como foram resolvidos
 
 | Erro | O que aconteceu | Como foi resolvido |
 |---|---|---|
-| App em tela preta ao abrir | O `shared_preferences` 2.5.x usa a biblioteca nativa `libdartjni.so`, que não entrava no APK. O `SharedPreferences.getInstance()` falhava antes do `runApp`. Foi visto no log do celular (`Failed to load dynamic library at path: libdartjni.so`). | `shared_preferences_android` fixado na versão 2.4.28 em `dependency_overrides`, com comentário no `pubspec.yaml`. Também foi preciso desinstalar o app e recompilar, porque a parte nativa antiga continuava instalada. |
-| Login do Google não funcionava | O `google-services.json` foi baixado antes de registrar o SHA-1 e de ativar o Google no console, então não tinha cliente OAuth (`oauth_client` vazio). | SHA-1 do certificado de debug registrado no console, Google ativado, `google-services.json` baixado de novo e app recompilado. |
-| Nome não aparecia no perfil depois de criar a conta | O nome era salvo no Firebase, mas o app lia o usuário antes de o dado voltar do servidor. | Chamada de `reload()` depois de `updateDisplayName`. Se não houver nome, o perfil mostra o começo do e-mail. |
-| App não compilava com o Flutter 3.47.1 | O `pubspec.yaml` do projeto exige Dart `^3.13.7`, e o Flutter instalado tinha o Dart 3.13.1. | `flutter upgrade` para o 3.47.9. |
-| Falha de Kotlin ao compilar (`Could not close incremental caches`) | Problema do compilador Kotlin quando o projeto e o cache ficam em discos diferentes (C: e D:). | `kotlin.incremental=false` no `gradle.properties` do usuário, fora do repositório. |
-| Emulador não abria | O AVD fica no disco C:, que estava sem os 12 GB livres que ele exige. | Os testes passaram a ser feitos num celular Android real, por cabo USB. |
+| App em tela preta ao abrir | O `shared_preferences` 2.5.x usa uma biblioteca nativa (`libdartjni.so`) que não entrava no APK, e o app falhava antes de abrir a primeira tela. Apareceu no log do celular. | `shared_preferences_android` fixado na versão 2.4.28, com comentário no `pubspec.yaml`. |
+| Login do Google não funcionava | O `google-services.json` foi baixado antes de registrar o SHA-1 e de ativar o Google, então não tinha cliente OAuth. | SHA-1 registrado, Google ativado e arquivo baixado de novo. |
+| Nome não aparecia no perfil | O app lia o usuário antes de o nome salvo voltar do servidor. | `reload()` depois de salvar o nome; sem nome, o perfil mostra o começo do e-mail. |
+| Telas de login diferentes do protótipo | A primeira versão usava o visual padrão do Flutter, com rótulos, títulos e botões que o protótipo não tem. | As telas foram refeitas comparando com o protótipo. Ficou só o que melhora contraste e acessibilidade, como o botão em verde escuro. |
 
-### Decisão sobre o `google-services.json` no repositório
+### Decisões que o grupo revisou
 
-A IA sugeriu commitar o `android/app/google-services.json`, porque sem ele o app não liga ao Firebase e o login não funciona na máquina de quem corrige. Depois do push, o grupo percebeu que o arquivo traz uma chave de API (`AIzaSy...`) e que o repositório é público, e a decisão foi revista.
-
-- **O que é a chave:** identifica o app Android para o Firebase e vai dentro de qualquer APK. Não é uma chave de servidor nem uma senha. Quem protege os dados são as regras de segurança do Firebase, e não o sigilo desse arquivo, e a documentação do Firebase permite versionar o `google-services.json`.
-- **O que não foi para o GitHub:** a chave do Google Maps, que continua só no `android/local.properties`, fora do Git.
-- **Decisão:** manter o arquivo no repositório, para o app funcionar na correção. No Google Cloud Console foi conferido que a chave criada pelo Firebase já vem restrita a 25 APIs do próprio Firebase (entre elas Identity Toolkit, Token Service, Firebase Installations e Cloud Firestore), e não a qualquer serviço do Google. Não foi feita restrição por SHA-1 (aplicativo), porque ela bloquearia o login em qualquer computador com outro certificado de debug, como o da professora.
-- **Não foi reescrito o histórico do Git:** exigiria `git push --force` no branch compartilhado, com risco de apagar trabalho dos colegas, e a chave não é um segredo de fato.
-- **Próximo cuidado:** ao criar o Firestore, não deixar as regras em modo de teste aberto.
+- **`google-services.json` no repositório:** a IA sugeriu commitá-lo para o app funcionar na correção. Ele traz uma chave de API do Firebase, que não é uma senha e vai dentro de qualquer APK. Foi mantido, e no Google Cloud Console foi conferido que a chave já vem restrita às APIs do Firebase.
+- **Regras do Firestore:** foram escritas com a IA e precisam ser testadas no simulador de regras do console antes da entrega.
 
 ### Prompts que funcionaram melhor
 
 Resumo dos pedidos que levaram a um resultado direto, na ordem em que foram feitos.
 
-1. **Implementação do login opcional.** Implementar a autenticação opcional do aplicativo com Firebase Authentication, seguindo o protótipo de alta fidelidade e os requisitos do projeto, com a opção de acessar o aplicativo sem login.
-   Resultado: a IA leu o código do Rafael, o protótipo e os requisitos antes de escrever as telas, o modelo de sessão e os testes.
-2. **Diagnóstico da tela preta.** Analisar o log do `flutter run` e o log do aparelho para identificar por que o aplicativo permanecia em uma tela preta ao ser aberto.
-   Resultado: o log do celular revelou a falha ao carregar `libdartjni.so`, o que levou a fixar a versão do `shared_preferences_android`.
-3. **Falha no login com Google.** Verificar a configuração do Firebase e do projeto Android, porque o login com a conta Google não funcionava no dispositivo.
-   Resultado: a conferência do `google-services.json` mostrou que o arquivo não tinha cliente OAuth, e ele foi baixado de novo depois de registrar o SHA-1.
-4. **Nome ausente no perfil.** Corrigir o campo de nome da tela de conta, que não era preenchido após criar uma conta com e-mail e senha.
-   Resultado: a IA descreveu o sintoma e a causa (usuário lido antes da atualização do perfil) e corrigiu com `reload()` e um nome alternativo tirado do e-mail.
-5. **Ícone do aplicativo.** Criar o ícone do aplicativo a partir do mascote Brotinho, no formato adaptativo do Android.
-   Resultado: a IA gerou o ícone em todas as densidades de tela, com o mascote dentro da área segura.
+1. **Login opcional.** Implementar a autenticação opcional com Firebase Authentication, seguindo o protótipo e os requisitos, com a opção de usar o app sem login.
+2. **Diagnóstico da tela preta.** Analisar o log do `flutter run` e o do aparelho para achar por que o app ficava numa tela preta.
+3. **Login com Google.** Verificar a configuração do Firebase e do projeto Android, porque o login com Google não funcionava.
+4. **Ícone.** Criar o ícone do aplicativo a partir do mascote Brotinho, no formato adaptativo do Android.
+5. **Firestore.** Gravar os registros e os lembretes de quem tem conta no Firestore, mantendo o aparelho como fonte principal e sem enviar nada de quem usa o app sem login.
+6. **Busca por foto.** Implementar a busca por foto com reconhecimento no aparelho, em que o usuário confirma a sugestão.
+7. **Telas fiéis ao protótipo.** Refazer as telas de login para ficar iguais ao protótipo de alta fidelidade.
 
-Observação geral: descrever o sintoma que aparece na tela e fornecer o log do dispositivo produziu resultados melhores do que pedir uma correção sem contexto.
+Descrever o sintoma que aparece na tela e fornecer o log do aparelho deu resultados melhores do que pedir uma correção sem contexto.
 
 ### Como o resultado foi conferido
 
-- `flutter analyze` sem problemas e todos os testes passando (31 no momento deste registro).
-- Teste no celular real (Android 15): criar conta, entrar, sair, editar nome, senha errada, recuperar senha, excluir conta, "Não quero fazer login" e login com Google.
-- Leitura do log do celular (`adb logcat`) para confirmar que o Firebase notificava o login e o logout e que não havia exceções.
+- `flutter analyze` sem problemas e todos os testes passando (138 no momento deste registro).
+- Teste no celular real: criar conta, entrar, sair, editar nome, senha errada, recuperar senha, excluir conta, "Não quero fazer login" e login com Google.
+- A conferir no celular: a sincronização com o Firestore real e o reconhecimento de fotos de resíduos de verdade, que dependem de criar o banco e de ajustar a tabela `rotulos.json` com fotos reais.
 
 ## Rafael: sprints 1, 2 e 3 (busca, categorias, mapa e tela Impacto)
 
