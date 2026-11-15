@@ -55,10 +55,10 @@ O aplicativo tem como objetivo funcionar como um assistente de reciclagem domés
 **Analise:**
 - **Palavras conceituais:** Termos como reciclagem, compostagem, logística reversa e economia circular moldam a linguagem do app, reforçando tanto a consequência do descarte errado quanto possíveis funções futuras, como conectar usuários a cooperativas. 
 - **Personalidade da identidade:** Didática, verde e comunitária. Isso evita um tom técnico ou corporativo e aproxima o app de uma experiência simples e educativa, valorizando também o impacto coletivo, não só o individual. 
--- **Tom da interface:** Educativo e motivador. Os feedbacks devem reforçar sensação de progresso e pertencimento, como no contador de "quilos reciclados", em vez de apenas confirmar ações. 
+- **Tom da interface:** Educativo e motivador. Os feedbacks devem reforçar sensação de progresso e pertencimento, como no contador de "quilos reciclados", em vez de apenas confirmar ações. 
 - **Tom da experiência do usuário:** Segue a mesma lógica motivadora, mas aplicada a todo o fluxo de uso, evitando fricção ou linguagem punitiva mesmo quando o usuário erra. 
 - **Forma como o aplicativo deseja ser lembrado:** Pela frase "o assistente que transforma lixo em consciência", que serve de guia para todas as decisões do produto.
-- 
+
 **Explique como essas características deverão influenciar a solução. Não é necessário desenvolver a identidade visual nesta atividade.**
 No geral, essas características pedem um app com linguagem simples e educativa, tom motivador e voltado à comunidade, priorizando clareza pedagógica acima de sofisticação técnica e medindo o sucesso pela mudança de consciência ambiental que gera no usuário.
 

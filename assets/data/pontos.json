@@ -1,0 +1,22 @@
+{
+  "versao": "2026-11-03",
+  "fontes": [
+    "Ecopontos: Prefeitura de Aracaju/Emsurb, lista publicada na revista Conviver, ed. 748, 23/09/2025.",
+    "Horário dos ecopontos: TRE-SE, página de endereços dos ecopontos de Aracaju.",
+    "Cooperativas: cadastro CNPJ da Receita Federal (consultado em 03/11/2026).",
+    "Coordenadas: OpenStreetMap (Nominatim). Endereços sem número usam o ponto da rua ou o centro do bairro."
+  ],
+  "pontos": [
+    {"id": "coop_care", "nome": "CARE – Cooperativa dos Agentes Autônomos de Reciclagem", "tipo": "cooperativa", "endereco": "Av. Alexandre Alcino, 150", "bairro": "Santa Maria", "lat": -10.9947303, "lng": -37.1022314, "precisao": "rua", "horario": "Ligue antes de ir", "telefone": "(79) 3243-1581", "aceita": ["papel", "plastico", "vidro", "metal"]},
+    {"id": "coop_central", "nome": "Cooperativas Coores e União", "tipo": "cooperativa", "endereco": "Av. João Amazonas, 80, Setor 03", "bairro": "17 de Março", "lat": -11.0031383, "lng": -37.1002927, "precisao": "rua", "horario": "Ligue antes de ir", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal"]},
+    {"id": "eco_17_marco", "nome": "Ecoponto 17 de Março", "tipo": "ecoponto", "endereco": "Rua Vereador Manoel Nunes Resende, s/n", "bairro": "17 de Março", "lat": -11.0044735, "lng": -37.0972359, "precisao": "rua", "horario": "Segunda a sexta, 8h às 12h e 13h às 17h", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal", "perigoso", "volumoso"]},
+    {"id": "eco_coroa_meio", "nome": "Ecoponto Coroa do Meio", "tipo": "ecoponto", "endereco": "Rua Jornalista João B. de Santanna, 2618", "bairro": "Coroa do Meio", "lat": -10.9642601, "lng": -37.0431016, "precisao": "bairro", "horario": "Segunda a sexta, 8h às 12h e 13h às 17h", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal", "perigoso", "volumoso"]},
+    {"id": "eco_inacio_barbosa", "nome": "Ecoponto Inácio Barbosa", "tipo": "ecoponto", "endereco": "Rua Júpiter, s/n", "bairro": "Inácio Barbosa", "lat": -10.9521715, "lng": -37.0653571, "precisao": "rua", "horario": "Segunda a sexta, 8h às 12h e 13h às 17h", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal", "perigoso", "volumoso"]},
+    {"id": "eco_ponto_novo", "nome": "Ecoponto Ponto Novo", "tipo": "ecoponto", "endereco": "Rua Massaranduba, s/n", "bairro": "Ponto Novo", "lat": -10.9378987, "lng": -37.0755157, "precisao": "rua", "horario": "Segunda a sexta, 8h às 12h e 13h às 17h", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal", "perigoso", "volumoso"]},
+    {"id": "eco_jabotiana", "nome": "Ecoponto Jabotiana", "tipo": "ecoponto", "endereco": "Rua Projetada, s/n", "bairro": "Jabotiana", "lat": -10.9437642, "lng": -37.0858010, "precisao": "bairro", "horario": "Segunda a sexta, 8h às 12h e 13h às 17h", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal", "perigoso", "volumoso"]},
+    {"id": "eco_18_forte", "nome": "Ecoponto 18 do Forte", "tipo": "ecoponto", "endereco": "Rua Jansen Melo, s/n", "bairro": "18 do Forte", "lat": -10.9000770, "lng": -37.0692181, "precisao": "bairro", "horario": "Segunda a sexta, 8h às 12h e 13h às 17h", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal", "perigoso", "volumoso"]},
+    {"id": "eco_industrial", "nome": "Ecoponto Industrial", "tipo": "ecoponto", "endereco": "Avenida Confiança, 131", "bairro": "Industrial", "lat": -10.8959452, "lng": -37.0516403, "precisao": "rua", "horario": "Segunda a sexta, 8h às 12h e 13h às 17h", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal", "perigoso", "volumoso"]},
+    {"id": "eco_jardim_centenario", "nome": "Ecoponto Jardim Centenário", "tipo": "ecoponto", "endereco": "Rua Radialista José da Silva Lima, 331", "bairro": "Jardim Centenário", "lat": -10.8965396, "lng": -37.0961543, "precisao": "rua", "horario": "Segunda a sexta, 8h às 12h e 13h às 17h", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal", "perigoso", "volumoso"]},
+    {"id": "eco_santos_dumont", "nome": "Ecoponto Santos Dumont", "tipo": "ecoponto", "endereco": "Rua Jane Bonfim, s/n", "bairro": "Santos Dumont", "lat": -10.8906580, "lng": -37.0876286, "precisao": "rua", "horario": "Segunda a sexta, 8h às 12h e 13h às 17h", "telefone": null, "aceita": ["papel", "plastico", "vidro", "metal", "perigoso", "volumoso"]}
+  ]
+}

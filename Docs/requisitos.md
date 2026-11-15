@@ -50,7 +50,7 @@
 
 ### 7. Categorias de resíduos com código de cores
 
-**Descrição:** Tela que organiza os resíduos por categoria (papel, plástico, vidro, orgânico, perigoso), usando o código de cores universal da reciclagem.
+**Descrição:** Tela que organiza os resíduos por categoria (papel, plástico, vidro, metal, orgânico, perigoso), usando o código de cores universal da reciclagem.
 
 **Necessidade do usuário que atende:** Reconhecer visualmente e rapidamente a categoria de um resíduo, especialmente em situações de pouca atenção disponível.
 
@@ -85,13 +85,13 @@
 **Descrição:** O sistema deve disponibilizar orientações práticas sobre como realizar compostagem doméstica de resíduos orgânicos.
 
 ### RF07 - Categorias com código de cores
-**Descrição:** O sistema deve organizar e exibir os resíduos por categoria (papel, plástico, vidro, orgânico, perigoso), utilizando o código de cores universal da reciclagem.
+**Descrição:** O sistema deve organizar e exibir os resíduos por categoria (papel, plástico, vidro, metal, orgânico, perigoso), utilizando o código de cores universal da reciclagem.
 
 ### RF08 - Busca por reconhecimento de imagem
 **Descrição:** O sistema deve permitir que o usuário tire uma foto do resíduo para que o sistema sugira automaticamente a categoria correspondente.
 
-### RF09 - Registro automático de reciclagem
-**Descrição:** O sistema deve registrar automaticamente, de forma anônima, cada consulta/confirmação de descarte feita pelo usuário, alimentando o contador de impacto.
+### RF09 - Registro de reciclagem com peso automático
+**Descrição:** O sistema deve registrar, de forma anônima, o descarte de um item somente quando o usuário tocar em "Registrar reciclagem" no resultado da busca. O peso médio estimado do item é somado automaticamente ao contador de impacto, sem pedir que o usuário informe o peso; o usuário pode, se quiser, ajustar o peso daquele registro logo após confirmá-lo. Uma busca sozinha não gera registro.
  
 ### RF10 - Aviso de indisponibilidade por falta de conexão
 **Descrição:** O sistema deve informar o usuário quando uma funcionalidade dependente de internet (ex: mapa de ecopontos) não puder ser executada por falta de conexão.
@@ -158,10 +158,10 @@
 |---|:---:|:---:|:---:|:---:|---|
 | Guia de classificação de resíduos (tipo → categoria → destino) | ✓ | ✓ | ✓ | ✕ | Criado e atualizado pela equipe de desenvolvimento (base de dados interna do app); o usuário apenas consulta. Não há exclusão porque o guia precisa estar sempre completo, remover um item quebraria a função principal do app. |
 | Ecopontos e cooperativas de coleta | ✓ | ✓ | ✓ | ✓ | Cadastro inicial feito pela equipe a partir de fontes públicas; pode ser atualizado (mudança de endereço/horário) ou excluído (ponto desativado). O usuário só consulta, não edita. |
-| Registro de reciclagem (para o contador de impacto) | ✓ | ✓ | ✕ | ✕ | Criado automaticamente a cada consulta/confirmação do usuário e consultado no contador de "quilos reciclados". Não é atualizável nem excluível porque o registro é anônimo e agregado localmente, não há vínculo com uma pessoa para permitir correção ou remoção individual, conforme o compromisso de privacidade do projeto. |
+| Registro de reciclagem (para o contador de impacto) | ✓ | ✓ | ✓ | ✕ | Criado quando o usuário toca em "Registrar reciclagem", com o peso médio estimado do item, e consultado no contador de "quilos reciclados". A única atualização permitida é "ajustar peso", logo após o registro, para corrigir a estimativa. Não é excluível: o registro é anônimo e fica só no aparelho, sem vínculo com uma pessoa, conforme o compromisso de privacidade do projeto. |
 | Lembretes de coleta seletiva | ✓ | ✓ | ✓ | ✓ | O usuário cria o lembrete (dia/horário da coleta do bairro), pode consultá-lo, editá-lo (se o dia da coleta mudar) e excluí-lo quando não precisar mais. |
 | Conteúdo educativo sobre compostagem | ✓ | ✓ | ✓ | ✕ | Criado e atualizado pela equipe (conteúdo editorial); o usuário apenas consulta. Sem exclusão para manter a base de orientações sempre completa. |
-| Dados de identificação do usuário (nome, e-mail, localização exata, etc.) | ✕ | ✕ | ✕ | ✕ | Não se aplica. O app não coleta dados de identificação, conforme definido no compromisso do projeto. Isso também elimina a necessidade de cadastro/login, simplificando o fluxo de uso. |
+| Conta opcional do usuário (nome, sobrenome e e-mail) | ✓ | ✓ | ✓ | ✓ | Só existe se o usuário escolher criar conta; "Não quero fazer login" libera o app inteiro sem cadastro (RNF06). Os dados ficam no serviço de autenticação (Firebase Authentication), com o mínimo necessário e conforme a LGPD, e o usuário pode editar ou excluir a conta. A localização do GPS é usada só no aparelho para ordenar os ecopontos e nunca é armazenada. É a última funcionalidade a ser implementada. |
 
 ## 2.5 Priorização
 
@@ -175,10 +175,18 @@
 
  **Contador de impacto (quilos reciclados)** — funciona como ferramenta de retenção/motivação, mas o app funciona sem ela.
  **Lembretes de coleta seletiva** — reforça engajamento e formação de hábito, mas não é o núcleo da proposta.
- **Guia de classificação offline** — é um diferencial competitivo forte (nenhum concorrente oferece), mas depende da funcionalidade essencial já existir online.
+ **Guia de classificação offline** — é um diferencial competitivo forte (nenhum concorrente oferece). Como a arquitetura é offline first (guia salvo no aparelho), ele é entregue junto com a busca, e não depois dela.
  **Categorias de resíduos com código de cores** — atende a uma restrição obrigatória do estudo de caso e ao público escolar, mas é um complemento visual à classificação, não a classificação em si.
 
 ### Secundárias
 
  **Conteúdo educativo sobre compostagem doméstica** — tema adjacente (redução de resíduos), não é o foco de classificação/descarte do app.
  **Busca com reconhecimento de imagem** — o próprio documento já indica: "(diferencial futuro)" e "não é essencial para o MVP".
+
+### Por último
+
+ **Login opcional (criar conta, e-mail ou Google)** — não é requisito de nenhuma funcionalidade, já que o app inteiro funciona sem conta. Fica para o fim da implementação.
+
+### Fora do escopo do protótipo
+
+ **RF11 (dados para gestores) e RF12 (configuração por síndicos)** — exigem servidor próprio, o que contraria o funcionamento offline e sem coleta de dados do protótipo.

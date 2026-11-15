@@ -1,0 +1,23 @@
+# Sistema e editores
+.DS_Store
+*.log
+*.swp
+*.iml
+.idea/
+.vscode/settings.json
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+migrate_working_dir/
+.widget_preview/
+**/ios/Flutter/.last_build_id
+
+# Builds do Android Studio
+/android/app/debug
+/android/app/profile
+/android/app/release
