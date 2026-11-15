@@ -115,8 +115,8 @@ void main() {
     });
 
     test('nome e sobrenome', () {
-      expect(validarNome(' '), 'Digite seu nome.');
-      expect(validarNome('', campo: 'sobrenome'), 'Digite seu sobrenome.');
+      expect(validarNome(' '), 'Informe seu nome.');
+      expect(validarNome('', campo: 'sobrenome'), 'Informe seu sobrenome.');
       expect(validarNome('Ana'), isNull);
     });
   });
@@ -221,16 +221,16 @@ void main() {
       await tester.tap(find.widgetWithText(FilledButton, 'Entrar'));
       await tester.pump();
 
-      expect(find.text('Digite seu e-mail.'), findsOneWidget);
-      expect(find.text('Digite sua senha.'), findsOneWidget);
+      expect(find.text('Informe seu e-mail.'), findsOneWidget);
+      expect(find.text('Informe sua senha.'), findsOneWidget);
       expect(repo.chamadas, isEmpty);
     });
 
     testWidgets('entrar com e-mail e senha', (tester) async {
       final (repo, modelo) = await abrir(tester);
 
-      await tester.enterText(find.widgetWithText(TextFormField, 'E-mail'), 'ana@email.com');
-      await tester.enterText(find.widgetWithText(TextFormField, 'Senha'), '123456');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite seu E-mail.'), 'ana@email.com');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite sua senha.'), '123456');
       await tester.tap(find.widgetWithText(FilledButton, 'Entrar'));
       await tester.pumpAndSettle();
 
@@ -242,8 +242,8 @@ void main() {
       final (repo, modelo) = await abrir(tester);
       repo.falhaProximaChamada = 'E-mail ou senha incorretos.';
 
-      await tester.enterText(find.widgetWithText(TextFormField, 'E-mail'), 'ana@email.com');
-      await tester.enterText(find.widgetWithText(TextFormField, 'Senha'), 'errada');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite seu E-mail.'), 'ana@email.com');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite sua senha.'), 'errada');
       await tester.tap(find.widgetWithText(FilledButton, 'Entrar'));
       await tester.pumpAndSettle();
 
@@ -254,14 +254,14 @@ void main() {
     testWidgets('criar conta confere se as senhas são iguais', (tester) async {
       final (repo, _) = await abrir(tester);
 
-      await tester.tap(find.text('Não possui conta? Criar conta'));
+      await tester.tap(find.text('Não possui conta?'));
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.widgetWithText(TextFormField, 'Nome'), 'Ana');
-      await tester.enterText(find.widgetWithText(TextFormField, 'Sobrenome'), 'Souza');
-      await tester.enterText(find.widgetWithText(TextFormField, 'E-mail'), 'ana@email.com');
-      await tester.enterText(find.widgetWithText(TextFormField, 'Crie sua senha'), '123456');
-      await tester.enterText(find.widgetWithText(TextFormField, 'Confirme sua senha'), '654321');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite seu nome.'), 'Ana');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite seu sobrenome.'), 'Souza');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite seu E-mail.'), 'ana@email.com');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Crie sua senha.'), '123456');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Confirme sua senha.'), '654321');
       await tester.tap(find.widgetWithText(FilledButton, 'Criar conta'));
       await tester.pump();
 
@@ -273,13 +273,13 @@ void main() {
       final (repo, modelo) = await abrir(tester);
       repo.falhaProximaChamada = mensagemDoErro('email-already-in-use');
 
-      await tester.tap(find.text('Não possui conta? Criar conta'));
+      await tester.tap(find.text('Não possui conta?'));
       await tester.pumpAndSettle();
-      await tester.enterText(find.widgetWithText(TextFormField, 'Nome'), 'Ana');
-      await tester.enterText(find.widgetWithText(TextFormField, 'Sobrenome'), 'Souza');
-      await tester.enterText(find.widgetWithText(TextFormField, 'E-mail'), 'ana@email.com');
-      await tester.enterText(find.widgetWithText(TextFormField, 'Crie sua senha'), '123456');
-      await tester.enterText(find.widgetWithText(TextFormField, 'Confirme sua senha'), '123456');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite seu nome.'), 'Ana');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite seu sobrenome.'), 'Souza');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Digite seu E-mail.'), 'ana@email.com');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Crie sua senha.'), '123456');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Confirme sua senha.'), '123456');
       await tester.tap(find.widgetWithText(FilledButton, 'Criar conta'));
       await tester.pumpAndSettle();
 
