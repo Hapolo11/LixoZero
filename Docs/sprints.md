@@ -14,11 +14,12 @@
 | Login | Login opcional com Firebase, conta e ícone | RNF06 | Hapolo | ✅ |
 | 3 | Registro de reciclagem, contador e lembretes | RF03, RF04, RF09 | Salatiel (RF09) e Rafael | ✅ |
 | 4 | Guia de compostagem e dica rotativa | RF06 | David | ✅ |
-| 5 | Reconhecimento de imagem (opcional) | RF08 | a definir | ⬜ |
+| 5 | Busca por foto e sincronização com o Firestore | RF08, RNF06 | Hapolo | ✅ |
+| Diagramas | Casos de uso atualizado e diagrama de classes | — | Caio | ✅ |
 | 6 | Polimento, acessibilidade, documentação e entrega | RNF, b-vi | Grupo | ⬜ |
 | — | Dados para gestores e configuração por síndicos | RF11, RF12 | — | ➖ |
 
-Verificação feita hoje: `flutter analyze` sem problemas e **100 testes passando**.
+Verificação de 17/11/2026, na `unidade-2` (commit `a64d054`): `flutter analyze` sem problemas e **138 testes passando**.
 
 ---
 
@@ -32,7 +33,7 @@ Verificação feita hoje: `flutter analyze` sem problemas e **100 testes passand
 | ✅ Justificativas de design | Hapolo | `Docs/justificativas.md` |
 | ✅ Protótipos de baixa e alta fidelidade | David, Hapolo, Salatiel e Caio | `Docs/prototipo*.pdf` |
 | ✅ Apresentações | Grupo | `Docs/apresentacao*.pdf` |
-| ✅ Diagrama de casos de uso | Caio | `Docs/diagrama-casos-de-uso.pdf` |
+| ✅ Diagrama de casos de uso (atualizado na Unidade II) | Caio | `Docs/diagrama-casos-de-uso.pdf` |
 
 ---
 
@@ -110,24 +111,35 @@ Verificação feita hoje: `flutter analyze` sem problemas e **100 testes passand
 
 ---
 
-## Sprint 5: reconhecimento de imagem (RF08) ⬜ opcional
+## Sprint 5: busca por foto e Firestore ✅
 
-**Objetivo:** sugerir a categoria a partir de uma foto.
-**Prioridade:** secundária, "diferencial futuro, não é essencial para o MVP" (`requisitos.md` 2.5).
+**Objetivo:** sugerir o item a partir de uma foto e guardar os dados de quem tem conta na nuvem.
+**Requisitos:** RF08 (imagem), RF03, RNF06 e RNF07.
+**Commits:** `36ba38f` e `77ea679`, de Hapolo.
 
-Escolha antes de começar:
+- ✅ Botão de câmera na busca, com câmera ou galeria (`image_picker`)
+- ✅ Reconhecimento no próprio aparelho com o ML Kit (`google_mlkit_image_labeling`); a foto não sai do celular
+- ✅ Mapa de rótulos para itens do guia em `assets/data/rotulos.json`
+- ✅ Até 3 sugestões para o usuário confirmar e mensagem quando a foto não é reconhecida
+- ✅ Registros de reciclagem e lembretes gravados no Firestore (`usuarios/{uid}`) para quem tem conta, com cópia no aparelho e envio quando a internet volta
+- ✅ Sincronização ao entrar na conta e quando a conexão volta, com o estado na tela Conta
+- ✅ Excluir a conta apaga antes os dados da nuvem
+- ✅ Regras de segurança em `firestore.rules`: cada usuário só acessa o que é dele
+- ✅ Quem escolhe "Não quero fazer login" continua só com os dados do aparelho
+- ✅ Telas de login refeitas para ficar fiéis ao protótipo de alta fidelidade
+- ✅ Testes da sincronização e da busca por foto (`test/sincronizacao_test.dart`, `test/busca_por_foto_test.dart`)
+- ✅ RF03, RF08, RNF07 e CRUD ajustados em `Docs/requisitos.md`
+- ✅ Seção do Hapolo no `Docs/uso-de-ia.md` atualizada
 
-- ⬜ **Opção A, implementar:** câmera com `image_picker`, rótulos com o ML Kit no próprio aparelho (`google_mlkit_image_labeling`, offline), uma tabela que liga rótulo ao item do guia e a busca já existente. A foto não sai do aparelho (RNF06). O usuário confirma a sugestão antes de ver o resultado.
-- ⬜ **Opção B, não implementar:** registrar a decisão no CHANGELOG e na priorização (`requisitos.md` 2.5) como "não entregue na Unidade II", com o motivo.
+## Diagramas da Unidade II ✅
 
-Se for a opção A:
+**Commits:** `4480fcf` e `a64d054`, de Caio.
 
-- ⬜ Botão de câmera no campo de busca
-- ⬜ Mapa de rótulos para itens (`assets/data/rotulos.json`) e teste que confere se todo item citado existe no guia
-- ⬜ Mensagem quando a foto não for reconhecida, levando para a busca por texto
-- ⬜ Permissão de câmera no Android e no iOS
-- ⬜ Testes com rotulador falso, no mesmo padrão de `Notificacoes` e `AuthRepositorio`
-- ⬜ Teste no emulador e no celular, e linha no CHANGELOG
+- ✅ Diagrama de casos de uso atualizado com a busca por foto, a sincronização e a revisão dos atores
+- ✅ Diagrama de classes (`Docs/diagrama-de-classes.pdf`)
+- ✅ Seção do Caio no `Docs/uso-de-ia.md`
+
+---
 
 ## Sprint 6: polimento e entrega ⬜
 
@@ -139,17 +151,31 @@ Se for a opção A:
 - ⬜ Confirmar o horário das cooperativas CARE, Coores e União (hoje o app mostra "Ligue antes de ir")
 - ⬜ Conferir os 4 ecopontos sem número no endereço ("posição aproximada")
 
+### Busca por foto e Firestore
+
+- ⬜ **Permissões de câmera e galeria no iOS:** falta `NSCameraUsageDescription` e `NSPhotoLibraryUsageDescription` no `ios/Runner/Info.plist`. Sem elas o app fecha ao abrir a câmera no iPhone
+- ⬜ Publicar as regras do `firestore.rules` no console do Firebase (estar no repositório não basta)
+- ⬜ Testar a busca por foto no celular real com itens comuns (garrafa PET, lata, papelão, casca de fruta) e ampliar o `rotulos.json` se precisar
+- ⬜ Testar a sincronização em dois celulares com a mesma conta e a exclusão da conta
+
 ### Acessibilidade e qualidade
 
 - ⬜ Passar o TalkBack (Android) e o VoiceOver (iOS) nas 4 abas e nas telas de login, conta e compostagem
-- ⬜ Rótulos de leitor de tela (`Semantics`, `tooltip`) nos botões só com ícone, no mascote e nos marcadores do mapa
+- ⬜ Rótulos de leitor de tela (`Semantics`, `tooltip`) nos botões só com ícone (incluindo o novo botão de câmera), no mascote e nos marcadores do mapa
 - ⬜ Testar com a fonte do sistema no máximo em todas as telas, não só nas Categorias
 - ⬜ Conferir o contraste de 4,5:1 nos textos sobre as cores das categorias (`justificativas.md`, seção 6)
 - ⬜ Conferir as áreas de toque de pelo menos 48 dp
 - ⬜ Medir o RNF01 (resultado em até 3 s) e o RNF02 (até 3 interações) e anotar no README
 - ⬜ Rodar num celular de entrada, ou num emulador com pouca memória (RNF04)
-- ⬜ Teste de ponta a ponta no celular real: buscar, registrar, ver o contador, criar lembrete, receber a notificação, mapa com e sem internet, compostagem, login e "Não quero fazer login"
-- ⬜ Testar o build de iOS de novo depois das sprints 3 e 4 (as notificações mexeram no `AppDelegate.swift`)
+- ⬜ Teste de ponta a ponta no celular real: buscar, registrar, ver o contador, criar lembrete, receber a notificação, mapa com e sem internet, compostagem, busca por foto, login, sincronização e "Não quero fazer login"
+- ⬜ Testar o build de iOS de novo depois das sprints 3 e 4 e da busca por foto: as notificações mexeram no `AppDelegate.swift`, e o ML Kit exige iOS 15.5 ou mais, mas o projeto ainda está em 15.0 (`IPHONEOS_DEPLOYMENT_TARGET` e `Podfile`)
+
+### Documentação e entrega
+
+- ✅ Seções de todos os integrantes no `Docs/uso-de-ia.md` (Hapolo, Rafael, Caio, Salatiel e David)
+- ⬜ README: trocar "Unidade II em andamento" pelo status final e anotar as medições de RNF01 e RNF02
+- ⬜ Linha final no CHANGELOG com a entrega da Unidade II
+- ⬜ Merge do PR #1 (`unidade-2` → `main`)
 
 ---
 
@@ -171,9 +197,9 @@ Os dois exigem servidor próprio, o que contraria o funcionamento offline e sem 
 | RF05 Offline | ✅ | Sprint 1 |
 | RF06 Compostagem | ✅ | Sprint 4 |
 | RF07 Cores | ✅ | Sprint 2 |
-| RF08 Imagem | ⬜ | Sprint 5 (opcional) |
+| RF08 Imagem | ✅ | Sprint 5 |
 | RF09 Registro | ✅ | Sprint 3 |
 | RF10 Sem internet | ✅ | Sprint 2 |
 | RF11 e RF12 | ➖ | Fora do escopo |
 | RNF01, RNF02, RNF04 (desempenho e usabilidade) | ⬜ medir | Sprint 6 |
-| RNF03, RNF05 a RNF16 | ✅ | Sprints 1 a 4 |
+| RNF03, RNF05 a RNF16 | ✅ | Sprints 1 a 5 |

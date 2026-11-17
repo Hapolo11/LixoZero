@@ -135,3 +135,4 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - RF03, RF08, RNF07, tabela CRUD (registros, lembretes e conta) ajustados ao uso do Firestore e à busca por foto — Hapolo. (`Docs/requisitos.md`)
 - Telas de login refeitas para ficar fiéis ao protótipo de alta fidelidade — Hapolo. (`lib/screens/login_screen.dart`, `lib/data/validadores.dart`, `assets/images/google_g.png`)
 - Diagrama de casos de uso atualizado com a busca por foto, a sincronização e a revisão dos atores — Caio. (`Docs/diagrama-casos-de-uso.pdf`)
+- Plano das sprints atualizado: sprint 5 (busca por foto e Firestore) e diagramas concluídos, e novas pendências da sprint 6 (permissões de câmera no iOS, versão mínima do iOS, regras do Firestore e entrega) — Rafael. (`Docs/sprints.md`)
