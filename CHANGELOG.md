@@ -117,7 +117,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Testes que montam a tela Buscar passam a receber as dicas do rodapé — David. (`test/reciclagem_model_test.dart`, `test/impacto_screen_test.dart`)
 - Navegação: onde fica o guia de compostagem sem criar uma quinta tela — David. (`Docs/justificativas.md`)
 
-## [11/11/2026]
+## [17/11/2026]
 
 ### Adicionado
 
@@ -127,8 +127,11 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Regras de segurança do Firestore: cada usuário só acessa o que é dele — Hapolo. (`firestore.rules`)
 - Busca por foto (RF08): botão de câmera na busca, reconhecimento no aparelho com o ML Kit, até 3 sugestões para o usuário confirmar e mensagem quando a foto não é reconhecida — Hapolo. (`lib/services/reconhecimento_imagem.dart`, `lib/data/rotulos_repository.dart`, `lib/widgets/busca_por_foto.dart`, `assets/data/rotulos.json`, `lib/screens/buscar_screen.dart`)
 - Testes da sincronização, da conversão para o Firestore, da exclusão da conta e da busca por foto — Hapolo. (`test/sincronizacao_test.dart`, `test/busca_por_foto_test.dart`, `test/nuvem_falsa.dart`)
+- Diagrama de classes — Caio. (`Docs/diagrama-de-classes.pdf`)
+- Registro de uso de IA, seção do Caio. — Caio. (`Docs/uso-de-ia.md`)
 
 ### Alterado
 
 - RF03, RF08, RNF07, tabela CRUD (registros, lembretes e conta) ajustados ao uso do Firestore e à busca por foto — Hapolo. (`Docs/requisitos.md`)
 - Telas de login refeitas para ficar fiéis ao protótipo de alta fidelidade — Hapolo. (`lib/screens/login_screen.dart`, `lib/data/validadores.dart`, `assets/images/google_g.png`)
+- Diagrama de casos de uso atualizado com a busca por foto, a sincronização e a revisão dos atores — Caio. (`Docs/diagrama-casos-de-uso.pdf`)

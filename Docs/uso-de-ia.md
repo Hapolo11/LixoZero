@@ -10,7 +10,7 @@ A IA foi usada como ferramenta de apoio. O código gerado foi lido, testado no c
 |---|---|---|
 | Hapolo | Login opcional com Firebase, tela de conta, ícone do app, Firestore (sincronização) e busca por foto | Claude Code |
 | Rafael | Sprints 1, 2 e 3 (busca, categorias, mapa, contador de impacto e lembretes) | Claude Code |
-| Caio | a preencher | a preencher |
+| Caio | Diagramas de casos de uso e classes | Claude Code |
 | Salatiel | Sprint 3 (registro de reciclagem, tela Impacto e lembretes de coleta) | Agente do Antigravity e Claude |
 | David | Sprint 4 (guia de compostagem e dica rotativa da tela Buscar) | Claude Code |
 
@@ -194,9 +194,61 @@ Observação geral: pedir que a IA teste no emulador e mostre a tela trouxe à t
 - Confirmação pelo `adb shell dumpsys` de que cada dia do lembrete fica agendado (por exemplo, quinta 12/11 e terça 17/11 às 08:00) e de que editar o lembrete cancela os agendamentos antigos.
 - APK de debug e de release compilando.
 
-## Caio
+## Caio: diagramas da Unidade II (casos de uso e classes)
 
-A preencher por Caio.
+### O que foi feito com apoio da IA
+
+- Diagrama de casos de uso, em três diagramas, um por módulo: guia e mapa, impacto e lembretes, conta e sincronização.
+- Diagrama de classes, em três páginas: modelos de domínio, repositórios e serviços, e sincronização com o Firestore.
+
+Esta parte foi feita por mim. Usei o Claude como apoio: ele gerou os primeiros rascunhos dos diagramas e das tabelas a partir do que eu passei, e eu refiz e ajustei tudo, mantendo só o que estava certo. Fui eu que defini o que entra em cada diagrama e o que fica de fora, levei as dúvidas para o grupo e trouxe as respostas, conferi os diagramas com o código da branch `unidade-2` e com o `requisitos.md`, e pedi e apliquei as correções em várias rodadas.
+
+### Como usei a IA
+
+- Para gerar os primeiros rascunhos dos diagramas.
+- Para montar a lista de dúvidas que levei ao grupo.
+- Para comparar os diagramas com o código quando o grupo fazia commits novos, apontando o que mudava.
+
+### Como o resultado está organizado
+
+| Arquivo | Função |
+|---|---|
+| `Docs/diagrama-casos-de-uso.pdf` | Os três diagramas de casos de uso (UC01 a UC17, com os auxiliares UC01a, UC04a e UC05a). |
+| `Docs/diagrama-de-classes.pdf` | Os três diagramas de classes, feitos a partir dos arquivos de `lib/`. |
+
+### Ferramenta dos rascunhos
+
+| Ferramenta | Por que |
+|---|---|
+| PlantUML | Os rascunhos foram gerados nessa ferramenta, que cria o diagrama a partir de um texto. Como os diagramas mudaram várias vezes (revisões do colega, commits novos do grupo), foi mais rápido alterar e gerar de novo do que começar do zero. Tem a notação UML que precisei (include, extend, generalização de atores, interfaces e enumerações). |
+
+### Erros gerados pela IA e como foram resolvidos
+
+| Erro | O que aconteceu | Como foi resolvido |
+|---|---|---|
+| Diagrama ilegível | O primeiro rascunho tinha todos os casos de uso num diagrama só, com linhas cruzadas. | Dividi em três diagramas por módulo. |
+| Funções que não estavam nos requisitos | A IA incluiu histórico de consultas, favoritos e estatística semanal, que aparecem no aditivo, mas não nos requisitos nem no protótipo. | A revisão de um colega apontou. Tirei os três. |
+| Casos de uso repetidos | "Ver contador de impacto" e "Ver quilos reciclados no mês" eram dois casos, mas a tela Impacto mostra o total e o do mês no mesmo cartão. | Juntei os dois no UC10, "Ver impacto da reciclagem (total e do mês)". |
+| Detalhe técnico no diagrama | "Enviar lote com IDs únicos" apareceu como caso de uso, mas é detalhe de implementação. | Removi. A regra continua nos requisitos. |
+| Atores confusos | O ator "Visitante" aparecia em funções que valem para todos, e o usuário logado "herdava" Criar conta. | Criei o ator Usuário, com Visitante e Usuário autenticado como especializações. |
+| Ator "Sistema" | A IA criou o ator "Sistema (automático)" para a notificação e a sincronização, mas o sistema não pode ser ator dele mesmo. | A notificação (UC12) passou a ter como ator externo o serviço de notificações do celular, e a sincronização (UC17) ficou com o usuário autenticado e o Firebase. |
+| Casos que não eram casos de uso | O aviso de falta de conexão aparecia como caso de uso, e "abrir rota" e "ligar" estavam juntos num só. | O aviso virou fluxo alternativo do UC04. Separei em UC05 (abrir rota) e UC05a (ligar). |
+| Ligação a mais | O UC08 (registrar reciclagem) estava ligado direto ao usuário e também estendia a busca. No código, o registro só é feito a partir do resultado da busca (`buscar_screen.dart`). | Tirei a ligação direta. |
+| Campos inventados | O primeiro rascunho do diagrama de classes tinha campos que não existem no código (`ativo` no `Lembrete`; `categoriaId`, `sincronizado` e `usuarioUid` no `RegistroReciclagem`). | Refiz lendo o código da branch `unidade-2`. |
+
+### Prompts que funcionaram melhor
+
+1. **Casos de uso a partir do enunciado.** Começar pelo diagrama de casos de uso com base no PDF do projeto, no documento da Unidade II e nos requisitos do grupo.
+2. **Ler o código antes.** Mandar o zip da branch `unidade-2` e pedir que o diagrama de classes use o repositório como referência, em vez de descrever as classes de memória.
+3. **Dúvidas para o grupo.** Pedir uma lista curta de perguntas para levar ao grupo, como por exemplo, quem sincroniza com o Firebase.
+4. **Atualizar depois de cada commit.** Mandar o zip novo e pedir para comparar com a versão anterior e dizer o que muda nos diagramas.
+
+Mandar o código real deu resultado melhor do que descrever as classes. Foi a causa dos campos inventados no primeiro rascunho.
+
+### Como o resultado foi conferido
+
+- Conferi os casos de uso com os requisitos funcionais do `requisitos.md` e com as regras do documento.
+- Comparei os diagramas de classes com `lib/` da branch `unidade-2` depois de cada commit do grupo.
 
 ## Salatiel: sprint 3 (registro de reciclagem, tela Impacto e lembretes)
  
