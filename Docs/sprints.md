@@ -2,7 +2,7 @@
 
 
 
-**Legenda:** ✅ feito · ⬜ pendente · ➖ fora do escopo
+**Legenda:** ✅ feito · 🟡 em parte · ⬜ pendente · ➖ fora do escopo
 
 ## Visão geral
 
@@ -16,10 +16,10 @@
 | 4 | Guia de compostagem e dica rotativa | RF06 | David | ✅ |
 | 5 | Busca por foto e sincronização com o Firestore | RF08, RNF06 | Hapolo | ✅ |
 | Diagramas | Casos de uso atualizado e diagrama de classes | — | Caio | ✅ |
-| 6 | Polimento, acessibilidade, documentação e entrega | RNF, b-vi | Grupo | ⬜ |
+| 6 | Polimento, acessibilidade, documentação e entrega | RNF, b-vi | Grupo (código: Rafael) | 🟡 código pronto; falta conferência no celular e merge |
 | — | Dados para gestores e configuração por síndicos | RF11, RF12 | — | ➖ |
 
-Verificação de 17/11/2026, na `unidade-2` (commit `a64d054`): `flutter analyze` sem problemas e **138 testes passando**.
+Verificação de 24/11/2026, na `unidade-2`: `flutter analyze` sem problemas e **152 testes passando**, e app rodando no emulador Android 15.
 
 ---
 
@@ -153,28 +153,28 @@ Verificação de 17/11/2026, na `unidade-2` (commit `a64d054`): `flutter analyze
 
 ### Busca por foto e Firestore
 
-- ⬜ **Permissões de câmera e galeria no iOS:** falta `NSCameraUsageDescription` e `NSPhotoLibraryUsageDescription` no `ios/Runner/Info.plist`. Sem elas o app fecha ao abrir a câmera no iPhone
-- ⬜ Publicar as regras do `firestore.rules` no console do Firebase (estar no repositório não basta)
+- ✅ **Permissões de câmera e galeria no iOS:** `NSCameraUsageDescription` e `NSPhotoLibraryUsageDescription` no `ios/Runner/Info.plist` (Rafael, 24/11)
+- ✅ Regras do `firestore.rules` publicadas no console do Firebase
 - ⬜ Testar a busca por foto no celular real com itens comuns (garrafa PET, lata, papelão, casca de fruta) e ampliar o `rotulos.json` se precisar
 - ⬜ Testar a sincronização em dois celulares com a mesma conta e a exclusão da conta
 
 ### Acessibilidade e qualidade
 
 - ⬜ Passar o TalkBack (Android) e o VoiceOver (iOS) nas 4 abas e nas telas de login, conta e compostagem
-- ⬜ Rótulos de leitor de tela (`Semantics`, `tooltip`) nos botões só com ícone (incluindo o novo botão de câmera), no mascote e nos marcadores do mapa
-- ⬜ Testar com a fonte do sistema no máximo em todas as telas, não só nas Categorias
-- ⬜ Conferir o contraste de 4,5:1 nos textos sobre as cores das categorias (`justificativas.md`, seção 6)
-- ⬜ Conferir as áreas de toque de pelo menos 48 dp
-- ⬜ Medir o RNF01 (resultado em até 3 s) e o RNF02 (até 3 interações) e anotar no README
+- ✅ Rótulos de leitor de tela nos botões só com ícone, conferidos pelo `labeledTapTargetGuideline` em todas as telas (`test/acessibilidade_test.dart`). O mascote fica fora do leitor de propósito, porque é enfeite e tudo o que ele "diz" está em texto; os marcadores do mapa usam o nome do ponto, e a lista abaixo do mapa tem os mesmos pontos
+- ✅ Fonte do sistema em 200% em todas as telas, por teste automático e no emulador. Corrigidos: Buscar estourando a altura, nomes das abas quebrando no meio da palavra e textos estourando a largura
+- ✅ Contraste de 4,5:1 conferido pelo `textContrastGuideline`. Corrigido o verde escuro sobre o verde claro (4,35:1 → 5,66:1) no filtro do Mapa e no botão "Ativar"
+- ✅ Áreas de toque de 48 dp conferidas pelo `androidTapTargetGuideline`. Corrigidos os filtros do Mapa, que tinham 36 dp
+- ✅ RNF01 e RNF02 medidos e anotados no README
 - ⬜ Rodar num celular de entrada, ou num emulador com pouca memória (RNF04)
 - ⬜ Teste de ponta a ponta no celular real: buscar, registrar, ver o contador, criar lembrete, receber a notificação, mapa com e sem internet, compostagem, busca por foto, login, sincronização e "Não quero fazer login"
-- ⬜ Testar o build de iOS de novo depois das sprints 3 e 4 e da busca por foto: as notificações mexeram no `AppDelegate.swift`, e o ML Kit exige iOS 15.5 ou mais, mas o projeto ainda está em 15.0 (`IPHONEOS_DEPLOYMENT_TARGET` e `Podfile`)
+- 🟡 iOS mínimo passou para 15.5 no `Podfile` e no `project.pbxproj` (Rafael, 24/11). Falta compilar num Mac com Xcode e testar notificações e câmera no simulador ou no iPhone. Para o login e o Firestore no iOS também falta o `ios/Runner/GoogleService-Info.plist` (sem ele o app abre sem conta, como no Android sem o `google-services.json`)
 
 ### Documentação e entrega
 
 - ✅ Seções de todos os integrantes no `Docs/uso-de-ia.md` (Hapolo, Rafael, Caio, Salatiel e David)
-- ⬜ README: trocar "Unidade II em andamento" pelo status final e anotar as medições de RNF01 e RNF02
-- ⬜ Linha final no CHANGELOG com a entrega da Unidade II
+- ✅ README com o status da Unidade II e as medições de RNF01 e RNF02
+- 🟡 CHANGELOG com a sprint 6 (24/11); falta a linha final da entrega
 - ⬜ Merge do PR #1 (`unidade-2` → `main`)
 
 ---

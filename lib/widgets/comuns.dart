@@ -98,9 +98,11 @@ class RotuloCategoria extends StatelessWidget {
           decoration: BoxDecoration(color: categoria.cor, shape: BoxShape.circle),
         ),
         const SizedBox(width: 6),
-        Text(
-          categoria.nome,
-          style: TextStyle(fontSize: tamanho, fontWeight: FontWeight.w600, color: AppColors.texto),
+        Flexible(
+          child: Text(
+            categoria.nome,
+            style: TextStyle(fontSize: tamanho, fontWeight: FontWeight.w600, color: AppColors.texto),
+          ),
         ),
       ],
     );

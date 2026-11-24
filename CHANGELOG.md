@@ -106,7 +106,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Testes do guia de compostagem e das dicas — David. (`test/compostagem_test.dart`, `test/dicas_falsas.dart`)
 - Seção do David no registro de uso de IA, com a sprint 4 — David. (`Docs/uso-de-ia.md`)
 - Plano das sprints da Unidade II, com o que já foi feito e o que falta para finalizar o projeto — Rafael. (`Docs/sprints.md`)
-- - Registro de uso de IA: seção da Sprint 3 do Salatiel — Salatiel. (`Docs/uso-de-ia.md`)
+- Registro de uso de IA: seção da Sprint 3 do Salatiel — Salatiel. (`Docs/uso-de-ia.md`)
 
 ### Alterado
 
@@ -136,3 +136,19 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Telas de login refeitas para ficar fiéis ao protótipo de alta fidelidade — Hapolo. (`lib/screens/login_screen.dart`, `lib/data/validadores.dart`, `assets/images/google_g.png`)
 - Diagrama de casos de uso atualizado com a busca por foto, a sincronização e a revisão dos atores — Caio. (`Docs/diagrama-casos-de-uso.pdf`)
 - Plano das sprints atualizado: sprint 5 (busca por foto e Firestore) e diagramas concluídos, e novas pendências da sprint 6 (permissões de câmera no iOS, versão mínima do iOS, regras do Firestore e entrega) — Rafael. (`Docs/sprints.md`)
+
+## [24/11/2026]
+
+### Adicionado
+
+- Testes de acessibilidade em todas as telas (Buscar, Mapa, Impacto, Categorias, login, conta e compostagem): área de toque de 48 dp, botões com nome para o leitor de tela, contraste de 4,5:1 e fonte do sistema em 200% sem estourar o layout — Rafael. (`test/acessibilidade_test.dart`)
+
+### Alterado
+
+- iOS: permissões de câmera e galeria para a busca por foto (sem elas o app fechava ao abrir a câmera no iPhone) e versão mínima do iOS de 15.0 para 15.5, exigida pelo ML Kit — Rafael. (`ios/Runner/Info.plist`, `ios/Podfile`, `ios/Runner.xcodeproj/project.pbxproj`)
+- Tela Buscar: cabeçalho, campo e resultado rolam juntos, e a dica do rodapé some com o teclado aberto; com a fonte grande ou o teclado aberto, a tela estourava 13 px — Rafael. (`lib/screens/buscar_screen.dart`)
+- Filtros do Mapa com área de toque de 48 dp (eram 36) e que crescem com a fonte do sistema — Rafael. (`lib/screens/mapa_screen.dart`)
+- Contraste do filtro selecionado do Mapa e do botão "Ativar" da localização: o verde escuro sobre o verde claro dava 4,35:1, agora 5,66:1 — Rafael. (`lib/theme/app_theme.dart`, `lib/screens/mapa_screen.dart`)
+- Nomes das abas numa linha só com a fonte grande (antes quebravam em "Impact-o" e "Catego-ria") — Rafael. (`lib/widgets/barra_navegacao.dart`)
+- Textos que estouravam a tela com a fonte grande: lixeira no resultado da busca e no card de categoria, nome da categoria e botão "Novo lembrete" — Rafael. (`lib/screens/buscar_screen.dart`, `lib/screens/categorias_screen.dart`, `lib/widgets/comuns.dart`, `lib/screens/impacto_screen.dart`)
+- Plano das sprints, README e registro de uso de IA atualizados com a sprint 6 — Rafael. (`Docs/sprints.md`, `README.md`, `Docs/uso-de-ia.md`)

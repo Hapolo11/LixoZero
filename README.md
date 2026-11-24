@@ -34,7 +34,9 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 
 ## Status
 
-Unidade II em andamento. Sprints 1 a 4, Firestore e busca por foto prontos:
+Unidade II com todas as funcionalidades prontas (sprints 1 a 5) e o polimento da sprint 6
+feito no código: acessibilidade, iOS e testes. Falta só a conferência dos dados e o teste
+no celular real (veja `Docs/sprints.md`).
 
 - **Sprint 1:** busca offline "Onde jogo isso?" com o guia de 6 categorias e 81 itens (RF01, RF05)
 - **Sprint 2:** tela de categorias e mapa de ecopontos e cooperativas de Aracaju (RF02, RF07, RF10)
@@ -48,7 +50,21 @@ Unidade II em andamento. Sprints 1 a 4, Firestore e busca por foto prontos:
 - **Busca por foto (RF08):** o botão de câmera da busca sugere o item pela foto, no próprio
   aparelho, e o usuário confirma
 
+- **Sprint 6:** acessibilidade conferida por testes automáticos em todas as telas (área de
+  toque de 48 dp, nomes para o leitor de tela, contraste de 4,5:1 e fonte em 200%), permissões
+  de câmera e galeria no iOS e iOS mínimo 15.5
+
 Também tem login opcional com Firebase. Veja o [Changelog](CHANGELOG.md).
+
+### Medições (RNF01 e RNF02)
+
+Medidas em 24/11/2026 no emulador Android 15 (Pixel) e nos testes automáticos:
+
+- **RNF01 (resultado em até 3 s):** a busca roda em memória e leva menos de 50 ms por consulta
+  no guia inteiro (`test/busca_test.dart`). No emulador, o resultado aparece assim que se
+  toca em Buscar, inclusive com erro de digitação ("pilhs" encontra Pilha).
+- **RNF02 (até 3 interações):** tocar no campo, digitar e tocar em Buscar. As "Dúvidas comuns"
+  e as sugestões da busca por foto resolvem em 1 toque.
 
 ## Como rodar
 
@@ -96,7 +112,7 @@ acrescente ali o rótulo que o ML Kit devolveu.
 | `lib/services/` | Localização, login e Firestore (Firebase), notificações dos lembretes, câmera e reconhecimento de imagem |
 | `lib/state/` | Navegação, conexão, login, sincronização com o Firestore, registros de reciclagem, lembretes e dica do rodapé |
 | `lib/screens/` | Telas Buscar, Mapa, Impacto e Categorias, mais login, conta e compostagem |
-| `test/` | Testes da busca, pontos de coleta, login, sincronização, busca por foto, reciclagem, contador, lembretes, compostagem e dicas |
+| `test/` | Testes da busca, pontos de coleta, login, sincronização, busca por foto, reciclagem, contador, lembretes, compostagem, dicas e acessibilidade |
 
 Para incluir ou corrigir um resíduo, edite `assets/data/guia.json` e rode `flutter test`,
 que confere se todo item tem categoria, destino e peso. O mesmo vale para o guia de

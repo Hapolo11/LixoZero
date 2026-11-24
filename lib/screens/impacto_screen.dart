@@ -269,7 +269,13 @@ class BotaoTracejado extends StatelessWidget {
                 children: [
                   const Icon(Icons.add, size: 20, color: AppColors.texto),
                   const SizedBox(width: 6),
-                  Text(texto, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.texto)),
+                  Flexible(
+                    child: Text(
+                      texto,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.texto),
+                    ),
+                  ),
                 ],
               ),
             ),

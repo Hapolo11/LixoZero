@@ -72,7 +72,18 @@ class _Item extends StatelessWidget {
             children: [
               Icon(icone, size: 22, color: cor),
               const SizedBox(height: 2),
-              Text(nome, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: cor)),
+              // Com a fonte do sistema no máximo, o nome diminui para caber
+              // inteiro em vez de quebrar no meio ("Impact-o"). O leitor de tela
+              // usa o rótulo do Semantics acima.
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  nome,
+                  maxLines: 1,
+                  softWrap: false,
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: cor),
+                ),
+              ),
             ],
           ),
         ),

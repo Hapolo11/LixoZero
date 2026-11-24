@@ -5,6 +5,9 @@ class AppColors {
   static const verdeEscuro = Color(0xFF007F3D);
   static const verdeMedio = Color(0xFF43AD7A);
   static const verdeClaro = Color(0xFFD6F4DD);
+  /// Verde de texto sobre o verdeClaro: o verdeEscuro ali dá 4,35:1, abaixo
+  /// dos 4,5:1 pedidos para texto normal (justificativas.md, seção 6).
+  static const verdeSobreClaro = Color(0xFF006B33);
   static const fundo = Color(0xFFF6FCF5);
   static const branco = Colors.white;
   static const texto = Color(0xFF1A1A1A);

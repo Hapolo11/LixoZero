@@ -91,11 +91,12 @@ class _MapaScreenState extends State<MapaScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const Cabecalho(titulo: 'Ecopontos próximos', pose: Pose.mapa),
-        SizedBox(
-          height: 48,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+        // Rolagem sem altura fixa: os filtros mantêm a área de toque de 48 dp
+        // e crescem junto com a fonte do sistema.
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
             children: [
               _Filtro(nome: 'Todos', ativo: filtro == null, aoTocar: () => navegacao.filtrarMapa(null)),
               for (final id in _filtros)
@@ -194,7 +195,7 @@ class _Filtro extends StatelessWidget {
         backgroundColor: AppColors.branco,
         selectedColor: AppColors.verdeClaro,
         side: BorderSide(color: ativo ? AppColors.verdeEscuro : AppColors.borda),
-        labelStyle: TextStyle(fontWeight: FontWeight.w600, color: ativo ? AppColors.verdeEscuro : AppColors.texto),
+        labelStyle: TextStyle(fontWeight: FontWeight.w600, color: ativo ? AppColors.verdeSobreClaro : AppColors.texto),
       ),
     );
   }
@@ -262,6 +263,7 @@ class _AvisoLocalizacao extends StatelessWidget {
           ),
           TextButton(
             onPressed: aoTocar,
+            style: TextButton.styleFrom(foregroundColor: AppColors.verdeSobreClaro),
             child: Text(falha == FalhaLocalizacao.semSinal ? 'Tentar de novo' : 'Ativar'),
           ),
         ],

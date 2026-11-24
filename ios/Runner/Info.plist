@@ -4,6 +4,10 @@
 <dict>
 	<key>MAPS_API_KEY</key>
 	<string>$(MAPS_API_KEY)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>O LixoZero usa a câmera para tirar uma foto do resíduo e sugerir onde descartá-lo. A foto é analisada no próprio aparelho e não é enviada para lugar nenhum.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>O LixoZero abre a galeria para você escolher uma foto do resíduo e receber a sugestão de descarte. A foto é analisada no próprio aparelho e não é enviada para lugar nenhum.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>O LixoZero usa sua localização só no aparelho, para mostrar os ecopontos mais próximos.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>

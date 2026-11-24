@@ -9,7 +9,7 @@ A IA foi usada como ferramenta de apoio. O código gerado foi lido, testado no c
 | Integrante | Parte do projeto | Ferramenta de IA |
 |---|---|---|
 | Hapolo | Login opcional com Firebase, tela de conta, ícone do app, Firestore (sincronização) e busca por foto | Claude Code |
-| Rafael | Sprints 1, 2 e 3 (busca, categorias, mapa, contador de impacto e lembretes) | Claude Code |
+| Rafael | Sprints 1, 2 e 3 (busca, categorias, mapa, contador de impacto e lembretes) e polimento da sprint 6 (acessibilidade e iOS) | Claude Code |
 | Caio | Diagramas de casos de uso e classes | Claude Code |
 | Salatiel | Sprint 3 (registro de reciclagem, tela Impacto e lembretes de coleta) | Agente do Antigravity e Claude |
 | David | Sprint 4 (guia de compostagem e dica rotativa da tela Buscar) | Claude Code |
@@ -97,7 +97,7 @@ Descrever o sintoma que aparece na tela e fornecer o log do aparelho deu resulta
 - Teste no celular real: criar conta, entrar, sair, editar nome, senha errada, recuperar senha, excluir conta, "Não quero fazer login" e login com Google.
 - A conferir no celular: a sincronização com o Firestore real e o reconhecimento de fotos de resíduos de verdade, que dependem de criar o banco e de ajustar a tabela `rotulos.json` com fotos reais.
 
-## Rafael: sprints 1, 2 e 3 (busca, categorias, mapa e tela Impacto)
+## Rafael: sprints 1, 2 e 3 (busca, categorias, mapa e tela Impacto) e sprint 6
 
 ### O que foi feito com apoio da IA
 
@@ -193,6 +193,25 @@ Observação geral: pedir que a IA teste no emulador e mostre a tela trouxe à t
 - Sprint 3 testada no emulador Android (Android 15): registrar reciclagem e ver o contador subir, criar, editar e apagar lembretes, aceitar a permissão de notificação e esperar a notificação "Hoje tem coleta seletiva" chegar no minuto marcado.
 - Confirmação pelo `adb shell dumpsys` de que cada dia do lembrete fica agendado (por exemplo, quinta 12/11 e terça 17/11 às 08:00) e de que editar o lembrete cancela os agendamentos antigos.
 - APK de debug e de release compilando.
+
+### Sprint 6: acessibilidade e iOS (24/11/2026)
+
+**O que foi feito com apoio da IA:** permissões de câmera e galeria no iOS, iOS mínimo 15.5 para o ML Kit e um teste de acessibilidade que monta o app inteiro e confere cada tela com as regras do próprio Flutter: `androidTapTargetGuideline` e `iOSTapTargetGuideline` (48 dp), `labeledTapTargetGuideline` (todo botão com nome para o leitor de tela) e `textContrastGuideline` (4,5:1), além da fonte do sistema em 200%.
+
+**O que o teste encontrou e foi corrigido:**
+
+- Filtros do Mapa com 36 dp de altura, presos numa faixa de altura fixa.
+- Verde escuro sobre verde claro com 4,35:1 no filtro selecionado e no botão "Ativar".
+- Tela Buscar estourando 13 px de altura com a fonte grande; o mesmo aconteceria com o teclado aberto em celular pequeno. O cabeçalho, o campo e o resultado passaram a rolar juntos.
+- Textos estourando a largura com a fonte grande (lixeira, nome da categoria e "Novo lembrete").
+
+**Erro que só apareceu no emulador:** com a fonte em 200%, os nomes das abas quebravam no meio da palavra ("Impact-o"). Como o texto quebra sem estourar, o teste não acusava nada; foi preciso acrescentar uma verificação específica, que falha sem a correção e passa com ela.
+
+**Erro da IA:** ao formatar o código com o `dart format`, a IA reformatou 34 arquivos, inclusive código dos colegas que ela não tinha alterado. A formatação foi desfeita nesses arquivos para o histórico mostrar só as mudanças reais.
+
+**O que ficou para o grupo:** os horários das cooperativas e os endereços sem número só se confirmam ligando ou indo ao local, então a IA não mexeu nesses dados. O build de iOS não foi compilado porque o Mac usado não tem Xcode.
+
+**Como foi conferido:** `flutter analyze` sem problemas, 152 testes passando e o app rodando no emulador Android 15, com fonte normal e em 200%: busca com erro de digitação, Mapa e Impacto.
 
 ## Caio: diagramas da Unidade II (casos de uso e classes)
 

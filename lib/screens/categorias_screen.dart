@@ -66,7 +66,12 @@ class _CartaoCategoria extends StatelessWidget {
                   children: [
                     Icon(Icons.delete, size: 20, color: categoria.cor),
                     const SizedBox(width: 4),
-                    Text(categoria.lixeira, style: const TextStyle(fontWeight: FontWeight.w600, color: AppColors.texto)),
+                    Flexible(
+                      child: Text(
+                        categoria.lixeira,
+                        style: const TextStyle(fontWeight: FontWeight.w600, color: AppColors.texto),
+                      ),
+                    ),
                   ],
                 ),
               ],

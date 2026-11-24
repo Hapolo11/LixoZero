@@ -78,38 +78,49 @@ class _BuscarScreenState extends State<BuscarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Cabeçalho, campo e resultado rolam juntos: com a fonte do sistema no
+    // máximo ou com o teclado aberto, nada fica cortado (RNF12).
+    final tecladoAberto = MediaQuery.viewInsetsOf(context).bottom > 0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Cabecalho(titulo: 'Onde jogo isso?', pose: Pose.acenando),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-          child: Row(
+        Expanded(
+          child: ListView(
+            padding: const EdgeInsets.only(bottom: 16),
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _campo,
-                  focusNode: _foco,
-                  textInputAction: TextInputAction.search,
-                  onSubmitted: _buscar,
-                  decoration: InputDecoration(
-                    hintText: 'Digite o resíduo',
-                    prefixIcon: const Icon(Icons.search, color: AppColors.textoApoio),
-                    suffixIcon: IconButton(
-                      tooltip: 'Buscar por foto',
-                      icon: const Icon(Icons.photo_camera_outlined, color: AppColors.verdeEscuro),
-                      onPressed: _buscarPorFoto,
+              const Cabecalho(titulo: 'Onde jogo isso?', pose: Pose.acenando),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _campo,
+                        focusNode: _foco,
+                        textInputAction: TextInputAction.search,
+                        onSubmitted: _buscar,
+                        decoration: InputDecoration(
+                          hintText: 'Digite o resíduo',
+                          prefixIcon: const Icon(Icons.search, color: AppColors.textoApoio),
+                          suffixIcon: IconButton(
+                            tooltip: 'Buscar por foto',
+                            icon: const Icon(Icons.photo_camera_outlined, color: AppColors.verdeEscuro),
+                            onPressed: _buscarPorFoto,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 8),
+                    FilledButton(onPressed: () => _buscar(_campo.text), child: const Text('Buscar')),
+                  ],
                 ),
               ),
-              const SizedBox(width: 8),
-              FilledButton(onPressed: () => _buscar(_campo.text), child: const Text('Buscar')),
+              _conteudo(),
             ],
           ),
         ),
-        Expanded(child: _conteudo()),
-        const BarraDica(),
+        // Com o teclado aberto, a dica sai do caminho para sobrar espaço.
+        if (!tecladoAberto) const BarraDica(),
       ],
     );
   }
@@ -120,18 +131,21 @@ class _BuscarScreenState extends State<BuscarScreen> {
     if (resultados.isEmpty) return _NaoEncontrado(busca: _ultimaBusca);
 
     final guia = context.read<GuiaRepository>();
-    return ListView.separated(
-      padding: const EdgeInsets.fromLTRB(20, 4, 20, 16),
-      itemCount: resultados.length,
-      separatorBuilder: (_, _) => const SizedBox(height: 12),
-      itemBuilder: (context, i) {
-        final item = resultados[i];
-        return CartaoResultado(
-          item: item,
-          categoria: guia.categoria(item.categoriaId),
-          destino: guia.destino(item.destino),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          for (var i = 0; i < resultados.length; i++) ...[
+            if (i > 0) const SizedBox(height: 12),
+            CartaoResultado(
+              item: resultados[i],
+              categoria: guia.categoria(resultados[i].categoriaId),
+              destino: guia.destino(resultados[i].destino),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }
@@ -169,7 +183,7 @@ class CartaoResultado extends StatelessWidget {
               children: [
                 Icon(categoria.icone, size: 16, color: categoria.cor),
                 const SizedBox(width: 4),
-                Text(categoria.lixeira, style: estilos.bodyMedium),
+                Flexible(child: Text(categoria.lixeira, style: estilos.bodyMedium)),
               ],
             ),
             const SizedBox(height: 12),
@@ -308,33 +322,36 @@ class _Inicio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
-      children: [
-        const Center(child: Mascote(Pose.busca, tamanho: 120)),
-        const SizedBox(height: 12),
-        Text(
-          'Digite o nome do resíduo e descubra onde ele vai. Funciona mesmo sem internet.',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-        const SizedBox(height: 16),
-        Text('Dúvidas comuns', style: Theme.of(context).textTheme.labelSmall),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final s in sugestoes)
-              ActionChip(
-                label: Text(s),
-                onPressed: () => aoEscolher(s),
-                backgroundColor: AppColors.branco,
-                side: const BorderSide(color: AppColors.verdeMedio),
-              ),
-          ],
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Center(child: Mascote(Pose.busca, tamanho: 120)),
+          const SizedBox(height: 12),
+          Text(
+            'Digite o nome do resíduo e descubra onde ele vai. Funciona mesmo sem internet.',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          const SizedBox(height: 16),
+          Text('Dúvidas comuns', style: Theme.of(context).textTheme.labelSmall),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final s in sugestoes)
+                ActionChip(
+                  label: Text(s),
+                  onPressed: () => aoEscolher(s),
+                  backgroundColor: AppColors.branco,
+                  side: const BorderSide(color: AppColors.verdeMedio),
+                ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -347,26 +364,29 @@ class _NaoEncontrado extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final estilos = Theme.of(context).textTheme;
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
-      children: [
-        const Center(child: Mascote(Pose.busca, tamanho: 110)),
-        const SizedBox(height: 12),
-        Text('Ainda não conheço "$busca".', textAlign: TextAlign.center, style: estilos.titleMedium),
-        const SizedBox(height: 6),
-        Text(
-          'Tente outro nome (por exemplo, "garrafa" em vez da marca) ou veja os exemplos de cada categoria.',
-          textAlign: TextAlign.center,
-          style: estilos.bodyMedium,
-        ),
-        const SizedBox(height: 16),
-        Center(
-          child: OutlinedButton(
-            onPressed: () => context.read<NavegacaoModel>().irPara(Aba.categorias),
-            child: const Text('Ver categorias'),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Center(child: Mascote(Pose.busca, tamanho: 110)),
+          const SizedBox(height: 12),
+          Text('Ainda não conheço "$busca".', textAlign: TextAlign.center, style: estilos.titleMedium),
+          const SizedBox(height: 6),
+          Text(
+            'Tente outro nome (por exemplo, "garrafa" em vez da marca) ou veja os exemplos de cada categoria.',
+            textAlign: TextAlign.center,
+            style: estilos.bodyMedium,
           ),
-        ),
-      ],
+          const SizedBox(height: 16),
+          Center(
+            child: OutlinedButton(
+              onPressed: () => context.read<NavegacaoModel>().irPara(Aba.categorias),
+              child: const Text('Ver categorias'),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
