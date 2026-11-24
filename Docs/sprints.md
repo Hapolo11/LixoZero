@@ -16,10 +16,10 @@
 | 4 | Guia de compostagem e dica rotativa | RF06 | David | ✅ |
 | 5 | Busca por foto e sincronização com o Firestore | RF08, RNF06 | Hapolo | ✅ |
 | Diagramas | Casos de uso atualizado e diagrama de classes | — | Caio | ✅ |
-| 6 | Polimento, acessibilidade, documentação e entrega | RNF, b-vi | Grupo (código: Rafael) | 🟡 código pronto; falta conferência no celular e merge |
+| 6 | Polimento, acessibilidade, documentação e entrega | RNF, b-vi | Grupo (código: Rafael) | 🟡 código pronto e testado no iOS; falta conferência dos dados e no celular Android |
 | — | Dados para gestores e configuração por síndicos | RF11, RF12 | — | ➖ |
 
-Verificação de 24/11/2026, na `unidade-2`: `flutter analyze` sem problemas e **152 testes passando**, e app rodando no emulador Android 15.
+Verificação de 24/11/2026, na `unidade-2` e na `main`: `flutter analyze` sem problemas, **152 testes passando**, app rodando no emulador Android 15 e no iOS.
 
 ---
 
@@ -168,14 +168,14 @@ Verificação de 24/11/2026, na `unidade-2`: `flutter analyze` sem problemas e *
 - ✅ RNF01 e RNF02 medidos e anotados no README
 - ⬜ Rodar num celular de entrada, ou num emulador com pouca memória (RNF04)
 - ⬜ Teste de ponta a ponta no celular real: buscar, registrar, ver o contador, criar lembrete, receber a notificação, mapa com e sem internet, compostagem, busca por foto, login, sincronização e "Não quero fazer login"
-- 🟡 iOS mínimo passou para 15.5 no `Podfile` e no `project.pbxproj` (Rafael, 24/11). Falta compilar num Mac com Xcode e testar notificações e câmera no simulador ou no iPhone. Para o login e o Firestore no iOS também falta o `ios/Runner/GoogleService-Info.plist` (sem ele o app abre sem conta, como no Android sem o `google-services.json`)
+- ✅ iOS mínimo 15.5 no `Podfile` e no `project.pbxproj`, e app testado e rodando no iOS (Rafael, 24/11). A entrega vai sem o `ios/Runner/GoogleService-Info.plist`: no iOS o login e o Firestore ficam indisponíveis, e o app funciona inteiro como visitante, com os dados só no aparelho (RNF06)
 
 ### Documentação e entrega
 
 - ✅ Seções de todos os integrantes no `Docs/uso-de-ia.md` (Hapolo, Rafael, Caio, Salatiel e David)
 - ✅ README com o status da Unidade II e as medições de RNF01 e RNF02
 - 🟡 CHANGELOG com a sprint 6 (24/11); falta a linha final da entrega
-- ⬜ Merge do PR #1 (`unidade-2` → `main`)
+- ✅ Merge do PR #1 (`unidade-2` → `main`): a `main` recebeu a `unidade-2` em 24/11
 
 ---
 

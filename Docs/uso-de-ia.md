@@ -209,9 +209,9 @@ Observação geral: pedir que a IA teste no emulador e mostre a tela trouxe à t
 
 **Erro da IA:** ao formatar o código com o `dart format`, a IA reformatou 34 arquivos, inclusive código dos colegas que ela não tinha alterado. A formatação foi desfeita nesses arquivos para o histórico mostrar só as mudanças reais.
 
-**O que ficou para o grupo:** os horários das cooperativas e os endereços sem número só se confirmam ligando ou indo ao local, então a IA não mexeu nesses dados. O build de iOS não foi compilado porque o Mac usado não tem Xcode.
+**O que ficou para o grupo:** os horários das cooperativas e os endereços sem número só se confirmam ligando ou indo ao local, então a IA não mexeu nesses dados. O build de iOS não foi compilado pela IA porque o Mac usado não tem Xcode; o Rafael testou o app no iOS e ele está rodando. A entrega vai sem o `GoogleService-Info.plist`, então no iOS o app funciona como visitante, sem login e sem sincronização.
 
-**Como foi conferido:** `flutter analyze` sem problemas, 152 testes passando e o app rodando no emulador Android 15, com fonte normal e em 200%: busca com erro de digitação, Mapa e Impacto.
+**Como foi conferido:** `flutter analyze` sem problemas, 152 testes passando e o app rodando no emulador Android 15, com fonte normal e em 200%: busca com erro de digitação, Mapa e Impacto. O Rafael testou no iOS.
 
 ## Caio: diagramas da Unidade II (casos de uso e classes)
 

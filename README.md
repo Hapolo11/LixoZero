@@ -35,8 +35,8 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 ## Status
 
 Unidade II com todas as funcionalidades prontas (sprints 1 a 5) e o polimento da sprint 6
-feito no código: acessibilidade, iOS e testes. Falta só a conferência dos dados e o teste
-no celular real (veja `Docs/sprints.md`).
+feito no código: acessibilidade, iOS e testes. Testado no emulador Android e no iOS. Falta só
+a conferência dos dados e o teste num celular Android real (veja `Docs/sprints.md`).
 
 - **Sprint 1:** busca offline "Onde jogo isso?" com o guia de 6 categorias e 81 itens (RF01, RF05)
 - **Sprint 2:** tela de categorias e mapa de ecopontos e cooperativas de Aracaju (RF02, RF07, RF10)
@@ -96,6 +96,11 @@ no console do Firebase crie o Firestore Database e publique o conteúdo de `fire
 (Firestore Database > Regras). Não use o "modo de teste", que deixa o banco aberto para
 qualquer pessoa. Sem o Firestore, o app continua funcionando e a tela Conta avisa que não
 foi possível sincronizar.
+
+No iOS, a entrega vai sem o `ios/Runner/GoogleService-Info.plist`: o app abre e funciona
+inteiro como visitante (busca, mapa, impacto, lembretes, compostagem e busca por foto), só
+sem login e sem sincronização. Para ligar o Firebase no iOS, baixe o arquivo no console do
+Firebase (app iOS com o bundle id do projeto) e coloque em `ios/Runner/`.
 
 **Busca por foto:** o reconhecimento é do ML Kit e roda sem internet. A tabela que liga os
 rótulos dele aos itens do guia é `assets/data/rotulos.json`. Se uma foto não for reconhecida,

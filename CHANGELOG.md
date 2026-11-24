@@ -152,3 +152,4 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Nomes das abas numa linha só com a fonte grande (antes quebravam em "Impact-o" e "Catego-ria") — Rafael. (`lib/widgets/barra_navegacao.dart`)
 - Textos que estouravam a tela com a fonte grande: lixeira no resultado da busca e no card de categoria, nome da categoria e botão "Novo lembrete" — Rafael. (`lib/screens/buscar_screen.dart`, `lib/screens/categorias_screen.dart`, `lib/widgets/comuns.dart`, `lib/screens/impacto_screen.dart`)
 - Plano das sprints, README e registro de uso de IA atualizados com a sprint 6 — Rafael. (`Docs/sprints.md`, `README.md`, `Docs/uso-de-ia.md`)
+- App testado e rodando no iOS; a entrega vai sem o `GoogleService-Info.plist`, então no iOS o app funciona como visitante, sem login e sem sincronização. Merge da `unidade-2` na `main` registrado no plano — Rafael. (`Docs/sprints.md`, `README.md`, `Docs/uso-de-ia.md`)
