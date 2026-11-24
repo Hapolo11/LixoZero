@@ -11,7 +11,7 @@ A IA foi usada como ferramenta de apoio. O código gerado foi lido, testado no c
 | Hapolo | Login opcional com Firebase, tela de conta, ícone do app, Firestore (sincronização) e busca por foto | Claude Code |
 | Rafael | Sprints 1, 2 e 3 (busca, categorias, mapa, contador de impacto e lembretes) e polimento da sprint 6 (acessibilidade e iOS) | Claude Code |
 | Caio | Diagramas de casos de uso e classes | Claude Code |
-| Salatiel | Sprint 3 (registro de reciclagem, tela Impacto e lembretes de coleta) | Agente do Antigravity e Claude |
+| Salatiel | Sprint 3 (registro de reciclagem, tela Impacto e lembretes de coleta) e sprint 6 (mascotes, versão web e modelagem do banco) | Agente do Antigravity, Claude e Claude Code |
 | David | Sprint 4 (guia de compostagem e dica rotativa da tela Buscar) | Claude Code |
 
 ## Hapolo: login opcional, conta, ícone, Firestore e busca por foto
@@ -326,6 +326,46 @@ Observação geral: ler o `git diff` e o `git status` antes de cada commit achou
 - RF09 testado no Chrome (`flutter run -d chrome`): busca por "Pilha", botão "Registrar reciclagem" no resultado, aviso "Registrado! +0,02 kg" e diálogo "Ajustar peso" abrindo com o peso atual.
 - `git status` e `git diff` conferidos antes do commit, para só entrarem arquivos da sprint e nenhuma linha antiga do CHANGELOG ser alterada.
 - O erro `Cannot read properties of undefined (reading 'maps')` do console no Chrome vem da tela do mapa na versão web e não tem relação com a sprint.
+
+### Sprint 6: mascotes, versão web e modelagem do banco (24/11/2026)
+
+**O que foi feito com apoio da IA (Claude Code):**
+
+- Mascotes ilustrados nos cards da tela Categorias. As imagens e o widget `MascoteCategoria` vieram num pacote com instruções (`COMO_USAR.md`). A IA copiou os arquivos para o projeto, registrou `assets/mascotes/` no `pubspec.yaml` e pôs o mascote à direita da lista de exemplos, num `Row` alinhado embaixo, com a lista dentro de um `Expanded`.
+- Versão web (`web/`) para testar o app no navegador, com o script do Google Maps no `web/index.html`. Era isso que causava o erro `reading 'maps'` anotado na sprint 3: sem o script, a tela do mapa quebrava no Chrome.
+- Modelagem do banco de dados (itens b-iii e b-iv) em `Docs/modelagem-banco.md`. O documento foi entregue em PDF e convertido para Markdown, com os diagramas em Mermaid, e cada tabela foi conferida com o código (`nuvem_repositorio.dart`, os models e o `sincronizacao_model.dart`).
+- Plano das sprints e CHANGELOG atualizados, sem alterar o que os colegas escreveram.
+
+| Arquivo | Função |
+|---|---|
+| `lib/widgets/mascote_categoria.dart` | Mostra o mascote da categoria pelo nome, com ou sem acento, e não quebra o card se a imagem faltar. |
+| `assets/mascotes/` | Uma imagem por categoria (plástico, papel, vidro, metal, orgânico e perigoso), que vai dentro do app e funciona offline (RNF03). |
+| `lib/screens/categorias_screen.dart` | Card da categoria com a lista de exemplos e o mascote lado a lado. |
+| `web/` | Versão para navegador, com nome, descrição e cores do LixoZero e o script do Google Maps. |
+| `Docs/modelagem-banco.md` | Coleções e documentos do Firestore, mapeamento das classes Dart, operações do `NuvemRepositorio`, sincronização e regras de segurança. |
+
+**Erros e problemas, e como foram resolvidos:**
+
+| Erro | O que aconteceu | Como foi resolvido |
+|---|---|---|
+| Aviso no código do pacote | O widget do pacote usava `(_, __, ___)` no `errorBuilder`, e o `flutter analyze` acusou `unnecessary_underscores`. | Trocado por `(_, _, _)`, o mesmo estilo do resto do projeto. |
+| Pacote extraído fora do projeto | O zip foi extraído ao lado da pasta do projeto, e não dentro dela. | A IA procurou os arquivos, leu o conteúdo antes de copiar e copiou para os lugares certos. |
+| Colega mudou o código durante o trabalho | O Rafael subiu commits que mexiam na mesma tela e no CHANGELOG. | O trabalho foi guardado num `git stash`, o `git pull` foi feito e a implementação foi refeita por cima do código novo, mantendo a correção dele na tela. |
+| Modelagem diferente do código | A seção de regras de segurança do PDF mostrava uma regra genérica, mas o `firestore.rules` real separa registros e lembretes, valida campos e tipos e nega todo o resto. | A seção passou a mostrar as regras reais, com um resumo do que cada uma garante. |
+| Mensagem de commit malformada | O primeiro commit dos mascotes ficou sem a linha em branco depois do título, e o GitHub mostrava a mensagem inteira como título. | A mensagem foi corrigida antes de qualquer colega usar o commit. |
+| Arquivos alterados pelo `flutter create` | Ao gerar a pasta `web/`, o Flutter também mudou o `.metadata` e o `analysis_options.yaml` e criou um `test/widget_test.dart`. | O `git status` mostrou as mudanças, que foram desfeitas; só a `web/` entrou no commit. |
+| `pubspec.lock` com versões novas | O Flutter mais novo deste computador atualizava Firebase, Firestore e ML Kit no `pubspec.lock`. | O arquivo ficou fora dos commits, para não trocar as versões que o grupo testou no Android e no iOS. |
+| Conflito no CHANGELOG | No merge da `unidade-2` na `main`, as linhas dos mascotes e da modelagem caíram no mesmo ponto. | As duas linhas foram mantidas, e os testes rodaram de novo antes do push. |
+| Testes travando no computador | O `flutter test` falhava antes de rodar por causa do "ó" de `Repositórios` no caminho, que o compilador de shaders do Flutter não aceita. | Os testes e o app rodaram a partir de uma unidade temporária sem acento (`subst X:`). |
+
+**Prompts que funcionaram melhor:**
+
+1. **Passo a passo do pacote dos mascotes.** Onde ficam os arquivos, o que registrar no `pubspec.yaml`, como encaixar o widget no card (`Row` alinhado embaixo e lista no `Expanded`), a entrada do CHANGELOG seguindo o `COMO_USAR.md` e rodar `flutter analyze` e `flutter test` no final.
+2. **"Dê um git pull e refaça a implementação."** Pedir o pull antes de commitar evitou sobrescrever o que o colega tinha feito na mesma tela.
+3. **Conferir a modelagem com o código antes de subir.** Foi o que achou a diferença nas regras de segurança.
+4. **Atualizar as sprints sem tirar ninguém.** Acrescentar o nome junto do colega na sprint que já existia, em vez de criar outra.
+
+**Como foi conferido:** `flutter analyze` sem avisos novos e 152 testes passando, inclusive os de acessibilidade com fonte em 200% na tela Categorias. O app foi aberto no Chrome e os mascotes, a tela Categorias e o mapa foram conferidos. O `git diff` e o `git status` foram lidos antes de cada commit.
 
 ## David: sprint 4 (guia de compostagem e dica rotativa)
 
