@@ -28,6 +28,7 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 - [Estudo de caso](Docs/estudo-de-caso.md)
 - [Pesquisa](Docs/pesquisa.md), [Benchmark](Docs/benchmark.md) e [Personas](Docs/personas.md)
 - [Requisitos](Docs/requisitos.md)
+- [Modelagem do banco de dados](Docs/modelagem-banco.md)
 - [Justificativas](Docs/justificativas.md)
 - [Plano das sprints](Docs/sprints.md)
 - [Changelog](CHANGELOG.md)
