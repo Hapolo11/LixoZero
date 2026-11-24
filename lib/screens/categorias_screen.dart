@@ -6,6 +6,7 @@ import '../models/categoria.dart';
 import '../state/navegacao_model.dart';
 import '../theme/app_theme.dart';
 import '../widgets/comuns.dart';
+import '../widgets/mascote_categoria.dart';
 import 'compostagem_screen.dart';
 
 /// Todas as categorias numa rolagem só, para dar para comparar sem ficar tocando.
@@ -81,18 +82,27 @@ class _CartaoCategoria extends StatelessWidget {
             const SizedBox(height: 10),
             Text('EXEMPLOS (toque para ver como descartar)', style: estilos.labelSmall),
             const SizedBox(height: 6),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                for (final exemplo in categoria.exemplos)
-                  ActionChip(
-                    avatar: Icon(categoria.icone, size: 16, color: categoria.cor),
-                    label: Text(exemplo),
-                    backgroundColor: AppColors.fundo,
-                    side: const BorderSide(color: AppColors.borda),
-                    onPressed: () => context.read<NavegacaoModel>().buscar(exemplo),
+                Expanded(
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      for (final exemplo in categoria.exemplos)
+                        ActionChip(
+                          avatar: Icon(categoria.icone, size: 16, color: categoria.cor),
+                          label: Text(exemplo),
+                          backgroundColor: AppColors.fundo,
+                          side: const BorderSide(color: AppColors.borda),
+                          onPressed: () => context.read<NavegacaoModel>().buscar(exemplo),
+                        ),
+                    ],
                   ),
+                ),
+                const SizedBox(width: 8),
+                MascoteCategoria(categoria: categoria.nome, tamanho: 110),
               ],
             ),
             // RF06: a compostagem fica dentro do Orgânico, sem aba nova (RNF10).

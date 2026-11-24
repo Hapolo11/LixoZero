@@ -142,6 +142,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 ### Adicionado
 
 - Testes de acessibilidade em todas as telas (Buscar, Mapa, Impacto, Categorias, login, conta e compostagem): área de toque de 48 dp, botões com nome para o leitor de tela, contraste de 4,5:1 e fonte do sistema em 200% sem estourar o layout — Rafael. (`test/acessibilidade_test.dart`)
+- Mascotes ilustrados nos cards da tela Categorias — Salatiel. (`assets/mascotes/`, `lib/widgets/mascote_categoria.dart`, `pubspec.yaml`, `lib/screens/categorias_screen.dart`)
 
 ### Alterado
 
