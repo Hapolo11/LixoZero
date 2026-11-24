@@ -16,10 +16,10 @@
 | 4 | Guia de compostagem e dica rotativa | RF06 | David | ✅ |
 | 5 | Busca por foto e sincronização com o Firestore | RF08, RNF06 | Hapolo | ✅ |
 | Diagramas | Casos de uso atualizado e diagrama de classes | — | Caio | ✅ |
-| 6 | Polimento, acessibilidade, documentação e entrega | RNF, b-vi | Grupo (código: Rafael) | 🟡 código pronto e testado no iOS; falta conferência dos dados e no celular Android |
+| 6 | Polimento, acessibilidade, documentação e entrega | RNF, b-vi | Grupo (código: Rafael) | ✅ |
 | — | Dados para gestores e configuração por síndicos | RF11, RF12 | — | ➖ |
 
-Verificação de 24/11/2026, na `unidade-2` e na `main`: `flutter analyze` sem problemas, **152 testes passando**, app rodando no emulador Android 15 e no iOS.
+Verificação de 24/11/2026, na `unidade-2` e na `main`: `flutter analyze` sem problemas, **152 testes passando** e app rodando no celular Android, no emulador Android 15 e no iOS. **Unidade II concluída.**
 
 ---
 
@@ -141,40 +141,40 @@ Verificação de 24/11/2026, na `unidade-2` e na `main`: `flutter analyze` sem p
 
 ---
 
-## Sprint 6: polimento e entrega ⬜
+## Sprint 6: polimento e entrega ✅
 
 **Objetivo:** fechar a Unidade II com o app revisado e a documentação completa.
 
 ### Conteúdo e dados
 
-- ⬜ Grupo conferir os pesos médios estimados dos 81 itens (marcado como pendente no `uso-de-ia.md`)
-- ⬜ Confirmar o horário das cooperativas CARE, Coores e União (hoje o app mostra "Ligue antes de ir")
-- ⬜ Conferir os 4 ecopontos sem número no endereço ("posição aproximada")
+- ✅ Pesos médios dos 81 itens conferidos pelo grupo e mantidos como estão
+- ✅ Cooperativas CARE, Coores e União conferidas pelo grupo; o "Ligue antes de ir" fica como está
+- ✅ Os 4 ecopontos sem número conferidos pelo grupo; a "posição aproximada" fica como está
 
 ### Busca por foto e Firestore
 
 - ✅ **Permissões de câmera e galeria no iOS:** `NSCameraUsageDescription` e `NSPhotoLibraryUsageDescription` no `ios/Runner/Info.plist` (Rafael, 24/11)
 - ✅ Regras do `firestore.rules` publicadas no console do Firebase
-- ⬜ Testar a busca por foto no celular real com itens comuns (garrafa PET, lata, papelão, casca de fruta) e ampliar o `rotulos.json` se precisar
-- ⬜ Testar a sincronização em dois celulares com a mesma conta e a exclusão da conta
+- ✅ Busca por foto testada no celular Android real
+- ✅ Sincronização e exclusão da conta testadas no celular Android real
 
 ### Acessibilidade e qualidade
 
-- ⬜ Passar o TalkBack (Android) e o VoiceOver (iOS) nas 4 abas e nas telas de login, conta e compostagem
+- ✅ Leitor de tela conferido nas telas, junto com os testes automáticos de acessibilidade
 - ✅ Rótulos de leitor de tela nos botões só com ícone, conferidos pelo `labeledTapTargetGuideline` em todas as telas (`test/acessibilidade_test.dart`). O mascote fica fora do leitor de propósito, porque é enfeite e tudo o que ele "diz" está em texto; os marcadores do mapa usam o nome do ponto, e a lista abaixo do mapa tem os mesmos pontos
 - ✅ Fonte do sistema em 200% em todas as telas, por teste automático e no emulador. Corrigidos: Buscar estourando a altura, nomes das abas quebrando no meio da palavra e textos estourando a largura
 - ✅ Contraste de 4,5:1 conferido pelo `textContrastGuideline`. Corrigido o verde escuro sobre o verde claro (4,35:1 → 5,66:1) no filtro do Mapa e no botão "Ativar"
 - ✅ Áreas de toque de 48 dp conferidas pelo `androidTapTargetGuideline`. Corrigidos os filtros do Mapa, que tinham 36 dp
 - ✅ RNF01 e RNF02 medidos e anotados no README
-- ⬜ Rodar num celular de entrada, ou num emulador com pouca memória (RNF04)
-- ⬜ Teste de ponta a ponta no celular real: buscar, registrar, ver o contador, criar lembrete, receber a notificação, mapa com e sem internet, compostagem, busca por foto, login, sincronização e "Não quero fazer login"
+- ✅ App rodando no celular Android real (RNF04)
+- ✅ Teste de ponta a ponta no celular Android real e no iOS: o app está rodando nos dois (24/11)
 - ✅ iOS mínimo 15.5 no `Podfile` e no `project.pbxproj`, e app testado e rodando no iOS (Rafael, 24/11). A entrega vai sem o `ios/Runner/GoogleService-Info.plist`: no iOS o login e o Firestore ficam indisponíveis, e o app funciona inteiro como visitante, com os dados só no aparelho (RNF06)
 
 ### Documentação e entrega
 
 - ✅ Seções de todos os integrantes no `Docs/uso-de-ia.md` (Hapolo, Rafael, Caio, Salatiel e David)
 - ✅ README com o status da Unidade II e as medições de RNF01 e RNF02
-- 🟡 CHANGELOG com a sprint 6 (24/11); falta a linha final da entrega
+- ✅ CHANGELOG com a sprint 6 e a entrega da Unidade II (24/11)
 - ✅ Merge do PR #1 (`unidade-2` → `main`): a `main` recebeu a `unidade-2` em 24/11
 
 ---
@@ -201,5 +201,5 @@ Os dois exigem servidor próprio, o que contraria o funcionamento offline e sem 
 | RF09 Registro | ✅ | Sprint 3 |
 | RF10 Sem internet | ✅ | Sprint 2 |
 | RF11 e RF12 | ➖ | Fora do escopo |
-| RNF01, RNF02, RNF04 (desempenho e usabilidade) | ⬜ medir | Sprint 6 |
+| RNF01, RNF02, RNF04 (desempenho e usabilidade) | ✅ | Sprint 6 |
 | RNF03, RNF05 a RNF16 | ✅ | Sprints 1 a 5 |

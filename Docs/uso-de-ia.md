@@ -164,7 +164,7 @@ Três decisões de projeto:
 - **Ecopontos:** os 9 de Aracaju vêm da Prefeitura/Emsurb (revista Conviver, ed. 748, de 23/09/2025), e o horário vem do TRE-SE. Quatro endereços não têm número, então o app mostra "posição aproximada".
 - **Cooperativas:** CARE, Coores e União, com endereço tirado do cadastro de CNPJ da Receita Federal. O horário não foi encontrado, então o app mostra "Ligue antes de ir".
 - **Coordenadas:** OpenStreetMap (Nominatim). Algumas são o centro da rua ou do bairro.
-- **Pesos médios dos 81 itens:** estimativas feitas para o projeto. Precisam de conferência do grupo.
+- **Pesos médios dos 81 itens:** estimativas feitas para o projeto, conferidas pelo grupo em 24/11/2026 e mantidas.
 - **Chave do Google Maps:** criada no Google Cloud Console, restrita ao pacote do app e à Maps SDK, com chaves separadas para Android e iOS. Fica em `android/local.properties` e `ios/Flutter/Secrets.xcconfig`, que o Git ignora; antes de cada envio foi conferido que esses arquivos não iam junto.
 
 ### Prompts que funcionaram melhor
@@ -209,9 +209,9 @@ Observação geral: pedir que a IA teste no emulador e mostre a tela trouxe à t
 
 **Erro da IA:** ao formatar o código com o `dart format`, a IA reformatou 34 arquivos, inclusive código dos colegas que ela não tinha alterado. A formatação foi desfeita nesses arquivos para o histórico mostrar só as mudanças reais.
 
-**O que ficou para o grupo:** os horários das cooperativas e os endereços sem número só se confirmam ligando ou indo ao local, então a IA não mexeu nesses dados. O build de iOS não foi compilado pela IA porque o Mac usado não tem Xcode; o Rafael testou o app no iOS e ele está rodando. A entrega vai sem o `GoogleService-Info.plist`, então no iOS o app funciona como visitante, sem login e sem sincronização.
+**O que ficou para o grupo:** os horários das cooperativas e os endereços sem número só se confirmam ligando ou indo ao local, então a IA não mexeu nesses dados. O grupo conferiu e decidiu manter como estão. O build de iOS não foi compilado pela IA porque o Mac usado não tem Xcode; o Rafael testou o app no iOS e ele está rodando. A entrega vai sem o `GoogleService-Info.plist`, então no iOS o app funciona como visitante, sem login e sem sincronização.
 
-**Como foi conferido:** `flutter analyze` sem problemas, 152 testes passando e o app rodando no emulador Android 15, com fonte normal e em 200%: busca com erro de digitação, Mapa e Impacto. O Rafael testou no iOS.
+**Como foi conferido:** `flutter analyze` sem problemas, 152 testes passando e o app rodando no emulador Android 15, com fonte normal e em 200%: busca com erro de digitação, Mapa e Impacto. O Rafael testou no iOS e o grupo testou no celular Android; o app roda nos dois.
 
 ## Caio: diagramas da Unidade II (casos de uso e classes)
 
