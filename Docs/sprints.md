@@ -16,7 +16,7 @@
 | 4 | Guia de compostagem e dica rotativa | RF06 | David | ✅ |
 | 5 | Busca por foto e sincronização com o Firestore | RF08, RNF06 | Hapolo | ✅ |
 | Diagramas | Casos de uso atualizado e diagrama de classes | — | Caio | ✅ |
-| 6 | Polimento, acessibilidade, documentação e entrega | RNF, b-vi | Grupo (código: Rafael) | ✅ |
+| 6 | Polimento, acessibilidade, documentação e entrega | RNF, b-vi | Grupo (código: Rafael e Salatiel) | ✅ |
 | — | Dados para gestores e configuração por síndicos | RF11, RF12 | — | ➖ |
 
 Verificação de 24/11/2026, na `unidade-2` e na `main`: `flutter analyze` sem problemas, **152 testes passando** e app rodando no celular Android, no emulador Android 15 e no iOS. **Unidade II concluída.**
@@ -170,7 +170,14 @@ Verificação de 24/11/2026, na `unidade-2` e na `main`: `flutter analyze` sem p
 - ✅ Teste de ponta a ponta no celular Android real e no iOS: o app está rodando nos dois (24/11)
 - ✅ iOS mínimo 15.5 no `Podfile` e no `project.pbxproj`, e app testado e rodando no iOS (Rafael, 24/11). A entrega vai sem o `ios/Runner/GoogleService-Info.plist`: no iOS o login e o Firestore ficam indisponíveis, e o app funciona inteiro como visitante, com os dados só no aparelho (RNF06)
 
+### Interface e versão web
+
+- ✅ Mascotes ilustrados nos cards da tela Categorias, um por categoria, ao lado da lista de exemplos. As imagens vão no app e funcionam offline (RNF03), e o card passa nos testes de fonte em 200% (Salatiel, 24/11, `b162bc3`)
+- ✅ Versão web para testar no navegador com `flutter run -d chrome`, com o mapa do Google Maps e o app como visitante, sem login (Salatiel, 24/11, `160a339`)
+
 ### Documentação e entrega
+
+- ✅ Modelagem do banco de dados (itens b-iii e b-iv): coleções e documentos do Firestore, mapeamento das classes Dart, operações do `NuvemRepositorio`, sincronização e regras de segurança em `Docs/modelagem-banco.md` (Salatiel, 24/11, `e99803e`)
 
 - ✅ Seções de todos os integrantes no `Docs/uso-de-ia.md` (Hapolo, Rafael, Caio, Salatiel e David)
 - ✅ README com o status da Unidade II e as medições de RNF01 e RNF02

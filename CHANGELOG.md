@@ -148,6 +148,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ### Alterado
 
+- Plano das sprints: mascotes, versão web e modelagem do banco na sprint 6, com Salatiel junto do Rafael no código — Salatiel. (`Docs/sprints.md`)
 - iOS: permissões de câmera e galeria para a busca por foto (sem elas o app fechava ao abrir a câmera no iPhone) e versão mínima do iOS de 15.0 para 15.5, exigida pelo ML Kit — Rafael. (`ios/Runner/Info.plist`, `ios/Podfile`, `ios/Runner.xcodeproj/project.pbxproj`)
 - Tela Buscar: cabeçalho, campo e resultado rolam juntos, e a dica do rodapé some com o teclado aberto; com a fonte grande ou o teclado aberto, a tela estourava 13 px — Rafael. (`lib/screens/buscar_screen.dart`)
 - Filtros do Mapa com área de toque de 48 dp (eram 36) e que crescem com a fonte do sistema — Rafael. (`lib/screens/mapa_screen.dart`)
