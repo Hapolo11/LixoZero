@@ -143,6 +143,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 - Testes de acessibilidade em todas as telas (Buscar, Mapa, Impacto, Categorias, login, conta e compostagem): área de toque de 48 dp, botões com nome para o leitor de tela, contraste de 4,5:1 e fonte do sistema em 200% sem estourar o layout — Rafael. (`test/acessibilidade_test.dart`)
 - Modelagem do banco de dados: coleções e documentos do Firestore, mapeamento das classes Dart, operações do `NuvemRepositorio`, sincronização e regras de segurança — Salatiel. (`Docs/modelagem-banco.md`, `README.md`)
+- Versão web para testar no navegador (`flutter run -d chrome`), com o mapa do Google Maps e o app funcionando como visitante, sem login — Salatiel. (`web/`, `README.md`)
 - Mascotes ilustrados nos cards da tela Categorias — Salatiel. (`assets/mascotes/`, `lib/widgets/mascote_categoria.dart`, `pubspec.yaml`, `lib/screens/categorias_screen.dart`)
 
 ### Alterado

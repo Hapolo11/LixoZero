@@ -77,11 +77,18 @@ flutter test   # testes
 flutter run    # com um emulador ou celular conectado
 ```
 
+Sem emulador ou celular, dá para abrir no navegador com `flutter run -d chrome`. Na web o
+login e a sincronização ficam desligados (o Firebase só está configurado para Android e iOS), o
+app funciona como visitante e a busca por foto pode não funcionar.
+
 **Chave do Google Maps:** o mapa precisa de uma chave da API (Maps SDK for Android/iOS),
 que não vai para o Git:
 
 - Android: em `android/local.properties`, coloque `MAPS_API_KEY=sua_chave`
 - iOS: crie `ios/Flutter/Secrets.xcconfig` com `MAPS_API_KEY=sua_chave`
+- Web: sem chave, o mapa aparece escurecido com a marca "for development purposes only". Para o
+  mapa normal, troque o script em `web/index.html` por `maps/api/js?key=sua_chave`, com a Maps
+  JavaScript API ativada na chave (não faça commit da chave)
 
 Sem a chave o mapa fica em branco, mas a lista de ecopontos continua aparecendo.
 
