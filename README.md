@@ -13,24 +13,27 @@ sobre separação correta, compostagem doméstica e logística reversa de recicl
 
 **Turma:** Programação para Dispositivos Móveis - GP0029VNO07A
 
-**Legenda:** [Sn] = Semana n (n = 1, 2, 3...)
+**Legenda:** [Sn] = Semana n (n = 1, 2, 3...) da Unidade I; [U2] = Unidade II (aplicativo)
 
 | Integrante | Responsabilidades |
 |---|---|
-| Hapolo Luiz | [S1] Estudo de caso — 2.1 Problema, 2.2 Público e usuários, 2.7 Restrições e condições; [S2] Pesquisa e Apresentação; [S3] 2.1 Funcionalidades e Apresentação; [S5] Justificativas; [S6] Protótipo de Baixa Fidelidade, Protótipo de Alta Fidelidade e Apresentação |
-| Caio Leal | [S1] Estudo de caso — 2.4 Objetivo e proposta de valor, 2.8 Pontos de atenção; [S2] Personas e Apresentação; [S3] 2.4 CRUD e Apresentação; [S6] Protótipo de Alta Fidelidade e Apresentação |
-| Salatiel Batista | [S1] Estudo de caso — 2.3 Contexto de uso, 2.5 Personalidade, identidade e experiência; [S2] Benchmark e Apresentação; [S3] 2.2 Requisitos Funcionais e Apresentação; [S6] Protótipo de Baixa Fidelidade e Protótipo de Alta Fidelidade |
-| David Cordeiro | [S1] Estudo de caso — 2.6 Funcionalidades e características já definidas; [S2] Pesquisa; [S3] 2.5 Priorizações e Apresentação; [S6] Protótipo de Baixa Fidelidade |
-| Rafael Henrique | [S3] 2.3 Requisitos Não-Funcionais e Apresentação |
+| Hapolo Luiz | [S1] Estudo de caso — 2.1 Problema, 2.2 Público e usuários, 2.7 Restrições e condições; [S2] Pesquisa e Apresentação; [S3] 2.1 Funcionalidades e Apresentação; [S5] Justificativas; [S6] Protótipo de Baixa Fidelidade, Protótipo de Alta Fidelidade e Apresentação; [U2] Login opcional com Firebase (entrar, criar conta, recuperar senha e Google), tela de conta e ícone do app; sincronização com o Firestore (registros e lembretes) e regras de segurança; busca por foto (RF08); telas de login fiéis ao protótipo; fluxo de navegação; registro de uso de IA |
+| Caio Leal | [S1] Estudo de caso — 2.4 Objetivo e proposta de valor, 2.8 Pontos de atenção; [S2] Personas e Apresentação; [S3] 2.4 CRUD e Apresentação; [S6] Protótipo de Alta Fidelidade e Apresentação; [U2] Diagrama de casos de uso, diagrama de classes e registro de uso de IA |
+| Salatiel Batista | [S1] Estudo de caso — 2.3 Contexto de uso, 2.5 Personalidade, identidade e experiência; [S2] Benchmark e Apresentação; [S3] 2.2 Requisitos Funcionais e Apresentação; [S6] Protótipo de Baixa Fidelidade e Protótipo de Alta Fidelidade; [U2] Registro de reciclagem (RF09), modelagem do banco de dados, mascotes nos cards de Categorias, versão web e registro de uso de IA |
+| David Cordeiro | [S1] Estudo de caso — 2.6 Funcionalidades e características já definidas; [S2] Pesquisa; [S3] 2.5 Priorizações e Apresentação; [S6] Protótipo de Baixa Fidelidade; [U2] Guia de compostagem e dica rotativa da tela Buscar (RF06) e registro de uso de IA |
+| Rafael Henrique | [S3] 2.3 Requisitos Não-Funcionais e Apresentação; [U2] Base do app (busca offline, categorias e mapa), tela Impacto com contador e lembretes de coleta com notificação, acessibilidade, permissões do iOS, testes no Android e no iOS, plano das sprints e registro de uso de IA |
 
 ## Documentação
 
 - [Estudo de caso](Docs/estudo-de-caso.md)
 - [Pesquisa](Docs/pesquisa.md), [Benchmark](Docs/benchmark.md) e [Personas](Docs/personas.md)
 - [Requisitos](Docs/requisitos.md)
+- [Diagrama de casos de uso](Docs/diagrama-casos-de-uso.pdf) e [diagrama de classes](Docs/diagrama-de-classes.pdf)
 - [Modelagem do banco de dados](Docs/modelagem-banco.md)
+- [Fluxo de navegação](Docs/fluxo-de-navegacao.md)
 - [Justificativas](Docs/justificativas.md)
 - [Plano das sprints](Docs/sprints.md)
+- [Registro de uso de IA](Docs/uso-de-ia.md)
 - [Changelog](CHANGELOG.md)
 
 ## Status

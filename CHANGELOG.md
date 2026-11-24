@@ -145,6 +145,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Modelagem do banco de dados: coleções e documentos do Firestore, mapeamento das classes Dart, operações do `NuvemRepositorio`, sincronização e regras de segurança — Salatiel. (`Docs/modelagem-banco.md`, `README.md`)
 - Versão web para testar no navegador (`flutter run -d chrome`), com o mapa do Google Maps e o app funcionando como visitante, sem login — Salatiel. (`web/`, `README.md`)
 - Mascotes ilustrados nos cards da tela Categorias — Salatiel. (`assets/mascotes/`, `lib/widgets/mascote_categoria.dart`, `pubspec.yaml`, `lib/screens/categorias_screen.dart`)
+- Fluxo de navegação real do app, com os diagramas da entrada e da conta, das abas e das janelas, e a tabela do que cada tela mostra — Hapolo. (`Docs/fluxo-de-navegacao.md`)
 
 ### Alterado
 
@@ -159,3 +160,4 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 - Plano das sprints, README e registro de uso de IA atualizados com a sprint 6 — Rafael. (`Docs/sprints.md`, `README.md`, `Docs/uso-de-ia.md`)
 - App testado e rodando no iOS; a entrega vai sem o `GoogleService-Info.plist`, então no iOS o app funciona como visitante, sem login e sem sincronização. Merge da `unidade-2` na `main` registrado no plano — Rafael. (`Docs/sprints.md`, `README.md`, `Docs/uso-de-ia.md`)
 - Dados conferidos pelo grupo e mantidos (pesos dos itens, cooperativas e ecopontos); app testado e rodando no celular Android e no iOS. Unidade II concluída — Rafael. (`Docs/sprints.md`, `README.md`, `Docs/uso-de-ia.md`)
+- README: responsabilidades da Unidade II de cada integrante, com base nos commits, e links para os diagramas, a modelagem do banco, o fluxo de navegação e o registro de uso de IA — Hapolo. (`README.md`)
